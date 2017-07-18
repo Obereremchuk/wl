@@ -1197,13 +1197,25 @@ function button_work(){
     if(!prod_value){ msg("Выбери продукт!"); return; };
     
     if (prod_value=="CP"){
-        createNotification_CP()
+        createNotification_CP();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
     }
     else if (prod_value=="CMM"){
-        createNotification_CMM()
+        createNotification_CMM();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
     }
     else if (prod_value=="CMA"){
-        createNotification_CMA()
+        createNotification_CMA();
+        prod_value="";
+        ocument.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
     }
 }
 
