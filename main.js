@@ -681,7 +681,7 @@ function createNotification_CMM(){ //create notification
 		trg: {// Notification trigger
 		    t:"sensor_value", // geofences control
 		    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик удара", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
-		}      
+		}       
 	};
 	res.createNotification(obj7, // create Notification using created object
 	    function(code){ // create Notification callback
