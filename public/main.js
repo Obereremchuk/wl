@@ -495,8 +495,8 @@ function createNotification_CMM(){ //create notification
     // simple validation and exit if invalid
     if(!un){ msg("Select units"); return; } // units validation
     // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
-    var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "#EEEEEE"}}, 
+    var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -505,12 +505,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: НАЖАТА ТРЕВОЖНАЯ КНОПКА!!!!! Время сработки: %MSG_TIME%. В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Тревожная кнопка", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"sensor_value", 
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }
     };
 
@@ -519,10 +519,10 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 {
                     msg(wialon.core.Errors.getErrorText(code)); 
-                    msg("error Notification ТРЕВОЖНАЯ КНОПКА created");
+                    msg("error Notification ТРЕВОЖНАЯ КНОПКА created CMM");
                     return;
                 }
-                console.log("Notification ТРЕВОЖНАЯ КНОПКА created"); // print create succeed message
+                console.log("Notification ТРЕВОЖНАЯ КНОПКА created CMM"); // print create succeed message
         }); 
 
     // construct Notifiacation object Сработка: Датчики взлома
@@ -535,12 +535,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Несанкционированное открытие дверей, капота или багажника. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Сработал датчик взлома",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Сработка: Датчики взлома", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: двери", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj2, // create Notification using created object
@@ -548,15 +548,15 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 {
                     msg(wialon.core.Errors.getErrorText(code)); 
-                    msg("error Notification Сработка: Датчики взлома created");
+                    msg("error Notification Сработка: Датчики взлома created CMM");
                     return;
                 } // exit if error code
-                console.log("Notification Сработка: Датчики взлома created");
+                console.log("Notification Сработка: Датчики взлома created CMM");
         //msg("Notification Сработка: Датчики взлома created"); // print create succeed message
     });
 
             // construct Notifiacation object Сработка сигнализации: зажигание
-    var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
+    var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -565,12 +565,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Несанкционированное включение зажигания. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Включено зажигание в охране",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Сработка: Включено зажигание", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: зажигание", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj3, // create Notification using created object
@@ -578,14 +578,14 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Сработка сигнализации: зажигание created");
+                    msg("error Notification Сработка сигнализации: зажигание created CMM");
                     return;
                 }
-                console.log("Notification Сработка сигнализации: зажигание created"); // print create succeed message
+                console.log("Notification Сработка сигнализации: зажигание created CMM"); // print create succeed message
     });
 
                     // construct Notifiacation object Низкое напряжения АКБ
-    var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+    var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -594,12 +594,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: низкое напряжение АКБ. Автомобиль находился около '%LOCATION%'.",
-            mmtd: 0, cdt: 0, mast: 300, mpst: 0, cp: 0, // default values
-            n: "Низкое напряжения АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% 	Разряжен основной аккумулятор.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Напряжение АКБ", sensor_type: "voltage", type: 0, upper_bound: "11.08"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj4, // create Notification using created object
@@ -607,14 +607,14 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Низкое напряжения АКБ created");
+                    msg("error Notification Низкое напряжения АКБ created CMM");
                     return;
                 } // exit if error code
-                    console.log("Notification Низкое напряжения АКБ created"); // print create succeed message
+                    console.log("Notification Низкое напряжения АКБ created CMM"); // print create succeed message
     });
 
-    // construct Notifiacation object НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ
-    var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
+    // construct Notifiacation object Основной аккумулятор отключен
+    var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -623,12 +623,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: БЫЛИ НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ ИЛИ БАГАЖНИК ПРИ ПОСТАНОВКЕ НА ОХРАНУ. %POS_TIME% он двигался со скоростью %SPEED% около '%LOCATION%'.",
-            mmtd: 0, cdt: 0, mast: 30, mpst: 0, cp: 0, // default values
-            n: "НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% 	Основной аккумулятор отключен",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Не закрыты двери в охране", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj5, // create Notification using created object
@@ -636,10 +636,10 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 {
                    msg(wialon.core.Errors.getErrorText(code));
-                   msg("error Notification НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ created");
+                   msg("error Notification Основной аккумулятор отключен created CMM");
                    return;
                } // exit if error code
-                   console.log("Notification НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ created"); // print create succeed message
+                   console.log("Notification Основной аккумулятор отключен created CMM"); // print create succeed message
     });
 
   // construct Notifiacation object Блокировка двигателя
@@ -652,12 +652,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Произошла блокировка двигателя. Время сработки: %MSG_TIME%  В %POS_TIME% автомобиль двигался со скоростью %SPEED% около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% Двигатель заблокирован",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Блокировка двигателя", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Двигатель заблокирован", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Блокировка иммобилайзера", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"msg_param", // geofences control
+                p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj6, // create Notification using created object
@@ -665,14 +665,14 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Блокировка двигателя created");
+                    msg("error Notification Блокировка двигателя created CMM");
                     return;
                 } // exit if error code
-                    console.log("Notification Блокировка двигателя created"); // print create succeed message
+                    console.log("Notification Блокировка двигателя created CMM"); // print create succeed message
     });
 
-          // construct Notifiacation object Cработка: Датчик удара/наклона/буксировки
-    var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
+          // construct Notifiacation object Cработка: Датчик наклона
+    var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -681,12 +681,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: сработал датчик удара/наклона/буксировки. Время сработки: %MSG_TIME%. В %POS_TIME% автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Сработал датчик наклона",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Cработка: Датчик удара/наклона/буксировки", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Сработал датчик наклона (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик удара", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }       
     };
     res.createNotification(obj7, // create Notification using created object
@@ -694,14 +694,14 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Cработка: Датчик удара/наклона/буксировки created");
+                    msg("error Notification Cработка: Датчик удара/наклона/буксировки created CMM");
                     return;
                 } // exit if error code
-                console.log("Notification Cработка: Датчик удара/наклона/буксировки created"); // print create succeed message
+                console.log("Notification Cработка: Датчик удара/наклона/буксировки created CMM"); // print create succeed message
     });
 
-          // construct Notifiacation object Cработка: ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)        
-    var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
+          // construct Notifiacation object Cработка: Датчик удара        
+    var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -710,12 +710,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Глушение  сигнала Дата и время сообщения: %MSG_TIME%",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
-            n: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% Сработал датчик удара",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Сработал датчик удара (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj8, // create Notification using created object
@@ -723,16 +723,16 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)");
+                    msg("error Notification Датчик удара CMM");
                     return;
                 } // exit if error code
-                console.log("Notification ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)"); // print create succeed message
+                console.log("Notification Датчик удара CMM"); // print create succeed message
     });
 
 
-          // construct Notifiacation object ГЛУШЕНИЕ GSM (ПАРКИНГ)        
+          // construct Notifiacation object Cработка: Сирена       
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "2"}}, 
+            act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -740,12 +740,12 @@ function createNotification_CMM(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Глушение  сигнала В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'. Дата и время сообщения: %MSG_TIME%",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
-            n: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% Сработала сирена",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Сработала сирена", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"msg_param", // geofences control
+                p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj9, // create Notification using created object
@@ -753,17 +753,17 @@ function createNotification_CMM(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification ГЛУШЕНИЕ GSM (ПАРКИНГ)");
+                    msg("error Notification Cработка: Сирена CMM");
                     return;
                 } // exit if error code
-                console.log("Notification ГЛУШЕНИЕ GSM (ПАРКИНГ)"); // print create succeed message
+                console.log("Notification Cработка: Сирена  CMM"); // print create succeed message
     });
 
     msg("9 уведомлений создано");
 }
 
 function createNotification_CMA(){ //create notification
-    console.log("start creation CMA notification");
+    console.log("start creation CMM notification");
     var res = wialon.core.Session.getInstance().getItem($("#res").val()); //get resource by id
     if(!res){ msg("Unknown resource"); return; }; // check if resource found
     var un = $("#units").val(); // get selected units ids
@@ -781,8 +781,8 @@ function createNotification_CMA(){ //create notification
     // simple validation and exit if invalid
     if(!un){ msg("Select units"); return; } // units validation
     // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
-    var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "#EEEEEE"}}, 
+    var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -791,12 +791,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: НАЖАТА ТРЕВОЖНАЯ КНОПКА!!!!! Время сработки: %MSG_TIME%. В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Тревожная кнопка", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"sensor_value", 
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }
     };
 
@@ -805,10 +805,10 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 {
                     msg(wialon.core.Errors.getErrorText(code)); 
-                    msg("error Notification ТРЕВОЖНАЯ КНОПКА created");
+                    msg("error Notification ТРЕВОЖНАЯ КНОПКА created CMM");
                     return;
                 }
-                console.log("Notification ТРЕВОЖНАЯ КНОПКА created"); // print create succeed message
+                console.log("Notification ТРЕВОЖНАЯ КНОПКА created CMM"); // print create succeed message
         }); 
 
     // construct Notifiacation object Сработка: Датчики взлома
@@ -821,12 +821,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Несанкционированное открытие дверей, капота или багажника. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Сработал датчик взлома",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Сработка: Датчики взлома", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: двери", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj2, // create Notification using created object
@@ -834,15 +834,15 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 {
                     msg(wialon.core.Errors.getErrorText(code)); 
-                    msg("error Notification Сработка: Датчики взлома created");
+                    msg("error Notification Сработка: Датчики взлома created CMM");
                     return;
                 } // exit if error code
-                console.log("Notification Сработка: Датчики взлома created");
+                console.log("Notification Сработка: Датчики взлома created CMM");
         //msg("Notification Сработка: Датчики взлома created"); // print create succeed message
     });
 
             // construct Notifiacation object Сработка сигнализации: зажигание
-    var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
+    var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -851,12 +851,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Несанкционированное включение зажигания. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Включено зажигание в охране",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Сработка: Включено зажигание", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: зажигание", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj3, // create Notification using created object
@@ -864,14 +864,14 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Сработка сигнализации: зажигание created");
+                    msg("error Notification Сработка сигнализации: зажигание created CMM");
                     return;
                 }
-                console.log("Notification Сработка сигнализации: зажигание created"); // print create succeed message
+                console.log("Notification Сработка сигнализации: зажигание created CMM"); // print create succeed message
     });
 
                     // construct Notifiacation object Низкое напряжения АКБ
-    var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+    var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -880,12 +880,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: низкое напряжение АКБ. Автомобиль находился около '%LOCATION%'.",
-            mmtd: 0, cdt: 0, mast: 300, mpst: 0, cp: 0, // default values
-            n: "Низкое напряжения АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% 	Разряжен основной аккумулятор.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Напряжение АКБ", sensor_type: "voltage", type: 0, upper_bound: "11.08"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj4, // create Notification using created object
@@ -893,14 +893,14 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Низкое напряжения АКБ created");
+                    msg("error Notification Низкое напряжения АКБ created CMM");
                     return;
                 } // exit if error code
-                    console.log("Notification Низкое напряжения АКБ created"); // print create succeed message
+                    console.log("Notification Низкое напряжения АКБ created CMM"); // print create succeed message
     });
 
-    // construct Notifiacation object НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ
-    var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
+    // construct Notifiacation object Основной аккумулятор отключен
+    var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -909,12 +909,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: БЫЛИ НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ ИЛИ БАГАЖНИК ПРИ ПОСТАНОВКЕ НА ОХРАНУ. %POS_TIME% он двигался со скоростью %SPEED% около '%LOCATION%'.",
-            mmtd: 0, cdt: 0, mast: 30, mpst: 0, cp: 0, // default values
-            n: "НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% 	Основной аккумулятор отключен",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Не закрыты двери в охране", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj5, // create Notification using created object
@@ -922,10 +922,10 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 {
                    msg(wialon.core.Errors.getErrorText(code));
-                   msg("error Notification НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ created");
+                   msg("error Notification Основной аккумулятор отключен created CMM");
                    return;
                } // exit if error code
-                   console.log("Notification НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ created"); // print create succeed message
+                   console.log("Notification Основной аккумулятор отключен created CMM"); // print create succeed message
     });
 
   // construct Notifiacation object Блокировка двигателя
@@ -938,12 +938,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Произошла блокировка двигателя. Время сработки: %MSG_TIME%  В %POS_TIME% автомобиль двигался со скоростью %SPEED% около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% Двигатель заблокирован",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Блокировка двигателя", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Двигатель заблокирован", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Блокировка иммобилайзера", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"msg_param", // geofences control
+                p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj6, // create Notification using created object
@@ -951,14 +951,14 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Блокировка двигателя created");
+                    msg("error Notification Блокировка двигателя created CMM");
                     return;
                 } // exit if error code
-                    console.log("Notification Блокировка двигателя created"); // print create succeed message
+                    console.log("Notification Блокировка двигателя created CMM"); // print create succeed message
     });
 
-          // construct Notifiacation object Cработка: Датчик удара/наклона/буксировки
-    var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
+          // construct Notifiacation object Cработка: Датчик наклона
+    var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -967,27 +967,27 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: сработал датчик удара/наклона/буксировки. Время сработки: %MSG_TIME%. В %POS_TIME% автомобиль находился около '%LOCATION%'.",
+            txt: "%UNIT%: %MSG_TIME% 	Сработал датчик наклона",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Cработка: Датчик удара/наклона/буксировки", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            n: "СММ: Сработал датчик наклона (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик удара", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
-            }      
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }       
     };
     res.createNotification(obj7, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification Cработка: Датчик удара/наклона/буксировки created");
+                    msg("error Notification Cработка: Датчик удара/наклона/буксировки created CMM");
                     return;
                 } // exit if error code
-                console.log("Notification Cработка: Датчик удара/наклона/буксировки created"); // print create succeed message
+                console.log("Notification Cработка: Датчик удара/наклона/буксировки created CMM"); // print create succeed message
     });
 
-          // construct Notifiacation object Cработка: ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)        
-    var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
+          // construct Notifiacation object Cработка: Датчик удара        
+    var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
@@ -996,12 +996,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Глушение  сигнала Дата и время сообщения: %MSG_TIME%",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
-            n: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% Сработал датчик удара",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Сработал датчик удара (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj8, // create Notification using created object
@@ -1009,16 +1009,16 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)");
+                    msg("error Notification Датчик удара CMM");
                     return;
                 } // exit if error code
-                console.log("Notification ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)"); // print create succeed message
+                console.log("Notification Датчик удара CMM"); // print create succeed message
     });
 
 
-          // construct Notifiacation object ГЛУШЕНИЕ GSM (ПАРКИНГ)        
+          // construct Notifiacation object Cработка: Сирена       
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "2"}}, 
+            act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1026,12 +1026,12 @@ function createNotification_CMA(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Глушение  сигнала В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'. Дата и время сообщения: %MSG_TIME%",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
-            n: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            txt: "%UNIT%: %MSG_TIME% Сработала сирена",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Сработала сирена", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                t:"msg_param", // geofences control
+                p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
     };
     res.createNotification(obj9, // create Notification using created object
@@ -1039,10 +1039,10 @@ function createNotification_CMA(){ //create notification
                 if(code)
                 { 
                     msg(wialon.core.Errors.getErrorText(code));
-                    msg("error Notification ГЛУШЕНИЕ GSM (ПАРКИНГ)");
+                    msg("error Notification Cработка: Сирена CMM");
                     return;
                 } // exit if error code
-                console.log("Notification ГЛУШЕНИЕ GSM (ПАРКИНГ)"); // print create succeed message
+                console.log("Notification Cработка: Сирена  CM"); // print create succeed message
     });
 
     msg("9 уведомлений создано");
