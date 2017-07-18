@@ -25,7 +25,7 @@ function init() { // Execute after login succeed
                 {type: "type", data: "user", flags: user_flags, mode: 0}, // Items (avl_unit) specification
                 {type: "type", data: "mapps", flags: mappss, mode: 0}], // Items (avl_unit) specification
 		function (code) { // updateDataFlags callback
-			if (code) { msg(wialon.core.Errors.getErrorText(code)); return; }
+			if (code) { msg(wialon.core.Errors.getErrorText(code)+", ммм, как на счет залогинится?"); return; }
                         
 // get loaded 'avl_resource's items with edit notification access 
 			var res = wialon.util.Helper.filterItems(sess.getItems("avl_resource"),
