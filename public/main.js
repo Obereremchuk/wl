@@ -4,6 +4,9 @@ function msg(text){
 
 var searchBox = document.querySelector("#searchBox");
 var prod_value;// переменная для вібора уведомлений по продукту
+// Wialon site dns
+var dns = "http://navi.venbest.com.ua";
+var token;
 
 function init() { // Execute after login succeed
 	var sess = wialon.core.Session.getInstance(); // get instance of current Session
@@ -1105,10 +1108,6 @@ function init1() {
         }
     });
 }
-
-// Wialon site dns
-var dns = "http://navi.venbest.com.ua";
-var token;
 
 // Main function
 function getToken() {
