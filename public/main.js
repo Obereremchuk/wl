@@ -67,7 +67,7 @@ function createuser(){
     var flag = 1; //флаг
     var skipCreatorCheck = 1; //флаг
     wialon.core.Session.getInstance().createUser(user, username, passw, flag, function(code, obj) { //create username
-        if (code != 0){ alert(wialon.core.Errors.getErrorText(code)); return; }
+        if (code != 0){ msg(wialon.core.Errors.getErrorText(code)+", ммм, как на счет залогинится?"); return ; }
         var newuser = obj;
 
 
@@ -77,11 +77,11 @@ function createuser(){
             console.log("Resources 1 created: '" + username + "'"); //выводим в лог созданный ресурс1
             wialon.core.Session.getInstance().createResource(newuser, username + "_user", flag, skipCreatorCheck, function(code, obj2) { //create resurce 2
                 if (code != 0){ alert(wialon.core.Errors.getErrorText(code)); return; } 
-                console.log("Resources 2 created: '" + username + "_user'"); //выводим в лог созданный ресурс2               
+                console.log("Resources 2 created: '" + username + "_user'"); //выводим в лог созданный ресурс2   
+                msg("Создано пользователя и два ресурса");
             });
         });
     });
-    msg("Создано пользователя и два ресурса");
 }
 
 function set_access(){
