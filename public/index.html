@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>M-Centre</title>
+  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="http://navi.venbest.com.ua/wsdk/script/wialon.js"></script>
+        <script src="main.js" type="text/javascript"></script>
+        <link href="newcss.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="panel header"><span class="remark"></span> Создание пользователей Wialon Local</div>
+        
+        <div id="product" class="panel left"><span class="remark"></span>
+            <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">CONNECT PLUS<Br>
+            <input type="radio" id="CMA" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
+            <input type="radio" id="CMM" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
+        </div>
+        
+        <div class="panel content"><span class="remark"></span>
+            <p>Создаем нового пользователя , ресурсы:</p>
+            <p><input type="text" id="username" placeholder="User name" /></p>
+            <p><input type="text" id="passw" placeholder="pass" /></p>
+            <p><input type="button" value="Создать" id="create_user"/></p>
+            <p>______________________________________________________________________________________</p>
+            <p>Назначаем права пользователя:</p>
+            <p>Проверяем коректность выбора пользователя и ресурсов</p>
+            <input type="button" value="Обновить поля!" id="Update"/><br/><br/>
+            <table>
+                <tr>
+                    <td>
+                        Resource "name":<br/><select id="res" multiple="multiple"></select>
+                    </td>
+                    <td>
+                        Resource "name_user":<br/><select id="res2" multiple="multiple"></select>
+                    </td>
+                    <td>
+                        Select user:<br/><select id="users" multiple="multiple"></select>
+                    </td>
+                    <td>
+                        Select units:<br/><select id="units" multiple="multiple"></select><input type="search" id="searchBox">
+                    </td>
+                    <!--<td>Select mapps<br/><select id="mapps" multiple="multiple"></select></td>-->
+                </tr>
+            </table>
+            <br/><input type="button" value="Назначить права" id="Set_access"/>
+            <p>______________________________________________________________________________________</p>
+        
+            <table>
+                    <tr>
+                    <td>
+                        <br/>
+                        <input type="text" id="first_email" placeholder="email 1" /><br/>                       
+                        <input type="text" id="sec_email" placeholder="email 2" /><br/>                        
+                        <input type="text" id="tri_email" placeholder="email 3" />
+                    </td>
+                    <td>
+                        <br/>
+                        
+                    </td>
+                    <td>
+                        <br/>
+                        
+                    </td>
+                    </tr>
+            </table>
+        
+            <div id="div_but" class="top">
+            <br/><input type="button" name="crtent" value="Создать уведомления"/>
+            </div>
+            
+            
+	</div>
+        
+        <div class="panel right"><span class="remark"></span><br />
+            <input id="login" type="button" value="Click to login" onclick="getToken()"/>
+            <input id="logout" type="button" value="Click to logout" onclick="logout()"/>
+            <iframe name="simple_form" src="" id="loginform" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
+	</div>
+                        
+	<div class="panel footer"><span class="remark"></span>
+            <div id="log"></div>
+        </div>
+
+    </body>
+
+</html>
