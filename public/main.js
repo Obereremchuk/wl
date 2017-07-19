@@ -200,24 +200,48 @@ function createNotification_CP(){ //create notification
     wialon.core.Session.getInstance().loadLibrary("mobileApps"); 
 
     var id_usr=$("#users").val();
-    var first_email = $("#first_email").val();
-    if(!first_email){ msg("Email то забыл ввеси, а?"); return; };
-    var sec_email = $("#sec_email").val();
-    if(!sec_email){ sec_email = first_email;};
-    var tri_email = $("#sec_email").val();
-    if(!tri_email){ tri_email = first_email;}; 
+    if (document.getElementById('no_email').checked ==false) {
+        var first_email = $("#first_email").val();
+        if(!first_email){ msg("Email то забыл ввеси, а?"); return; };
+        var sec_email = $("#sec_email").val();
+        if(!sec_email){ sec_email = first_email;};
+        var tri_email = $("#sec_email").val();
+        if(!tri_email){ tri_email = first_email;}; 
+    }
+    
     var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";
 
     // simple validation and exit if invalid
-    if(!un){ msg("Select units"); return; } // units validation
+    if(!un)
+    {
+        msg("Select units"); 
+        return; 
+    } // units validation
     // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
-    var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "#ff0000"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+    if (document.getElementById('no_email').checked ==false) 
+    {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "#ff0000"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: НАЖАТА ТРЕВОЖНАЯ КНОПКА!!!!! Время сработки: %MSG_TIME%. В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Тревожная кнопка", sensor_type: "digital", type: 0, upper_bound: "1"}
+                }
+            };
+    }
+    if (document.getElementById('no_email').checked ==true){
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}},
                     {t:"event", p:{flags: 0}},
-//                        {"t":"mobile_apps","p":{"apps":"{\"Wialon Local\":[id_usr]}"}}
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
         sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
@@ -226,10 +250,10 @@ function createNotification_CP(){ //create notification
             n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Тревожная кнопка", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Тревожная кнопка", sensor_type: "digital", type: 0, upper_bound: "1"}
             }
-    };
-
+        };
+    }
         res.createNotification(obj1, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -242,23 +266,42 @@ function createNotification_CP(){ //create notification
         }); 
 
     // construct Notifiacation object Сработка: Датчики взлома
-    var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+    if (document.getElementById('no_email').checked ==false){
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: Несанкционированное открытие дверей, капота или багажника. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "Сработка: Датчики взлома", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: двери", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }      
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: Несанкционированное открытие дверей, капота или багажника. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "Сработка: Датчики взлома", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: Несанкционированное открытие дверей, капота или багажника. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "Сработка: Датчики взлома", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {// Notification trigger
                 t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: двери", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: двери", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
     res.createNotification(obj2, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -272,6 +315,8 @@ function createNotification_CP(){ //create notification
     });
 
             // construct Notifiacation object Сработка сигнализации: зажигание
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -288,7 +333,26 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: зажигание", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Несанкционированное включение зажигания. Время сработки: %MSG_TIME%. Автомобиль находился около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "Сработка: Включено зажигание", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации: зажигание", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
+    
     res.createNotification(obj3, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -301,6 +365,8 @@ function createNotification_CP(){ //create notification
     });
 
                     // construct Notifiacation object Низкое напряжения АКБ
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -317,7 +383,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Напряжение АКБ", sensor_type: "voltage", type: 0, upper_bound: "11.08"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: низкое напряжение АКБ. Автомобиль находился около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 300, mpst: 0, cp: 0, // default values
+            n: "Низкое напряжения АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Напряжение АКБ", sensor_type: "voltage", type: 0, upper_bound: "11.08"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj4, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -330,6 +414,8 @@ function createNotification_CP(){ //create notification
     });
 
     // construct Notifiacation object НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -346,7 +432,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Не закрыты двери в охране", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: БЫЛИ НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ ИЛИ БАГАЖНИК ПРИ ПОСТАНОВКЕ НА ОХРАНУ. %POS_TIME% он двигался со скоростью %SPEED% около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 30, mpst: 0, cp: 0, // default values
+            n: "НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Не закрыты двери в охране", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj5, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -359,6 +463,8 @@ function createNotification_CP(){ //create notification
     });
 
   // construct Notifiacation object Блокировка двигателя
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -375,7 +481,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Блокировка иммобилайзера", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Произошла блокировка двигателя. Время сработки: %MSG_TIME%  В %POS_TIME% автомобиль двигался со скоростью %SPEED% около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "Блокировка двигателя", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Блокировка иммобилайзера", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj6, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -388,6 +512,8 @@ function createNotification_CP(){ //create notification
     });
 
           // construct Notifiacation object Cработка: Датчик удара/наклона/буксировки
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -404,7 +530,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик удара", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: сработал датчик удара/наклона/буксировки. Время сработки: %MSG_TIME%. В %POS_TIME% автомобиль находился около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "Cработка: Датчик удара/наклона/буксировки", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик удара", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj7, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -417,6 +561,8 @@ function createNotification_CP(){ //create notification
     });
 
           // construct Notifiacation object Cработка: ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)        
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -433,7 +579,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+        if (document.getElementById('no_email').checked ==true)
+    {
+    var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Глушение  сигнала Дата и время сообщения: %MSG_TIME%",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
+            n: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj8, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -447,6 +611,8 @@ function createNotification_CP(){ //create notification
 
 
           // construct Notifiacation object ГЛУШЕНИЕ GSM (ПАРКИНГ)        
+    if (document.getElementById('no_email').checked ==false)
+    {
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: "2"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -463,7 +629,25 @@ function createNotification_CP(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true)
+    {
+    var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
+            act: [  {t:"message", p:{color: "2"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Глушение  сигнала В %POS_TIME% объект двигался со скоростью %SPEED% около '%LOCATION%'. Дата и время сообщения: %MSG_TIME%",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 60, cp: 0, // default values
+            n: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "ГЛУШЕНИЕ GSM (ПАРКИНГ)", sensor_type: "digital", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj9, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
