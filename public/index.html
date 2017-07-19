@@ -28,7 +28,7 @@ and open the template in the editor.
         <div class="panel content"><span class="remark"></span>
             <p>Создаем нового пользователя , ресурсы:</p>
             <p><input type="text" id="username" placeholder="User name" /></p>
-            <p><input type="text" id="passw" placeholder="pass" /></p>
+            <p><input type="text" readonly="readonly" id="passw" placeholder="pass" /><input type="button" value="Generate" id="Generate"/></p>
             <p><input type="button" value="Создать" id="create_user"/></p>
             <p>______________________________________________________________________________________</p>
             <p>Назначаем права пользователя:</p>
@@ -62,17 +62,9 @@ and open the template in the editor.
                         <input type="text" id="sec_email" placeholder="email 2" /><br/>                        
                         <input type="text" id="tri_email" placeholder="email 3" />
                     </td>
-                    <td>
-                        <br/>
-                        
-                    </td>
-                    <td>
-                        <br/>
-                        
-                    </td>
-                    </tr>
             </table>        
             <br/><input type="button" id="create_btn" name="crtent" value="Создать уведомления"/>
+            <br/><br/><textarea name="Out" id="Out" cols="40" rows="5"></textarea>
 	</div>
         
         <div class="panel right"><span class="remark"></span><br />
