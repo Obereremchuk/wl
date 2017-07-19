@@ -7,6 +7,8 @@ var prod_value;// переменная для вібора уведомлени�
 // Wialon site dns
 var dns = "http://navi.venbest.com.ua";
 var token;
+var pass_out;
+var out;
 
 function init() { // Execute after login succeed
 	var sess = wialon.core.Session.getInstance(); // get instance of current Session
@@ -1219,6 +1221,35 @@ function button_work(){
     }
 }
 
+function password_generator(  ) {
+    if(!$("#username").val()){ msg("Введите имя пользователя"); return; }
+    var length = (5)?(5):(10);
+    var string = "abcdefghijklmnopqrstuvwxyz"; //to upper 
+    var numeric = '0123456789';
+    var punctuation = '';
+    var password = "";
+    var character = "";
+    var crunch = true;
+    while( password.length<length ) {
+        entity1 = Math.ceil(string.length * Math.random()*Math.random());
+        entity2 = Math.ceil(numeric.length * Math.random()*Math.random());
+        entity3 = Math.ceil(punctuation.length * Math.random()*Math.random());
+        hold = string.charAt( entity1 );
+        hold = (entity1%2==0)?(hold.toUpperCase()):(hold);
+        character += hold;
+        character += numeric.charAt( entity2 );
+        character += punctuation.charAt( entity3 );
+        password = character;
+        //msg (password);
+    }
+    
+    console.log (password);
+    document.getElementById('passw').value = password;
+    out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
+    document.getElementById('Out').value = out;
+}
+        
+
 // execute when DOM ready
 $(document).ready(function () {
        // bind actions to button clicks
@@ -1228,6 +1259,7 @@ $(document).ready(function () {
         $("#create_user").click (createuser);
         $("#Update").click (Update);
         $("#Locale").click( Locale );    
+        $("#Generate").click( password_generator);//
         
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
