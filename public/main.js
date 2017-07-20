@@ -670,36 +670,56 @@ function createNotification_CMM(){ //create notification
     wialon.core.Session.getInstance().loadLibrary("mobileApps"); 
 
     var id_usr=$("#users").val();
+        if (document.getElementById('no_email').checked ==false) {
     var first_email = $("#first_email").val();
     if(!first_email){ msg("Email то забыл ввеси, а?"); return; };
     var sec_email = $("#sec_email").val();
     if(!sec_email){ sec_email = first_email;};
     var tri_email = $("#sec_email").val();
     if(!tri_email){ tri_email = first_email;}; 
+        }
     var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";
 
     // simple validation and exit if invalid
     if(!un){ msg("Select units"); return; } // units validation
     // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
-    var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "#ff0000"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"event", p:{flags: 0}},
-//                        {"t":"mobile_apps","p":{"apps":"{\"Wialon Local\":[id_usr]}"}}
-                    {"t":"mobile_apps","p":{"apps":app}}
-                ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "СММ: Тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
-            trg: {// Notification trigger
-                t:"sensor_value", 
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+        if (document.getElementById('no_email').checked ==false) {
+            var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
+                    act: [  {t:"message", p:{color: "#ff0000"}}, 
+                            {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                            {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                            {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                            {t:"event", p:{flags: 0}},
+        //                        {"t":"mobile_apps","p":{"apps":"{\"Wialon Local\":[id_usr]}"}}
+                            {"t":"mobile_apps","p":{"apps":app}}
+                        ], // default values
+                    sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                    txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
+                    mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                    n: "СММ: Тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                    trg: {// Notification trigger
+                        t:"sensor_value", 
+                        p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                    }
+            };
+        }
+            if (document.getElementById('no_email').checked ==true) {
+              var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "#ff0000"}}, 
+                        {t:"event", p:{flags: 0}},
+    //                        {"t":"mobile_apps","p":{"apps":"{\"Wialon Local\":[id_usr]}"}}
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+                sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", 
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }
-    };
-
+    };  
+            }
         res.createNotification(obj1, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -712,23 +732,41 @@ function createNotification_CMM(){ //create notification
         }); 
 
     // construct Notifiacation object Сработка: Датчики взлома
-    var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"event", p:{flags: 0}},
-                    {"t":"mobile_apps","p":{"apps":app}}
-                ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: %MSG_TIME% 	Сработал датчик взлома",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "СММ: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
-            trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
-            }      
-    };
+    if (document.getElementById('no_email').checked ==false) {
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% 	Сработал датчик взлома",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }      
+        };
+    }
+        if (document.getElementById('no_email').checked ==true) {
+                var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+                   act: [  {t:"message", p:{color: "black"}}, 
+                           {t:"event", p:{flags: 0}},
+                           {"t":"mobile_apps","p":{"apps":app}}
+                       ], // default values
+               sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                   txt: "%UNIT%: %MSG_TIME% 	Сработал датчик взлома",
+                   mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                   n: "СММ: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                   trg: {// Notification trigger
+                       t:"sensor_value", // geofences control
+                       p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                   }      
+               };       
+            }
     res.createNotification(obj2, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -742,23 +780,41 @@ function createNotification_CMM(){ //create notification
     });
 
             // construct Notifiacation object Сработка сигнализации: зажигание
-    var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"event", p:{flags: 0}},
-                    {"t":"mobile_apps","p":{"apps":app}}
-                ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: %MSG_TIME% 	Включено зажигание в охране",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "СММ: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
-            trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
-            }      
-    };
+    if (document.getElementById('no_email').checked ==false) {
+        var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% 	Включено зажигание в охране",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }      
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+            var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
+                        act: [  {t:"message", p:{color: "black"}}, 
+                                {t:"event", p:{flags: 0}},
+                                {"t":"mobile_apps","p":{"apps":app}}
+                            ], // default values
+                    sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                        txt: "%UNIT%: %MSG_TIME% 	Включено зажигание в охране",
+                        mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                        n: "СММ: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                        trg: {// Notification trigger
+                            t:"sensor_value", // geofences control
+                            p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                        }      
+                }; 
+            }
     res.createNotification(obj3, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -771,23 +827,41 @@ function createNotification_CMM(){ //create notification
     });
 
                     // construct Notifiacation object Низкое напряжения АКБ
-    var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"event", p:{flags: 0}},
-                    {"t":"mobile_apps","p":{"apps":app}}
-                ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: %MSG_TIME% 	Разряжен основной аккумулятор.",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "СММ: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
-            trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
-            }      
-    };
+    if (document.getElementById('no_email').checked ==false) {
+        var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% 	Разряжен основной аккумулятор.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
+                }      
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+                var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
+                        act: [  {t:"message", p:{color: "black"}}, 
+                                {t:"event", p:{flags: 0}},
+                                {"t":"mobile_apps","p":{"apps":app}}
+                            ], // default values
+                    sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                        txt: "%UNIT%: %MSG_TIME% 	Разряжен основной аккумулятор.",
+                        mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                        n: "СММ: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                        trg: {// Notification trigger
+                            t:"sensor_value", // geofences control
+                            p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
+                        }      
+                };        
+            }
     res.createNotification(obj4, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -800,23 +874,41 @@ function createNotification_CMM(){ //create notification
     });
 
     // construct Notifiacation object Основной аккумулятор отключен
-    var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
-                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"event", p:{flags: 0}},
-                    {"t":"mobile_apps","p":{"apps":app}}
-                ], // default values
-        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "%UNIT%: %MSG_TIME% 	Основной аккумулятор отключен",
-            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
-            n: "СММ: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
-            trg: {// Notification trigger
-                t:"sensor_value", // geofences control
-                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
-            }      
-    };
+    if (document.getElementById('no_email').checked ==false) {
+        var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% 	Основной аккумулятор отключен",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }      
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+            var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
+                    act: [  {t:"message", p:{color: "black"}}, 
+                            {t:"event", p:{flags: 0}},
+                            {"t":"mobile_apps","p":{"apps":app}}
+                        ], // default values
+                sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                    txt: "%UNIT%: %MSG_TIME% 	Основной аккумулятор отключен",
+                    mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                    n: "СММ: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                    trg: {// Notification trigger
+                        t:"sensor_value", // geofences control
+                        p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                    }      
+                };        
+            }
     res.createNotification(obj5, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -829,6 +921,7 @@ function createNotification_CMM(){ //create notification
     });
 
   // construct Notifiacation object Блокировка двигателя
+    if (document.getElementById('no_email').checked ==false) {
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -845,7 +938,24 @@ function createNotification_CMM(){ //create notification
                 t:"msg_param", // geofences control
                 p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Двигатель заблокирован",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СММ: Двигатель заблокирован", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"msg_param", // geofences control
+                p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
+            }      
+        };        
+            }
     res.createNotification(obj6, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -858,6 +968,7 @@ function createNotification_CMM(){ //create notification
     });
 
           // construct Notifiacation object Cработка: Датчик наклона
+    if (document.getElementById('no_email').checked ==false) {
     var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -874,7 +985,24 @@ function createNotification_CMM(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }       
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+            var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% 	Сработал датчик наклона",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Сработал датчик наклона (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }       
+            };        
+        }
     res.createNotification(obj7, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -887,6 +1015,7 @@ function createNotification_CMM(){ //create notification
     });
 
           // construct Notifiacation object Cработка: Датчик удара        
+    if (document.getElementById('no_email').checked ==false) {
     var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -903,7 +1032,24 @@ function createNotification_CMM(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+            var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% Сработал датчик удара",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Сработал датчик удара (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"sensor_value", // geofences control
+                    p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+                }      
+            };        
+        }
     res.createNotification(obj8, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -917,6 +1063,7 @@ function createNotification_CMM(){ //create notification
 
 
           // construct Notifiacation object Cработка: Сирена       
+    if (document.getElementById('no_email').checked ==false) {
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -933,7 +1080,24 @@ function createNotification_CMM(){ //create notification
                 t:"msg_param", // geofences control
                 p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+            var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
+                act: [  {t:"message", p:{color: "black"}}, 
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: %MSG_TIME% Сработала сирена",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "СММ: Сработала сирена", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {// Notification trigger
+                    t:"msg_param", // geofences control
+                    p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
+                }      
+            };        
+        }
     res.createNotification(obj9, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -956,17 +1120,20 @@ function createNotification_CMA(){ //create notification
     wialon.core.Session.getInstance().loadLibrary("mobileApps"); 
 
     var id_usr=$("#users").val();
+    if (document.getElementById('no_email').checked ==false) {
     var first_email = $("#first_email").val();
     if(!first_email){ msg("Email то забыл ввеси, а?"); return; };
     var sec_email = $("#sec_email").val();
     if(!sec_email){ sec_email = first_email;};
     var tri_email = $("#sec_email").val();
     if(!tri_email){ tri_email = first_email;}; 
+    }
     var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";
 
     // simple validation and exit if invalid
     if(!un){ msg("Select units"); return; } // units validation
     // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
+    if (document.getElementById('no_email').checked ==false) {
     var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -984,7 +1151,25 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", 
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
+                    {t:"event", p:{flags: 0}},
+//                        {"t":"mobile_apps","p":{"apps":"{\"Wialon Local\":[id_usr]}"}}
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Нажата тревожная кнопка",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "CMA: Нажата тревожная кнопка (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", 
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Тревожная кнопка", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }
+        };
+    }
 
         res.createNotification(obj1, // create Notification using created object
         function(code){ // create Notification callback
@@ -998,6 +1183,7 @@ function createNotification_CMA(){ //create notification
         }); 
 
     // construct Notifiacation object Сработка: Датчики взлома
+    if (document.getElementById('no_email').checked ==false) {
     var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1014,7 +1200,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Сработал датчик взлома",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Сработал датчик взлома (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик взлома", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj2, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1028,6 +1231,7 @@ function createNotification_CMA(){ //create notification
     });
 
             // construct Notifiacation object Сработка сигнализации: зажигание
+    if (document.getElementById('no_email').checked ==false) {
     var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1044,7 +1248,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Включено зажигание в охране",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "CMA: Зажигание в охране (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Зажигание в охране", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj3, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1057,6 +1278,7 @@ function createNotification_CMA(){ //create notification
     });
 
                     // construct Notifiacation object Низкое напряжения АКБ
+    if (document.getElementById('no_email').checked ==false) {
     var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1073,7 +1295,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Разряжен основной аккумулятор.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "CMA: Разряжен основной аккумулятор (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор разряжен", sensor_type: "any", type: 0, upper_bound: 1}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj4, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1086,6 +1325,7 @@ function createNotification_CMA(){ //create notification
     });
 
     // construct Notifiacation object Основной аккумулятор отключен
+    if (document.getElementById('no_email').checked ==false) {
     var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1102,7 +1342,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Основной аккумулятор отключен",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Основной аккумулятор отключен (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Аккумулятор отключен", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj5, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1115,6 +1372,7 @@ function createNotification_CMA(){ //create notification
     });
 
   // construct Notifiacation object Блокировка двигателя
+    if (document.getElementById('no_email').checked ==false) {
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1131,7 +1389,24 @@ function createNotification_CMA(){ //create notification
                 t:"msg_param", // geofences control
                 p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Двигатель заблокирован",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Двигатель заблокирован", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"msg_param", // geofences control
+                p: {text_mask: "*b*", param: "data_state", type : "1", kind: 1}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj6, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1144,6 +1419,7 @@ function createNotification_CMA(){ //create notification
     });
 
           // construct Notifiacation object Cработка: Датчик наклона
+    if (document.getElementById('no_email').checked ==false) {
     var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1160,7 +1436,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }       
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Сработал датчик наклона",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Сработал датчик наклона (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик наклона", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }       
+        };
+    }
     res.createNotification(obj7, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1173,6 +1466,7 @@ function createNotification_CMA(){ //create notification
     });
 
           // construct Notifiacation object Cработка: Датчик удара        
+    if (document.getElementById('no_email').checked ==false) {
     var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1189,7 +1483,24 @@ function createNotification_CMA(){ //create notification
                 t:"sensor_value", // geofences control
                 p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Сработал датчик удара",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Сработал датчик удара (B)", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"sensor_value", // geofences control
+                p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "*Датчик удара", sensor_type: "any", type: 0, upper_bound: "1"}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj8, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1203,6 +1514,7 @@ function createNotification_CMA(){ //create notification
 
 
           // construct Notifiacation object Cработка: Сирена       
+    if (document.getElementById('no_email').checked ==false) {
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1219,7 +1531,24 @@ function createNotification_CMA(){ //create notification
                 t:"msg_param", // geofences control
                 p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Сработала сирена",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "СМA: Сработала сирена", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"msg_param", // geofences control
+                p: { text_mask: "*f*p*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj9, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1232,6 +1561,7 @@ function createNotification_CMA(){ //create notification
     });
     
               // construct Notifiacation object Cработка: Сирена       
+    if (document.getElementById('no_email').checked ==false) {
     var obj10 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: "black"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
@@ -1248,7 +1578,24 @@ function createNotification_CMA(){ //create notification
                 t:"msg_param", // geofences control
                 p: { text_mask: "*id*o1*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
             }      
-    };
+        };
+    }
+    if (document.getElementById('no_email').checked ==true) {
+        var obj10 = { ma:0, fl:0, tz:7200, la:"ru",
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+        sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: %MSG_TIME% Установлено в охрану с открытыми дверьми",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "CMA: Установлено в охрану с открытыми дверьми", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {// Notification trigger
+                t:"msg_param", // geofences control
+                p: { text_mask: "*id*o1*", param: "data_state", type: "1", kind: 1}// trigger parameters ( geozones ids, control type)
+            }      
+        };
+    }
     res.createNotification(obj10, // create Notification using created object
         function(code){ // create Notification callback
                 if(code)
@@ -1399,7 +1746,7 @@ function button_work(){
     else if (prod_value=="CMA"){
         createNotification_CMA();
         prod_value="";
-        ocument.getElementById('CP').checked =false;
+        document.getElementById('CP').checked =false;
         document.getElementById('CMM').checked =false;
         document.getElementById('CMA').checked =false;
     }
@@ -1432,7 +1779,24 @@ function password_generator(  ) {
     out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
     document.getElementById('Out').value = out;
 }
-        
+
+function no_email_check(){
+    if (document.getElementById('no_email').checked ==true)
+    {
+        document.getElementById('first_email').disabled =true;
+        document.getElementById('sec_email').disabled =true;
+        document.getElementById('tri_email').disabled =true;
+    }
+    if (document.getElementById('no_email').checked ==false)
+    {
+        document.getElementById('first_email').disabled =false;
+        document.getElementById('sec_email').disabled =false;
+        document.getElementById('tri_email').disabled =false;
+    }
+            
+    
+    
+}       
 
 // execute when DOM ready
 $(document).ready(function () {
@@ -1442,8 +1806,10 @@ $(document).ready(function () {
         $("#Set_access").click( set_access );
         $("#create_user").click (createuser);
         $("#Update").click (Update);
+        $("#Update_1").click (Update);
         $("#Locale").click( Locale );    
-        $("#Generate").click( password_generator);//
+        $("#Generate").click( password_generator);
+        $("#no_email").click( no_email_check);
         
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
