@@ -51,12 +51,20 @@ function init() { // Execute after login succeed
                             $("#units").append("<option value='"+ units[i].getId() +"'>"+ units[i].getUniqueId()+ " (" + units[i].getName() + ")" +"</option>");
                             $("#units :not(:contains("+$searchBox+"))option").remove();
 // get loaded 'users's items                       
-                        var users = sess.getItems("user"); 
+                        var users = sess.getItems("user");                        
 // construct Select list using found users                        
 			for (var i = 0; i< users.length; i++) 
+                            
                             $("#users").append("<option value='"+ users[i].getId() +"'>"+ users[i].getName() +"</option>");
-                            $("#users :not(:contains("+$username+"))option").remove();
+                            $("#users :not(:contains("+$username+"))option").hide();
                             $("#users :contains("+$username+")").attr("selected", "selected");
+                            
+                            var usersq = sess.getItems("user"); 
+                            for (var i = 0; i< usersq.length; i++) 
+                            var test11= usersq[i].getId() + usersq[i].getName();
+                            //if (i=="haoshfo")
+
+                                msg(test11 + "1");
 	});    
 }
 
@@ -90,77 +98,102 @@ function set_access(){
     var sess = wialon.core.Session.getInstance();
     var flag_res=4648339329; // Access flag for res 550594678661
     var flag_res_user=52785134440321;
+    var flag_opus=68719476735;
+    var flag_dlenik=68702699519;
     var flag_unit=550594678661;
     var flag_usr = 0; // Access flag for usr
     var mask_flag_usr = 23; // mask of flag;
 //    var locale_flag = -134155792;//184753184;
     
     var unit=$("#units").val(); //check for select resource
-    if(!unit)
-    {
+    if(!unit){
         msg("Выберите Объект"); 
         return; // exit if no resource select
     } 
-
     var res=$("#res").val(); //check for select resource
-    if(!res)
-    { 
+    if(!res){ 
         msg("Выберите ресурс"); 
         return; // exit if no resource select
     }   
     var res2=$("#res2").val(); //check for select resource
-    if(!res2)
-    { 
+    if(!res2){ 
         msg("Выберите ресурс2"); 
         return; // exit if no resource select
     }
     var id_usr=$("#users").val(); //check for select user
-    if(!id_usr)
-    {
+    if(!id_usr){
         msg("Выберите User"); 
         return; // exit if no user select
     }  
-    var userr = sess.getItem( id_usr );    
-    userr.updateItemAccess(sess.getItem( res ), flag_res, function(code) // set accsess to item
-    {
-        if (code != 0)
-        {
+    var usr_opus=sess.getItem( "haoshfo" );//o.pustovit
+    var usr_dlenik=sess.getItem( "Snezhok" );//d.lenik
+    var userr = sess.getItem( id_usr ); 
+    msg(id_usr);
+    msg(userr);
+    
+    msg(usr_opus);
+       
+    usr_opus.updateItemAccess(sess.getItem( res ), flag_opus, function(code){
+        if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
         console.log("access to res Done");
-    });
+    });    // set accsess to item user for o.pustovit
+    usr_dlenik.updateItemAccess(sess.getItem( res ), flag_dlenik, function(code){
+        if (code != 0){
+            alert(wialon.core.Errors.getErrorText(code));
+            return;
+        }
+        console.log("access to res Done");
+    });    // set accsess to user item for d.lenik
     
-     var userr = sess.getItem( id_usr );    
-    userr.updateItemAccess(sess.getItem( res2 ), flag_res_user, function(code) // set accsess to item
-    {
-        if (code != 0)
-        {
+    usr_opus.updateItemAccess(sess.getItem( res2 ), flag_opus, function(code){
+        if (code != 0){
+            alert(wialon.core.Errors.getErrorText(code));
+            return;
+        }
+        console.log("access to res Done");
+    });    // set accsess to item user_name  for o.pustovit
+    usr_dlenik.updateItemAccess(sess.getItem( res2 ), flag_dlenik, function(code){
+        if (code != 0){
+            alert(wialon.core.Errors.getErrorText(code));
+            return;
+        }
+        console.log("access to res Done");
+    });    // set accsess to item user_name  for d.lenik
+    
+    var userr = sess.getItem( id_usr );    
+    userr.updateItemAccess(sess.getItem( res ), flag_res, function(code){
+        if (code != 0){
+            alert(wialon.core.Errors.getErrorText(code));
+            return;
+        }
+        console.log("access to res Done");
+    });    // set accsess to item user for user
+    var userr = sess.getItem( id_usr );    
+    userr.updateItemAccess(sess.getItem( res2 ), flag_res_user, function(code){
+        if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
         console.log("access to res_user Done");
-    });
-    
-    userr.updateUserFlags(flag_usr, mask_flag_usr, function(code) // set accsess to user
-    {
-        if (code != 0)
-        {
+    });// set accsess to item user_name  for user  
+    userr.updateUserFlags(flag_usr, mask_flag_usr, function(code){
+        if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
         console.log("access to User Done :");
-    });
+    }); // set accsess to user
     var userr = sess.getItem( id_usr );    
-    userr.updateItemAccess(sess.getItem( unit ), flag_unit, function(code) // set accsess to item
-    {
-        if (code != 0)
-        {
+    userr.updateItemAccess(sess.getItem( unit ), flag_unit, function(code){
+        if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
         console.log("access to unit Done");
-    });
+    });// set accsess to unit
     msg("Установлены права для пользователя, объекта и двум ресурам")
 }   
 
