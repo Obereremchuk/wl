@@ -48,30 +48,23 @@ function init() { // Execute after login succeed
                         var units = sess.getItems("avl_unit");
 // construct Select list using found units
 			for (var i = 0; i< units.length; i++) 
+                            
                             $("#units").append("<option value='"+ units[i].getId() +"'>"+ units[i].getUniqueId()+ " (" + units[i].getName() + ")" +"</option>");
                             $("#units :not(:contains("+$searchBox+"))option").remove();
 // get loaded 'users's items                       
                         var users = sess.getItems("user");                        
 // construct Select list using found users                        
 			for (var i = 0; i< users.length; i++) 
-                            
                             $("#users").append("<option value='"+ users[i].getId() +"'>"+ users[i].getName() +"</option>");
                             $("#users :not(:contains("+$username+"))option").hide();
                             $("#users :contains("+$username+")").attr("selected", "selected");
-                            
-                            var usersq = sess.getItems("user"); 
-                            for (var i = 0; i< usersq.length; i++) 
-                            var test11= usersq[i].getId() + usersq[i].getName();
-                            //if (i=="haoshfo")
-
-                                msg(test11 + "1");
 	});    
 }
 
 function createuser(){
     var user = wialon.core.Session.getInstance().getCurrUser();
     var username = $("#username").val(); // имя нового юзера из формы
-    if(!username){ msg("Введите имя пользователя"); return; } // если не введено имя, возвращаем
+    if(!username || username.indexOf(' ') >= 0 ){ msg("Введите верное имя пользователя"); return; } // если не введено имя, возвращаем
     var passw = $("#passw").val(); // пароль для нового юзера из формы
     if(!passw){ msg("Введите пароль"); return; } // eесли не введен пароль, возвращаем
     var flag = 1; //флаг
@@ -98,8 +91,8 @@ function set_access(){
     var sess = wialon.core.Session.getInstance();
     var flag_res=4648339329; // Access flag for res 550594678661
     var flag_res_user=52785134440321;
-    var flag_opus=68719476735;
-    var flag_dlenik=68702699519;
+    var flag_opus=52810916888575;
+    var flag_dlenik=52806621921279;
     var flag_unit=550594678661;
     var flag_usr = 0; // Access flag for usr
     var mask_flag_usr = 23; // mask of flag;
@@ -125,14 +118,12 @@ function set_access(){
         msg("Выберите User"); 
         return; // exit if no user select
     }  
-    var usr_opus=sess.getItem( "haoshfo" );//o.pustovit
-    var usr_dlenik=sess.getItem( "Snezhok" );//d.lenik
-    var userr = sess.getItem( id_usr ); 
-    msg(id_usr);
-    msg(userr);
     
-    msg(usr_opus);
-       
+    var usr_dlenik_id="1066";//d.lenik
+    var usr_dlenik = sess.getItem( usr_dlenik_id );
+    var usr_opus_id="27";//o.pustovit
+    var usr_opus = sess.getItem( usr_opus_id );
+    
     usr_opus.updateItemAccess(sess.getItem( res ), flag_opus, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
