@@ -128,6 +128,7 @@ function set_access(){
         }
         console.log("access to res1 for o.pustovit Done");
     });//Устанавливаем права на русурс1 для пользователю: o.pustovit
+    
     usr_opus.updateItemAccess(sess.getItem( res2 ), flag_opus, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
@@ -136,17 +137,15 @@ function set_access(){
         console.log("access to res2 for o.pustovit Done");
     });//Устанавливаем права на русурс2 для пользователю: o.pustovit
     
-        var flag_opus_new_user=-1; //FULL Права на учетку нового пользователя для o.pustovit;
+    var flag_opus_new_user=-1; //FULL Права на учетку нового пользователя для o.pustovit;
     var usr_opus = sess.getItem("27");//Загружаем данные пользователя: o.pustovit
     usr_opus.updateItemAccess(sess.getItem( id_usr ), flag_opus_new_user, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
-        console.log("access to new user for o.pustovit Done");
-    });//Устанавливаем права на четку нового пользователя: o.pustovit
-    
-    
+        console.log("Full access to new user for o.pustovit Done");
+    });//Устанавливаем Full права на учетку нового пользователя: o.pustovit
     
     var flag_dlenik=52806621921279;//Права на ресурсы нового пользователя для d.lenik
     //var usr_dlenik_id="1066";
