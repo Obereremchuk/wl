@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="http://navi.venbest.com.ua/wsdk/script/wialon.js"></script>
+    </head>
+    <body>
+    <!-- load map -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.2/leaflet.js"></script>
+        
+    <!-- Call getToken() onclick -->
+	<input id="login" type="button" value="Click to open login page" onclick="getToken()"/>
+        <iframe name="simple_form" src="" id="loginform" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
+    <!-- Print token here-->
+    Your token: <span id="token"></span>
+    <br /><br />
+    <input id="logout" type="button" value="Click to logout" disabled onclick="logout()"/>
+        Select unit: <select id="units"><option></option></select>
+        <div id="log"></div>
+
+    
+ <script type="text/javascript">
+// Wialon site dns
+var dns = "http://navi.venbest.com.ua";
+var token;
+
+// Main function
+function getToken() {
+    // construct login page URL
+    var url = dns + "/login.html"; // your site DNS + "/login.html"
+    url += "?client_id=" + "App";	// your application name
+    url += "&access_type=" + -1;	// access level, 0x100 = "Online tracking only",
+    url += "&activation_time=" + 0;	// activation time, 0 = immediately; you can pass any UNIX time value
+    url += "&duration=" + 43200;	// duration, 604800 = one week in seconds, 1 chas
+    url += "&flags=" + 0x1;			// options, 0x1 = add username in response
+    
+    url += "&redirect_uri=" + dns + "/post_token.html"; // if login succeed - redirect to this page
+
+    // listen message with token from login page window
+    window.addEventListener("message", tokenRecieved);
+    
+    // finally, open login page in new window
+    window.open(url, "_blank", "width=760, height=500, top=300, left=500"); 
+}
+
+// Help function
+function tokenRecieved(e) {
+    // get message from login window
+    var msg = e.data;
+    if (typeof msg == "string" && msg.indexOf("access_token=") >= 0) {
+        // get token
+       	 token = msg.replace("access_token=", "");
+        // now we can use token, e.g show it on page
+        document.getElementById("token").innerHTML = token;
+        document.getElementById("login").setAttribute("disabled", "");
+        document.getElementById("logout").removeAttribute("disabled");
+        
+        // or login to wialon using our token
+        wialon.core.Session.getInstance().initSession("http://navi.venbest.com.ua", null, 0x800);
+        
+        wialon.core.Session.getInstance().loginToken(token, "", function(code) {
+            if (code)
+                return;
+            var user = wialon.core.Session.getInstance().getCurrUser().getName();
+           //alert("Authorized as " + user);
+        });
+        
+        // remove "message" event listener
+       //window.removeEventListener("message", tokenRecieved);
+          
+    }
+}
+
+function logout() {
+    var sess = wialon.core.Session.getInstance();
+	if (sess && sess.getId()) {
+    	sess.logout(function() {
+            document.getElementById("logout").setAttribute("disabled", "");
+            document.getElementById("login").removeAttribute("disabled");
+        });
+    }
+}
+
+function msg(text) { $("#log").prepend(text + "<br/>"); }
+
+</script>
+       </body>
+</html>
+
