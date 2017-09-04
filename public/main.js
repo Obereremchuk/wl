@@ -138,7 +138,7 @@ function set_access(){
     });//Устанавливаем права на русурс2 для пользователю: o.pustovit
     
     var flag_opus_new_user=-1; //FULL Права на учетку нового пользователя для o.pustovit;
-    var usr_opus = sess.getItem("27");//Загружаем данные пользователя: o.pustovit
+    var usr_opus = sess.getItem("27");//Загружаем данные пользователя: o.pustovit id:27
     usr_opus.updateItemAccess(sess.getItem( id_usr ), flag_opus_new_user, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
@@ -148,8 +148,7 @@ function set_access(){
     });//Устанавливаем Full права на учетку нового пользователя: o.pustovit
     
     var flag_dlenik=52806621921279;//Права на ресурсы нового пользователя для d.lenik
-    //var usr_dlenik_id="1066";
-    var usr_dlenik = sess.getItem("1066");//Загружаем данные пользователя: d.lenik
+    var usr_dlenik = sess.getItem("1066");//Загружаем данные пользователя: d.lenik id:1066
     usr_dlenik.updateItemAccess(sess.getItem( res ), flag_dlenik, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));

@@ -29,7 +29,7 @@ and open the template in the editor.
         <div class="panel content"><span class="remark"></span>
             <p>Создаем нового пользователя , ресурсы:</p>
             <p><input type="text" id="username" placeholder="User name" /></p>
-            <p><input type="text" readonly="readonly" id="passw" placeholder="pass" /><input type="button" value="Generate" id="Generate"/></p>
+            <p><input type="text" id="passw" placeholder="pass" oninput="update_out()"/><input type="button" value="Generate" id="Generate"/></p>
             <p><input type="button" value="Создать" id="create_user"/></p>
             <p>______________________________________________________________________________________</p>
             <p>Назначаем права пользователя:</p>
@@ -47,7 +47,7 @@ and open the template in the editor.
                         Select user:<br/><select id="users" multiple="multiple"></select>
                     </td>
                     <td>
-                        Select units:<br/><select id="units" multiple="multiple">  </select><input type="search" id="searchBox"> <input type="button" value="Поиск" id="Update_1"/>
+                        Select units:<br/><select id="units" multiple="multiple" ></select> <input type="search" id="searchBox" oninput="update_search()"> <input type="button" value="Поиск" id="Update_1" style="display: none;"/>
                     </td>
                     <!--<td>Select mapps<br/><select id="mapps" multiple="multiple"></select></td>-->
                 </tr>
@@ -77,6 +77,17 @@ and open the template in the editor.
 	<div class="panel footer"><span class="remark"></span>
             <div id="log"></div>
         </div>
+        
+        <script>
+        function update_search(){
+           Update_1.click();
+        }    
+        function update_out() {
+            var password = document.getElementById('passw').value;
+            var out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
+            document.getElementById('Out').value = out;
+        }
+        </script>
 
     </body>
  
