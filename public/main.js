@@ -207,30 +207,39 @@ function set_access(){
 }//Устанавливаем права.
 
 function Locale(){
-    var id_usr=$("#users").val(); //check for select user
+    var userId=$("#users").val(); //check for select user
     if(!id_usr)
     {
         msg("Выберите User"); 
         return; // exit if no user select
     } 
-    var sess = wialon.core.Session.getInstance();
-    var user = sess.getItem( id_usr );
-    var locale = {};
-    locale.formatDate = "%Y-%m-%E %H:%M:%S";
-    locale.flags = 0;
-    var localeflag = -134155792;
-    user.getRenderer().setLocale(localeflag, "ru", locale, null);
+    msg(userId);
+    var temp;
+    var user = wialon.core.Session.getInstance().getItem(userId);
+    if (user)
+        user.getCustomProperty("email", temp);
+    msg("email:"+ temp);
     msg("done");
     
-//        wialon.core.Session.getInstance().getRenderer().setLocale(locale_flag, "ru", {flags:0,formatDate:'%Y/%m/%E %H:%M:%S'}, function(code) // set locale to user
-//    {
-//        if (code != '' )
-//        {
-//            lert(wialon.core.Errors.getErrorText(code));
-//            return;
-//        }
-//        msg("locale to User Done :" + code);
-//    });
+//        You can get user in 3 ways:
+//1) by id
+//var user =  wialon.core.Session.getInstance().getItem(id);   
+//console.log(user);
+//
+//2) by name        
+//var spec = {itemsType: "user", propName: "sys_name", propValueMask: "name", sortType: ""};
+//wialon.core.Session.getInstance().searchItems(spec, 2, wialon.item.Item.dataFlag.base, 0, 0, qx.lang.Function.bind(function(code, result) {            
+//    if (code || !result || typeof result.items == "undefined" || !result.items.length)
+//        return;
+//    console.log(result.items[0]);
+//}, this));
+//
+//3) get current user
+//var user = wialon.core.Session.getInstance().getCurrUser();
+//console.log(user);
+//
+//note for 1) and 2): you can only get those users that you can access according access rights
+
 }// Не используется, настройка локализации пользователя.
 
 function createNotification_CP(){
@@ -1605,10 +1614,10 @@ $(document).ready(function () {
         $("#Set_access").click( set_access );
         $("#create_user").click (createuser);
         $("#Update").click (Update);
-        $("#Update_1").click (Update);
-        $("#Locale").click( Locale );    
+        $("#Update_1").click (Update);   
         $("#Generate").click( password_generator);
-        $("#no_email").click( no_email_check);      
+        $("#no_email").click( no_email_check);
+        $("#Locale").click(Locale);
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
 //       break loop1; // Только 4 попытки
