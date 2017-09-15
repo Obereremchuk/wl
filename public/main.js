@@ -93,6 +93,7 @@ function createuser(){
             });//Создаем ресурс 2
         })//Создаем ресурс 1, ресурс2
     });//Созаем пользователя, ресурс1, ресурс2
+    Locale();// візіваем функцию установки настроек пользователя - летнее время и часовой пояс
 }//Созаем пользователя, ресурс1, ресурс2
 
 function set_access(){
@@ -208,19 +209,14 @@ function set_access(){
 
 function Locale(){
     var userId=$("#users").val(); //check for select user
-    if(!id_usr)
-    {
-        msg("Выберите User"); 
-        return; // exit if no user select
-    } 
-    msg(userId);
-    var temp;
-    var user = wialon.core.Session.getInstance().getItem(userId);
-    if (user)
-        user.getCustomProperty("email", temp);
-    msg("email:"+ temp);
-    msg("done");
-    
+    var user = wialon.core.Session.getInstance().getItem(userId);//Загружаем данные нового юзера 
+    var curruser = wialon.core.Session.getInstance().getCurrUser();//Загружаем данные юзера под которым вошли 
+    var curruser_tz = curruser.getCustomProperty("tz");//Загружаем настройки временной зоны юзера под которым вошли 
+    var curruser_dst = curruser.getCustomProperty("dst");//Загружаем настройки летнего времени юзера под которым вошли    
+    msg("Usrname:"+ user.getName()+ ", tz:"+user_tz +", dst:"+ user_dst);//Загружаем настройки временной зоны юзера под которым вошли
+    console.log("Usrname:"+ curruser.getName()+ ", tz:"+ curruser_tz+", dst:"+ curruser_dst);// выводим в лог данные текущего юзера под которым вошли
+    user.updateCustomProperty("tz", curruser_tz);//Устанавливаем настройки временной зоны с юзера под клторым вошли, юзеру которого создаем
+    user.updateCustomProperty("dst", curruser_dst);//Устанавливаем настройки летнеее время с юзера под клторым вошли, юзеру которого создаем   
 //        You can get user in 3 ways:
 //1) by id
 //var user =  wialon.core.Session.getInstance().getItem(id);   
@@ -240,7 +236,7 @@ function Locale(){
 //
 //note for 1) and 2): you can only get those users that you can access according access rights
 
-}// Не используется, настройка локализации пользователя.
+}// Настройка локализации пользователя - летнее время, часовой пояс
 
 function createNotification_CP(){
     console.log("start creation CP notification");
