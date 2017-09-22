@@ -30,8 +30,7 @@ and open the template in the editor.
             <p>Создаем нового пользователя , ресурсы:</p>
             <p><input type="text" id="username" placeholder="User name" /></p>
             <p><input type="text" id="passw" placeholder="pass" oninput="update_out()"/><input type="button" value="Generate" id="Generate"/></p>
-            <p><input type="button" value="Создать" id="create_user"/></p>
-            <p><input type="button" value="Locale" id="Locale"/></p>
+            <p><input type="button" value="Создать" id="create_user" />  <input type="button" value="Locale" id="Locale" style="display: none;"/> <input type="checkbox" name="Locale" id="Locale1" checked> Set Locale </p>
             <p>______________________________________________________________________________________</p>
             <p>Назначаем права пользователя:</p>
             <p>Проверяем коректность выбора пользователя и ресурсов</p>
@@ -53,7 +52,7 @@ and open the template in the editor.
                     <!--<td>Select mapps<br/><select id="mapps" multiple="multiple"></select></td>-->
                 </tr>
             </table>
-            <br/><input type="button" value="Назначить права" id="Set_access"/>
+            <br/><input type="button" value="Назначить права" id="Set_access"/> 
             <p>______________________________________________________________________________________</p>
         
             <table>

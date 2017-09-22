@@ -54,6 +54,7 @@ function init() { // Получаем, фильтруем ресурс1, рес�
                     $("#users :not(:contains("+$username+"))option").hide();//Убираем все что не содержит username
                     $("#users :contains("+$username+")").attr("selected", "selected");//выбираем из списка содержащий $username
     });// получаем, фильтруем ресурс1, ресурс2, пользователь, объект
+
 }
 
 function createuser(){
@@ -93,7 +94,6 @@ function createuser(){
             });//Создаем ресурс 2
         })//Создаем ресурс 1, ресурс2
     });//Созаем пользователя, ресурс1, ресурс2
-    Locale();// візіваем функцию установки настроек пользователя - летнее время и часовой пояс
 }//Созаем пользователя, ресурс1, ресурс2
 
 function set_access(){
@@ -204,17 +204,22 @@ function set_access(){
         console.log("access to unit Done");
     });//Устанавливаем права на объект для нового пользователя.
     
-    msg("Установлены права для пользователя, объекта и двум ресурам")
+    var loc;
+    if (document.getElementById('Locale1').checked) {
+        Locale();
+        loc = " ,настройки локализации";
+        
+    }
+    msg("Установлены права для пользователя, объекта и двум ресурам"+ loc)
 }//Устанавливаем права.
 
 function Locale(){
     var userId=$("#users").val(); //check for select user
     var user = wialon.core.Session.getInstance().getItem(userId);//Загружаем данные нового юзера 
     var curruser = wialon.core.Session.getInstance().getCurrUser();//Загружаем данные юзера под которым вошли 
-    var curruser_tz = curruser.getCustomProperty("tz");//Загружаем настройки временной зоны юзера под которым вошли 
-    var curruser_dst = curruser.getCustomProperty("dst");//Загружаем настройки летнего времени юзера под которым вошли    
-    msg("Usrname:"+ user.getName()+ ", tz:"+user_tz +", dst:"+ user_dst);//Загружаем настройки временной зоны юзера под которым вошли
-    console.log("Usrname:"+ curruser.getName()+ ", tz:"+ curruser_tz+", dst:"+ curruser_dst);// выводим в лог данные текущего юзера под которым вошли
+    var curruser_tz = 184753184;//curruser.getCustomProperty("tz");//Загружаем настройки временной зоны юзера под которым вошли 
+    var curruser_dst = -1;//curruser.getCustomProperty("dst");//Загружаем настройки летнего времени юзера под которым вошли    
+    console.log("Usrname:"+ curruser.getName()+"ToUser:" + user +", tz:"+ curruser_tz+", dst:"+ curruser_dst);// выводим в лог данные текущего юзера под которым вошли
     user.updateCustomProperty("tz", curruser_tz);//Устанавливаем настройки временной зоны с юзера под клторым вошли, юзеру которого создаем
     user.updateCustomProperty("dst", curruser_dst);//Устанавливаем настройки летнеее время с юзера под клторым вошли, юзеру которого создаем   
 //        You can get user in 3 ways:
@@ -1608,9 +1613,10 @@ $(document).ready(function () {
        // bind actions to button clicks
 	$("#create_btn").click( button_work); // bind action to button click
         $("#Set_access").click( set_access );
+        //$("#create_user").click (Locale); 
         $("#create_user").click (createuser);
-        $("#Update").click (Update);
-        $("#Update_1").click (Update);   
+        $("#Update").click (Update); 
+        $("#Update_1").click (Update); 
         $("#Generate").click( password_generator);
         $("#no_email").click( no_email_check);
         $("#Locale").click(Locale);
