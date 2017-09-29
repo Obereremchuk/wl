@@ -148,7 +148,7 @@ function set_access(){
         console.log("Full access to new user for o.pustovit Done");
     });//Устанавливаем Full права на учетку нового пользователя: o.pustovit
     
-    var flag_dlenik=52806621921279;//Права на ресурсы нового пользователя для d.lenik
+    var flag_dlenik=52810916888575;//Права на ресурсы нового пользователя для d.lenik
     var usr_dlenik = sess.getItem("1066");//Загружаем данные пользователя: d.lenik id:1066
     usr_dlenik.updateItemAccess(sess.getItem( res ), flag_dlenik, function(code){
         if (code != 0){
@@ -626,7 +626,7 @@ function createNotification_CP(){
         console.log("Notification ГЛУШЕНИЕ GSM (ПАРКИНГ)"); // print create succeed message
     });//Создаем уведомление
 
-    msg("9 уведомлений создано");
+    msg("CP 9 уведомлений создано");
 }//Создаем уведомления для Connect Plus
 
 function createNotification_CMM(){ //create notification
@@ -1012,7 +1012,7 @@ function createNotification_CMM(){ //create notification
         console.log("Notification Cработка: Сирена  CMM"); // print create succeed message
     });//Создаем уведомление
 
-    msg("9 уведомлений создано");
+    msg("CMM 9 уведомлений создано");
 }//Создаем уведомления для Connect Magnum Moto
 
 function createNotification_CMA(){ //create notification
@@ -1436,8 +1436,382 @@ function createNotification_CMA(){ //create notification
         console.log("Notification Cработка: Установлено в охрану с открытыми дверьми  CMA"); // print create succeed message
     });//Опции уведомлений без Email
 
-    msg("10 уведомлений создано");
-}
+    msg("CMA 10 уведомлений создано");
+}//Создаем уведомления для CMA
+
+function createNotification_WATCH(){ //create notification
+    console.log("start creation WATCH notification");
+    var res = wialon.core.Session.getInstance().getItem($("#res").val()); //Загружаем данные выбраного из списка ресурс1
+    if(!res){
+        msg("Выбери ресурс");
+        return; 
+    }; //Проверянм: Ресурс выбран?
+    var un = $("#units").val(); //Загружаем данные выбраного из списка объекта
+    if(!un){
+        msg("Select units");
+        return; 
+    } //Проверянм: объект выбран?
+    var id_usr=$("#users").val();
+    if (document.getElementById('no_email').checked ==false) {
+    var first_email = $("#first_email").val();
+    if(!first_email){
+        msg("Email то забыл ввеси, а?");
+        return; 
+    };//Проверка: поле Email Заполнено?
+    var sec_email = $("#sec_email").val();
+    if(!sec_email){
+        sec_email = first_email;
+    };
+    var tri_email = $("#sec_email").val();
+    if(!tri_email){
+        tri_email = first_email;
+    }; 
+    }//отключение поле Email
+    wialon.core.Session.getInstance().loadLibrary("mobileApps");
+    var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";//Выбор пользователя для мобильных уведомлений
+
+    // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
+    if (document.getElementById('no_email').checked ==false) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "#ff0000"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+                sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "Нажата тревожная кнопка на часах %UNIT%.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "W: Тревожная кнопка", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {t:"alarm", p: {}}
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "Нажата тревожная кнопка на часах %UNIT%.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "W: Тревожная кнопка", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"alarm", p: {}}
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj1, function(code){ // create Notification callback
+        if(code){
+            msg(wialon.core.Errors.getErrorText(code)); 
+            msg("error creation WATCH notification");
+            return;
+        }
+        console.log("creation WATCH notification"); // print create succeed message
+    }); //Опции уведомлений без Email
+
+    // construct Notifiacation object Низкй заряд АКБ
+    if (document.getElementById('no_email').checked ==false){
+        var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: уровень заряда батареи  ниже 20 % Зарядите часы!",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "W: Низкий заряд АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Заряд АКБ", sensor_type: "custom", type: 0, upper_bound: "20"}}      
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true){
+        var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: уровень заряда батареи  ниже 20 % Зарядите часы!",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "W: Низкий заряд АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Заряд АКБ", sensor_type: "custom", type: 0, upper_bound: "20"}}      
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj4, function(code){ // create Notification callback
+        if(code){ 
+            msg(wialon.core.Errors.getErrorText(code));
+            msg("error Notification Низкое напряжения АКБ created");
+            return;
+        } // exit if error code
+        console.log("Notification уровень заряда батареи  ниже 20 created"); // print create succeed message
+    });//Создаем уведомление
+    msg("Watch 2 уведомлений создано");
+}//Создаем уведомления для WATCH
+
+function createNotification_UBER(){ //create notification
+    console.log("start creation WATCH notification");
+    var res = wialon.core.Session.getInstance().getItem($("#res").val()); //Загружаем данные выбраного из списка ресурс1
+    if(!res){
+        msg("Выбери ресурс");
+        return; 
+    }; //Проверянм: Ресурс выбран?
+    var un = $("#units").val(); //Загружаем данные выбраного из списка объекта
+    if(!un){
+        msg("Select units");
+        return; 
+    } //Проверянм: объект выбран?
+    var id_usr=$("#users").val();
+    if (document.getElementById('no_email').checked ==false) {
+    var first_email = $("#first_email").val();
+    if(!first_email){
+        msg("Email то забыл ввеси, а?");
+        return; 
+    };//Проверка: поле Email Заполнено?
+    var sec_email = $("#sec_email").val();
+    if(!sec_email){
+        sec_email = first_email;
+    };
+    var tri_email = $("#sec_email").val();
+    if(!tri_email){
+        tri_email = first_email;
+    }; 
+    }//отключение поле Email
+    wialon.core.Session.getInstance().loadLibrary("mobileApps");
+    var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";//Выбор пользователя для мобильных уведомлений
+
+    // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
+    if (document.getElementById('no_email').checked ==false) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "#ff0000"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+                sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "Нажата тревожная кнопка на часах %UNIT%.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "S: Кнопка тревоги", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {t:"alarm", p: {}}
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "Нажата тревожная кнопка на часах %UNIT%.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "S: Кнопка тревоги", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"alarm", p: {}}
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj1, function(code){ // create Notification callback
+        if(code){
+            msg(wialon.core.Errors.getErrorText(code)); 
+            msg("error creation WATCH notification");
+            return;
+        }
+        console.log("creation UBER notification"); // print create succeed message
+    }); //Опции уведомлений без Email
+    
+        // construct Notifiacation object UBER Низкий заряд баранеи
+    if (document.getElementById('no_email').checked ==false) {
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Y Низкий заряд батареи. Значение = %PARAM_VALUE%.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "S: Низкий заряд батареи", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"msg_param", p: { text_mask: "b", param: "b", type: "0", kind: 0, lower_bound:1, upper_bound:20}}
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true) {
+        var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: Y Низкий заряд батареи. Значение = %PARAM_VALUE%.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "S: Низкий заряд батареи", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"msg_param", p: { text_mask: "b", param: "data_state", type: "1", kind: 1}}
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj2, function(code){ // create Notification callback
+        if(code){
+            msg(wialon.core.Errors.getErrorText(code)); 
+            msg("error Notification Сработка: Датчики взлома created CMA");
+            return;
+        } // exit if error code
+        console.log("Notification UBER Низкий заряд баранеи");
+    });//Опции уведомлений без Email
+    
+    msg("UBER 1 уведомлений создано");
+}//Создаем уведомления для UBER
+
+function createNotification_C(){
+    console.log("start creation CP notification");
+    var res = wialon.core.Session.getInstance().getItem($("#res").val()); //Загружаем данные выбраного из списка ресурс1
+    if(!res){
+        msg("Выбери ресурс");
+        return; 
+    }; //Проверянм: Ресурс выбран?
+    var un = $("#units").val(); //Загружаем данные выбраного из списка объекта
+    if(!un){
+        msg("Select units"); 
+        return; 
+    } //Проверянм: объект выбран?
+    var id_usr=$("#users").val();
+    
+    if (document.getElementById('no_email').checked ==false) {
+        var first_email = $("#first_email").val();
+        if(!first_email){
+            msg("Не заполнено поле Email");
+            return; };//Проверка: поле Email Заполнено?
+        var sec_email = $("#sec_email").val();
+        if(!sec_email){
+            sec_email = first_email;
+        };
+        var tri_email = $("#sec_email").val();
+        if(!tri_email){ 
+            tri_email = first_email;
+        }; 
+    } //отключение поле Email 
+    wialon.core.Session.getInstance().loadLibrary("mobileApps");
+    var app = "{\"Wialon Local\""+":"+"["+id_usr+"]"+"}";//Выбор пользователя для мобильных уведомлений
+
+    // construct Notifiacation object ТРЕВОЖНАЯ КНОПКА
+    if (document.getElementById('no_email').checked ==false) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+                act: [  {t:"message", p:{color: "#ff0000"}}, 
+                        {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        {t:"event", p:{flags: 0}},
+                        {"t":"mobile_apps","p":{"apps":app}}
+                    ], // default values
+                sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+                txt: "%UNIT%: НАЖАТА ТРЕВОЖНАЯ КНОПКА. Объект в %POS_TIME% двигался со скоростью %SPEED% около '%LOCATION%'.",
+                mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+                n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+                trg: {t:"alarm", p: {}}
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true) {
+        var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "#ff0000"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: НАЖАТА ТРЕВОЖНАЯ КНОПКА. Объект в %POS_TIME% двигался со скоростью %SPEED% около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "ТРЕВОЖНАЯ КНОПКА", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"alarm", p: {}}
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj1, function(code){ // create Notification callback
+        if(code){
+            msg(wialon.core.Errors.getErrorText(code)); 
+            msg("error creation WATCH notification");
+            return;
+        }
+        console.log("creation WATCH notification"); // print create succeed message
+    }); //Опции уведомлений без Email
+
+    // construct Notifiacation object Сработка сигнализации
+    if (document.getElementById('no_email').checked ==false){
+        var obj3 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: сработала сигнализация. Объект в %POS_TIME% двигался со скоростью %SPEED% около '%LOCATION%'. Дата и время сообщения: %MSG_TIME%",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "Сработала сигнализация", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации", sensor_type: "digital", type: 0, upper_bound: "1"}}      
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true){
+        var obj3 = { ma:0, fl:1, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "UNIT%: сработала сигнализация. Объект в %POS_TIME% двигался со скоростью %SPEED% около '%LOCATION%'. Дата и время сообщения: %MSG_TIME%",
+            mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
+            n: "Сработала сигнализация", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 1, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Сработка сигнализации", sensor_type: "digital", type: 0, upper_bound: "1"}}      
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj3, function(code){ // create Notification callback
+        if(code){ 
+            msg(wialon.core.Errors.getErrorText(code));
+            msg("error Notification Сработка сигнализации: зажигание created");
+            return;
+        }
+        console.log("Notification Сработка сигнализации"); // print create succeed message
+    });//Создаем уведомление
+
+    // construct Notifiacation object Низкое напряжения АКБ
+    if (document.getElementById('no_email').checked ==false){
+        var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: низкое напряжение АКБ. Автомобиль находился около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 300, mpst: 0, cp: 0, // default values
+            n: "Низкое напряжения АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик напряжения", sensor_type: "voltage", type: 0, upper_bound: "11.08"}}      
+        };
+    }//Опции  уведомлений с Email
+    if (document.getElementById('no_email').checked ==true){
+        var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
+            act: [  {t:"message", p:{color: "black"}}, 
+                    {t:"event", p:{flags: 0}},
+                    {"t":"mobile_apps","p":{"apps":app}}
+                ], // default values
+            sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
+            txt: "%UNIT%: низкое напряжение АКБ. Автомобиль находился около '%LOCATION%'.",
+            mmtd: 0, cdt: 0, mast: 300, mpst: 0, cp: 0, // default values
+            n: "Низкое напряжения АКБ", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
+            trg: {t:"sensor_value", p: {lower_bound: 0, merge: 1, prev_msg_diff: 0, sensor_name_mask: "Датчик напряжения", sensor_type: "voltage", type: 0, upper_bound: "11.08"}}      
+        };
+    }//Опции уведомлений без Email
+    res.createNotification(obj4, function(code){ // create Notification callback
+        if(code){ 
+            msg(wialon.core.Errors.getErrorText(code));
+            msg("error Notification Низкое напряжения АКБ created");
+            return;
+        } // exit if error code
+        console.log("Notification Низкое напряжения АКБ created"); // print create succeed message
+    });//Создаем уведомление
+
+    msg("Connect 3 уведомлений создано");
+}//Создаем уведомления для Connect 
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -1448,7 +1822,7 @@ function sleep(milliseconds) {
   }
 } //Задержка, не используется
 
-function Update (){
+function Update(){
     $("#res").html(''); 
     $("#res2").html('');
     $("#users").html('');
@@ -1549,6 +1923,9 @@ function button_work(){
         document.getElementById('CP').checked =false;
         document.getElementById('CMM').checked =false;
         document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('UBER').checked =false;
+        document.getElementById('C').checked =false;
     }//Ели выбран СР, содаем его уведомления, и очищаем выбраный продукт
     else if (prod_value=="CMM"){
         createNotification_CMM();
@@ -1556,6 +1933,9 @@ function button_work(){
         document.getElementById('CP').checked =false;
         document.getElementById('CMM').checked =false;
         document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('UBER').checked =false;
+        document.getElementById('C').checked =false;
     }//Ели выбран СММ, содаем его уведомления, и очищаем выбраный продукт
     else if (prod_value=="CMA"){
         createNotification_CMA();
@@ -1563,7 +1943,40 @@ function button_work(){
         document.getElementById('CP').checked =false;
         document.getElementById('CMM').checked =false;
         document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('UBER').checked =false;
+        document.getElementById('C').checked =false;
     }//Ели выбран СМА, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="WATCH"){
+        createNotification_WATCH();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('UBER').checked =false;
+        document.getElementById('C').checked =false;
+    }//Ели выбран WATCH, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="UBER"){
+        createNotification_UBER();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        //document.getElementById('WATCH').checked =false;
+        //document.getElementById('UBER').checked =false;
+        //document.getElementById('C').checked =false;
+    }//Ели выбран C, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="C"){
+        createNotification_C();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('UBER').checked =false;
+        document.getElementById('C').checked =false;
+    }//Ели выбран C, содаем его уведомления, и очищаем выбраный продукт
 }//Выбор продукта и создание уведомлений для него
 
 function password_generator(  ) {
