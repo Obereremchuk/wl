@@ -1592,7 +1592,7 @@ function createNotification_UBER(){ //create notification
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
                 sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-                txt: "Нажата тревожная кнопка на часах %UNIT%.",
+                txt: "Нажата тревожная кнопка %UNIT%.",
                 mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
                 n: "S: Кнопка тревоги", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
                 trg: {t:"alarm", p: {}}
@@ -1605,7 +1605,7 @@ function createNotification_UBER(){ //create notification
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
             sch: { f1:0, f2: 0, t1: 0, t2: 0, m: 0, y: 0, w: 0}, // shedule default value
-            txt: "Нажата тревожная кнопка на часах %UNIT%.",
+            txt: "Нажата тревожная кнопка %UNIT%.",
             mmtd: 0, cdt: 0, mast: 0, mpst: 0, cp: 0, // default values
             n: "S: Кнопка тревоги", un: un, ta: 0, td: 0,  // set name, units, activation and deactivation time
             trg: {t:"alarm", p: {}}
@@ -1656,10 +1656,10 @@ function createNotification_UBER(){ //create notification
             msg("error Notification Сработка: Датчики взлома created CMA");
             return;
         } // exit if error code
-        console.log("Notification UBER Низкий заряд баранеи");
+        console.log("Notification S: Низкий заряд баранеи");
     });//Опции уведомлений без Email
     
-    msg("UBER 1 уведомлений создано");
+    msg("S: 1 уведомлений создано");
 }//Создаем уведомления для UBER
 
 function createNotification_C(){
