@@ -25,28 +25,28 @@ and open the template in the editor.
         .footer {
             left: 0;
             bottom: 0;
-            height: 149px;
+            height: 99px;
             right: 0;
             background: #CAECF7;
                 }
         .left  {
             left: 0;
             top: 41px;
-            bottom: 150px;
+            bottom: 100px;
             width: 200px;
             background: #A7E2FF;
                }
         .right {
             right: 0;
             top: 41px;
-            bottom: 150px;
+            bottom: 100px;
             width: 280px;
             background: #A7E2FF;
                 }
         .content {
                 left: 201px;
                 top: 41px;
-                bottom: 150px;
+                bottom: 100px;
                 right: 281px;
                 background: #D6F1FF;
                 overflow: hidden;
