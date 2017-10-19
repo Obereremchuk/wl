@@ -317,7 +317,7 @@ function createNotification_CP(){
     // construct Notifiacation object Сработка: Датчики взлома
     if (document.getElementById('no_email').checked ==false){
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -333,7 +333,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                 {t:"event", p:{flags: 0}},
                 {"t":"mobile_apps","p":{"apps":app}}
             ], // default values
@@ -356,7 +356,7 @@ function createNotification_CP(){
     // construct Notifiacation object Сработка сигнализации: зажигание
     if (document.getElementById('no_email').checked ==false){
         var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -372,7 +372,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -395,7 +395,7 @@ function createNotification_CP(){
     // construct Notifiacation object Низкое напряжения АКБ
     if (document.getElementById('no_email').checked ==false){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -411,7 +411,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -434,7 +434,7 @@ function createNotification_CP(){
     // construct Notifiacation object НЕ ЗАКРЫТЫ ДВЕРИ/КАПОТ/БАГАЖНИК В ОХРАНЕ
     if (document.getElementById('no_email').checked ==false){
         var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -450,7 +450,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -473,7 +473,7 @@ function createNotification_CP(){
     // construct Notifiacation object Блокировка двигателя
     if (document.getElementById('no_email').checked ==false){
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -489,7 +489,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -512,7 +512,7 @@ function createNotification_CP(){
     // construct Notifiacation object Cработка: Датчик удара/наклона/буксировки
     if (document.getElementById('no_email').checked ==false){
     var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -528,7 +528,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -551,7 +551,7 @@ function createNotification_CP(){
     // construct Notifiacation object Cработка: ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)        
     if (document.getElementById('no_email').checked ==false){
         var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -567,7 +567,7 @@ function createNotification_CP(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
     var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -702,7 +702,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Сработка: Датчики взлома
     if (document.getElementById('no_email').checked ==false) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -718,7 +718,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                    {t:"event", p:{flags: 0}},
                    {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -741,7 +741,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Сработка сигнализации: зажигание
     if (document.getElementById('no_email').checked ==false) {
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -757,7 +757,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
-                    act: [  {t:"message", p:{color: "black"}}, 
+                    act: [  {t:"message", p:{color: ""}}, 
                             {t:"event", p:{flags: 0}},
                             {"t":"mobile_apps","p":{"apps":app}}
                         ], // default values
@@ -780,7 +780,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Низкое напряжения АКБ
     if (document.getElementById('no_email').checked ==false) {
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -796,7 +796,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -819,7 +819,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Основной аккумулятор отключен
     if (document.getElementById('no_email').checked ==false) {
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -835,7 +835,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -858,7 +858,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Блокировка двигателя
     if (document.getElementById('no_email').checked ==false) {
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -874,7 +874,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -897,7 +897,7 @@ function createNotification_CMM(){ //create notification
     // construct Notifiacation object Cработка: Датчик наклона
     if (document.getElementById('no_email').checked ==false) {
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -913,7 +913,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -936,7 +936,7 @@ function createNotification_CMM(){ //create notification
           // construct Notifiacation object Cработка: Датчик удара        
     if (document.getElementById('no_email').checked ==false) {
         var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -952,7 +952,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -976,7 +976,7 @@ function createNotification_CMM(){ //create notification
           // construct Notifiacation object Cработка: Сирена       
     if (document.getElementById('no_email').checked ==false) {
         var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-                act: [  {t:"message", p:{color: "black"}}, 
+                act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                         {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -992,7 +992,7 @@ function createNotification_CMM(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1088,7 +1088,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Сработка: Датчики взлома
     if (document.getElementById('no_email').checked ==false) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1104,7 +1104,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1127,7 +1127,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Сработка сигнализации: зажигание
     if (document.getElementById('no_email').checked ==false) {
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1143,7 +1143,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1166,7 +1166,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Низкое напряжения АКБ
     if (document.getElementById('no_email').checked ==false) {
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1182,7 +1182,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1205,7 +1205,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Основной аккумулятор отключен
     if (document.getElementById('no_email').checked ==false) {
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1221,7 +1221,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1244,7 +1244,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Блокировка двигателя
     if (document.getElementById('no_email').checked ==false) {
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1260,7 +1260,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1283,7 +1283,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Cработка: Датчик наклона
     if (document.getElementById('no_email').checked ==false) {
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1299,7 +1299,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1322,7 +1322,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Cработка: Датчик удара        
     if (document.getElementById('no_email').checked ==false) {
     var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1338,7 +1338,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1361,7 +1361,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Cработка: Сирена       
     if (document.getElementById('no_email').checked ==false) {
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1377,7 +1377,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1400,7 +1400,7 @@ function createNotification_CMA(){ //create notification
     // construct Notifiacation object Cработка: Сирена       
     if (document.getElementById('no_email').checked ==false) {
         var obj10 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1416,7 +1416,7 @@ function createNotification_CMA(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj10 = { ma:0, fl:0, tz:7200, la:"ru",
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1512,7 +1512,7 @@ function createNotification_WATCH(){ //create notification
     // construct Notifiacation object Низкй заряд АКБ
     if (document.getElementById('no_email').checked ==false){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1528,7 +1528,7 @@ function createNotification_WATCH(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1623,7 +1623,7 @@ function createNotification_UBER(){ //create notification
         // construct Notifiacation object UBER Низкий заряд баранеи
     if (document.getElementById('no_email').checked ==false) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1639,7 +1639,7 @@ function createNotification_UBER(){ //create notification
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true) {
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1735,7 +1735,7 @@ function createNotification_C(){
     // construct Notifiacation object Сработка сигнализации
     if (document.getElementById('no_email').checked ==false){
         var obj3 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1751,7 +1751,7 @@ function createNotification_C(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj3 = { ma:0, fl:1, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1774,7 +1774,7 @@ function createNotification_C(){
     // construct Notifiacation object Низкое напряжения АКБ
     if (document.getElementById('no_email').checked ==false){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
                     {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
@@ -1790,7 +1790,7 @@ function createNotification_C(){
     }//Опции  уведомлений с Email
     if (document.getElementById('no_email').checked ==true){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
-            act: [  {t:"message", p:{color: "black"}}, 
+            act: [  {t:"message", p:{color: ""}}, 
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
