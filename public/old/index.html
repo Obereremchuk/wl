@@ -21,15 +21,12 @@ and open the template in the editor.
         <div class="panel header"><span class="remark"></span> Создание пользователей Wialon Local</div>
         
         <div id="product" class="panel left"><span class="remark"></span>
-            <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
-            <input type="radio" id="CNTK" name="prod" value="CNTK" onClick="select_product()">Connect Keyless<Br>
-            <input type="radio" id="CRAB" name="prod" value="CRAB" onClick="select_product()">CRAB<Br>
+            <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">CONNECT PLUS<Br>
             <input type="radio" id="CMA" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
             <input type="radio" id="CMM" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
-            <input type="radio" id="WATCH" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
-            <input type="radio" id="UBER" name="prod" value="UBER" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
-            <input type="radio" id="C" name="prod" value="C" onClick="select_product()">Connect<Br>
-            <input type="radio" id="AXA" name="prod" value="AXA" onClick="select_product()">AXA<Br>
+            <input type="radio" id="CMM" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
+            <input type="radio" id="CMM" name="prod" value="UBER" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
+            <input type="radio" id="CMM" name="prod" value="C" onClick="select_product()">Connect<Br>
         </div>
         
         <div class="panel content"><span class="remark"></span>
@@ -44,19 +41,17 @@ and open the template in the editor.
             <table>
                 <tr>
                     <td>
-                        Resource "name":<br/><select id="res" multiple="multiple" style="width: 200px;"></select>
+                        Resource "name":<br/><select id="res" multiple="multiple"></select>
                     </td>
                     <td>
-                        Resource "name_user":<br/><select id="res2" multiple="multiple" style="width: 200px;"></select>
+                        Resource "name_user":<br/><select id="res2" multiple="multiple"></select>
                     </td>
                     <td>
-                        Select user:<br/><select  id="users" multiple="multiple" style="width: 200px;"></select>
+                        Select user:<br/><select id="users" multiple="multiple"></select>
                     </td>
                     <td>
-                        Select units:<input type="radio" id="select_unit" name="select" checked="checked"> Select groups:<input type="radio" id="select_group" name="select"> <br/>
-                        <select id="units" multiple="multiple" style="width: 250px;"></select> <input type="search" id="searchBox" oninput="update_search()"> <input type="button" value="Поиск" id="Update_1" style="display: none;"/>
+                        Select units:<br/><select id="units" multiple="multiple" ></select> <input type="search" id="searchBox" oninput="update_search()"> <input type="button" value="Поиск" id="Update_1" style="display: none;"/>
                     </td>
-
                     <!--<td>Select mapps<br/><select id="mapps" multiple="multiple"></select></td>-->
                 </tr>
             </table>
@@ -83,7 +78,7 @@ and open the template in the editor.
 	</div>
                         
 	<div class="panel footer"><span class="remark"></span>
-            <textarea style="overflow-x:hidden; width:100%;" name="log" id="log" rows="4"></textarea>
+            <div id="log"></div>
         </div>
         
         <script>
