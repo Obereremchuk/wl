@@ -2403,8 +2403,8 @@ function createNotification_AXA(){
         ma:0, fl:0, tz:7200, la:"ru", 
         act: [  {t:"message", p:{color: "#ff0000"}}, 
                 {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+//                {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
+//                {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
                 {t:"event", p:{flags: 0}},
                 {"t":"mobile_apps","p":{"apps":app}}
             ], // default values
@@ -2692,7 +2692,149 @@ function no_email_check(){
         document.getElementById('sec_email').disabled =false;
         document.getElementById('tri_email').disabled =false;
     }
-} //Если отмечено без email содаем другие уведомления без email   
+} //Если отмечено без email содаем другие уведомления без email 
+
+function init_(){
+    var nm = $("#nm").val();
+    var sess = wialon.core.Session.getInstance(); // get instance of current Session
+	// flags to specify what kind of data should be returned
+	var flags = wialon.item.Item.dataFlag.base |
+	         wialon.item.Unit.dataFlag.sensors | 
+	         wialon.item.Unit.dataFlag.lastMessage |
+                 wialon.item.Unit.dataFlag.commands |
+	         wialon.item.Unit.dataFlag.commandAliases;;
+	sess.loadLibrary("unitSensors"); // load Sensor Library
+        sess.loadLibrary("unitCommandDefinitions"); // load Command Definitions Library
+	
+	sess.updateDataFlags( // load items to current session
+	    [{type: "type", data: "avl_unit", flags: flags, mode: 0}], // Items specification
+	    function (code) { // updateDataFlags callback
+		    if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code 
+			// get loaded 'avl_unit's items with edit sensors access 
+		    var units = wialon.util.Helper.filterItems( sess.getItems("avl_unit"), 
+		        wialon.item.Unit.accessFlag.editSensors);
+			
+		    if (!units || !units.length){ msg("No units found"); return; } // check if units found
+		    for (var i=0; i<units.length; i++) // construct Select list using found units
+			    $("#units").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
+                            $("#units :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
+                            $("#units :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
+	    }
+    );
+}
+
+function create_unit(){
+    var user=wialon.core.Session.getInstance().getCurrUser();
+    var name=$("#nm").val();
+    var hwid= "9";
+    var dataflag = "1";
+    
+    wialon.core.Session.getInstance().createUnit(user,name, hwid,dataflag,function (code,obj) {
+        if (code){
+            msg(wialon.core.Errors.getErrorText(code));
+            return; 
+        }
+        msg("ok")
+        console.log(obj)
+    });  
+} //Создаем объект
+
+function update_unit()  {
+    // construct Sensor object with defaults and entered data
+    var obj = { n:"Sensor_name", d:"", f:0, c:"", vt:1, vs:0, tbl:[], m:"Metrics", p:"speed", t:"mileage"};//Пременная с данными для создания датчиков
+    create_sensor(obj);
+        
+    var cf= {id: "2", n: "name", v: "value"};//Пременная с данными для создания произвольных полей
+    create_costomfaild(cf);
+    
+    var acf= {id: "2", n: "adminname", v: "value"};//Пременная с данными для создания admin полей
+    create_adminfaild(acf);
+    
+    var phn= $("#phone").val();//Пременная с данными для обновления телефона
+    update_phonenum(phn);
+    
+    var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
+    var idHW = "9";//Пременная с типом оборудования
+    update_uniqueid(idHW, uniqueid);
+    
+    var apass = 11111; //Пременная с паролем оборудования
+    update_apass(apass);
+    
+    var obj = { n:"comand1", c:"driver_msg", l:"tcp", p:"TPASS", a:1 }; //Пременная с данными для создания команд
+    create_comand(obj)
+    
+}
+
+function create_comand(obj){
+    var sess = wialon.core.Session.getInstance(); // get instance of current Session
+    // get Unit by id and create Command from obj
+    sess.getItem( $("#units").val() ).createCommandDefinition(obj, 
+        function(code, data){ // create command callback
+	    	if (code) msg(wialon.core.Errors.getErrorText(msg("error"+ code))); // print error if error code
+	    	else { // print message about creation succeed and refresh command list
+	    	    msg("command created successfully");
+	    	}
+	});
+}// Создаем команду для объекта
+
+function update_apass(apass){
+    var sess=wialon.core.Session.getInstance();
+    sess.getItem( parseInt( $("#units").val() ) ).updateAccessPassword(apass); 
+    msg("Accsess Pass updated");
+}// Обновляем Пароль объекта
+
+function update_uniqueid(idHW, uniqueid){
+    var sess=wialon.core.Session.getInstance();
+    sess.getItem( parseInt( $("#units").val() ) ).updateDeviceSettings(idHW, uniqueid); 
+    msg("uniqueid updated");
+}// Обновляем ID объекта
+
+function update_phonenum(phn){
+    var sess=wialon.core.Session.getInstance();
+    sess.getItem( parseInt( $("#units").val() ) ).updatePhoneNumber( phn );
+    msg("phn updated" );
+}// Обновляем Телефон объекта
+
+function create_costomfaild(cf){
+    var sess=wialon.core.Session.getInstance();
+    sess.loadLibrary("itemCustomFields");
+    sess.getItem( parseInt( $("#units").val() ) ).createCustomField( cf );
+    msg("cf created successfully" ); 
+}// Создаем произвольное поле для объекта
+
+function create_adminfaild(acf){
+    var sess=wialon.core.Session.getInstance();
+    sess.loadLibrary("itemAdminFields");
+    sess.getItem( parseInt( $("#units").val() ) ).createAdminField( acf );
+    msg("acf created successfully" ); 
+}// Создаем Административное поле для объекта
+
+function create_sensor(obj){
+    var sess = wialon.core.Session.getInstance(); // get instance of current Session
+// get Unit by id and create sensor from obj
+    sess.getItem( $("#units").val()).createSensor(obj,
+    function(code, data){ // create sensor callback
+                if (code) msg(wialon.core.Errors.getErrorText(code)); // print error if error code
+            else { // print message about creation succeed and refresh sensor list
+                msg("sensor created successfully" ); 
+        }
+    });
+}// Создаем объект
+
+function getHWid(){
+wialon.core.Session.getInstance().getHwTypes(
+                    [{filterType:"",
+                      filterValue:[""],
+                      includeType:"",
+                      ignoreRename:""}], 
+              function (code, col){
+                  if (code != 0){ 
+                      msg(wialon.core.Errors.getErrorText(code)); 
+                      return ; 
+                  }
+                  var hwid = col;
+                  console.log (hwid);});
+}//Получаем диапазон доступных HWid
 
 $(document).ready(function () {
        // bind actions to button clicks
@@ -2705,6 +2847,10 @@ $(document).ready(function () {
         $("#Generate").click( password_generator);
         $("#no_email").click( no_email_check);
         $("#Locale").click(Locale);
+        $("#gethwid").click(getHWid);
+        $("#create_unit").click(create_unit);
+        $("#update_unit").click(update_unit);
+        $("#init_").click(init_);
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
 //       break loop1; // Только 4 попытки
