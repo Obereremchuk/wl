@@ -2698,28 +2698,34 @@ function init_(){
     var nm = $("#nm").val();
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
 	// flags to specify what kind of data should be returned
-	var flags = wialon.item.Item.dataFlag.base |
-	         wialon.item.Unit.dataFlag.sensors | 
-	         wialon.item.Unit.dataFlag.lastMessage |
-                 wialon.item.Unit.dataFlag.commands |
-	         wialon.item.Unit.dataFlag.commandAliases;;
-	sess.loadLibrary("unitSensors"); // load Sensor Library
-        sess.loadLibrary("unitCommandDefinitions"); // load Command Definitions Library
-	
-	sess.updateDataFlags( // load items to current session
-	    [{type: "type", data: "avl_unit", flags: flags, mode: 0}], // Items specification
-	    function (code) { // updateDataFlags callback
-		    if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code 
-			// get loaded 'avl_unit's items with edit sensors access 
-		    var units = wialon.util.Helper.filterItems( sess.getItems("avl_unit"), 
-		        wialon.item.Unit.accessFlag.editSensors);
-			
-		    if (!units || !units.length){ msg("No units found"); return; } // check if units found
-		    for (var i=0; i<units.length; i++) // construct Select list using found units
-			    $("#units").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
-                            $("#units :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
-                            $("#units :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
-	    }
+    var flags = wialon.item.Item.dataFlag.base |
+             wialon.item.Unit.dataFlag.sensors | 
+             wialon.item.Unit.dataFlag.lastMessage |
+             wialon.item.Unit.dataFlag.commands |
+             wialon.item.Unit.dataFlag.commandAliases;
+    sess.loadLibrary("unitSensors"); // load Sensor Library
+    sess.loadLibrary("unitCommandDefinitions"); // load Command Definitions Library
+
+    sess.updateDataFlags( // load items to current session
+        [{type: "type", data: "avl_unit", flags: flags, mode: 0}, // Items specification
+        {type: "type", data: "user", flags: flags, mode: 0}], // Items (user) specification
+        function (code) { // updateDataFlags callback
+                if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code 
+                    // get loaded 'avl_unit's items with edit sensors access 
+                var units = wialon.util.Helper.filterItems( sess.getItems("avl_unit"), 
+                    wialon.item.Unit.accessFlag.editSensors);
+
+                if (!units || !units.length){ msg("No units found"); return; } // check if units found
+                for (var i=0; i<units.length; i++) // construct Select list using found units
+                        $("#units").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
+                        $("#units :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
+                        $("#units :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
+                        
+//                        Get all users to console
+//                        var users = sess.getItems("user");
+//                        for (var i = 0; i< users.length; i++);
+//                        console.log(users[i].getId() +":"+ users[i].getName());
+        }
     );
 }
 
@@ -2763,7 +2769,40 @@ function update_unit()  {
     var obj = { n:"comand1", c:"driver_msg", l:"tcp", p:"TPASS", a:1 }; //Пременная с данными для создания команд
     create_comand(obj)
     
+    //Устанавливаем права на объект для пользователей
+    var acl_flag=550594678661;//Пременная с правами Service
+    var user=wialon.core.Session.getInstance().getItem("27");// Устанавливаеми права Позователю Пустовит
+    set_access_unit(acl_flag,user);
+    
+    var acl_flag=550594678661;//Пременная с правами Service
+    var user=wialon.core.Session.getInstance().getItem("58");// Устанавливаеми права Позователю v.chihman
+    set_access_unit(acl_flag,user);
+    
+    var acl_flag=550594678661;//Пременная с правами Service
+    var user=wialon.core.Session.getInstance().getItem("206");// Устанавливаеми права Позователю y.vyshnevska
+    set_access_unit(acl_flag,user);
+    
+    var acl_flag=550594678661;//Пременная с правами Service
+    var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю l.kolomiyets
+    set_access_unit(acl_flag,user);
+    
+    var acl_flag=550594678661;//Пременная с правами Service
+    var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+    set_access_unit(acl_flag,user);
 }
+
+function set_access_unit(acl_flag,user){
+    var sess = wialon.core.Session.getInstance();    
+    var unit=$("#units").val();    
+
+    user.updateItemAccess(sess.getItem( unit ), acl_flag, function(code){
+        if (code != 0){
+            alert(wialon.core.Errors.getErrorText(code));
+            return;
+        }
+        console.log("access to unit Done");
+    });//Устанавливаем права на объект для нового пользователя.
+}//Устанавливаем права.
 
 function create_comand(obj){
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
@@ -2851,6 +2890,7 @@ $(document).ready(function () {
         $("#create_unit").click(create_unit);
         $("#update_unit").click(update_unit);
         $("#init_").click(init_);
+        $("#test").click(set_access_unit);
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
 //       break loop1; // Только 4 попытки
