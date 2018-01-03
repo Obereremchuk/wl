@@ -2444,6 +2444,156 @@ function Update(){
     init();
 }//Обновление полей страницы согласно введенных данных
 
+function button_work(){
+    
+    if(!prod_value){
+        msg("Выбери продукт!");
+        return; 
+    };//Проверка: Продукт выбран?
+    
+    if (prod_value=="CP"){
+        createNotification_CP();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран СР, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="CMM"){
+        createNotification_CMM();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран СММ, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="CMA"){
+        createNotification_CMA();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран СМА, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="WATCH"){
+        createNotification_WATCH();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран WATCH, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="PHONE"){
+        createNotification_UBER();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран Uber, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="C"){
+        createNotification_C();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран C, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="AXA"){
+        createNotification_AXA();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран AXA, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="CNTK"){
+        createNotification_CNTK();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран СММ, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="CRAB"){
+        createNotification_CRAB();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран CRAB, содаем его уведомления, и очищаем выбраный продукт
+    else if (prod_value=="TK"){
+        createNotification_CRAB();
+        prod_value="";
+        document.getElementById('CP').checked =false;
+        document.getElementById('CMM').checked =false;
+        document.getElementById('CMA').checked =false;
+        document.getElementById('WATCH').checked =false;
+        document.getElementById('PHONE').checked =false;
+        document.getElementById('C').checked =false;
+        document.getElementById('AXA').checked =false;
+        document.getElementById('CNTK').checked =false;
+        document.getElementById('CRAB').checked =false;
+        document.getElementById('TK').checked =false;
+    }//Ели выбран TK, содаем его уведомления, и очищаем выбраный продукт
+    
+}//Выбор продукта и создание уведомлений для него
+
 function select_product (){
     
     var prod_select = document.getElementsByName('prod');
@@ -2523,133 +2673,6 @@ function logout() {
         });
     }
 }
-
-function button_work(){
-    
-    if(!prod_value){
-        msg("Выбери продукт!");
-        return; 
-    };//Проверка: Продукт выбран?
-    
-    if (prod_value=="CP"){
-        createNotification_CP();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран СР, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="CMM"){
-        createNotification_CMM();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран СММ, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="CMA"){
-        createNotification_CMA();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран СМА, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="WATCH"){
-        createNotification_WATCH();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран WATCH, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="UBER"){
-        createNotification_UBER();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-    }//Ели выбран Uber, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="C"){
-        createNotification_C();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран C, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="AXA"){
-        createNotification_AXA();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран AXA, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="CNTK"){
-        createNotification_CNTK();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран СММ, содаем его уведомления, и очищаем выбраный продукт
-    else if (prod_value=="CRAB"){
-        createNotification_CRAB();
-        prod_value="";
-        document.getElementById('CP').checked =false;
-        document.getElementById('CMM').checked =false;
-        document.getElementById('CMA').checked =false;
-        document.getElementById('WATCH').checked =false;
-        document.getElementById('UBER').checked =false;
-        document.getElementById('C').checked =false;
-        document.getElementById('AXA').checked =false;
-        document.getElementById('CNTK').checked =false;
-        document.getElementById('CRAB').checked =false;
-    }//Ели выбран CRAB, содаем его уведомления, и очищаем выбраный продукт
-    
-}//Выбор продукта и создание уведомлений для него
 
 function password_generator(  ) {
     if(!$("#username").val()){
@@ -2789,8 +2812,29 @@ function create_unit(){
 } //Создаем объект
 
 function update_unit()  {
-    //Создаем датчики
     
+    if(!prod_value){
+        msg("Выбери продукт!");
+        return; 
+    };//Проверка: Продукт выбран?
+    
+    var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
+    var idHW = "9";//Пременная с типом оборудования
+    if(!uniqueid){
+        msg("Заполни ID объекта!");
+        return; 
+    };//Проверка: номер СИМ карты объекта введен?
+    update_uniqueid(idHW, uniqueid);
+    
+    //Обновляем номер СИМ карты объекта
+    var phn= $("#phone").val();//Пременная с данными для обновления телефона
+    if(!phn){
+        msg("Заполни номер СИМ карты!");
+        return; 
+    };//Проверка: номер СИМ карты объекта введен?
+    update_phonenum(phn);
+    
+    //Создаем датчики
     var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par6", t:"digital"};//Пременная с данными для создания датчиков
     create_sensor(obj,);
     var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par141", t:"digital"};//Пременная с данными для создания датчиков
@@ -2817,9 +2861,6 @@ function update_unit()  {
     create_sensor(obj);
     var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
     create_sensor(obj);
-    
-    
-    
     
     //Создаем произвольные поля
     var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
@@ -2904,13 +2945,6 @@ function update_unit()  {
     create_adminfaild(acf);
     var acf= {id: "38", n: "12 Версия ПО Prizrak", v: "6.4."};//Произвольное поле №38
     create_adminfaild(acf);
-    
-    var phn= $("#phone").val();//Пременная с данными для обновления телефона
-    update_phonenum(phn);
-    
-    var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
-    var idHW = "9";//Пременная с типом оборудования
-    update_uniqueid(idHW, uniqueid);
     
     var apass = 11111; //Пременная с паролем оборудования
     update_apass(apass);
