@@ -27,32 +27,29 @@ and open the template in the editor.
             <input type="radio" id="CMA" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
             <input type="radio" id="CMM" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
             <input type="radio" id="WATCH" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
-            <input type="radio" id="UBER" name="prod" value="UBER" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
+            <input type="radio" id="TK" name="prod" value="TK" onClick="select_product()">TK<Br>
+            <input type="radio" id="PHONE" name="prod" value="PHONE" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
             <input type="radio" id="C" name="prod" value="C" onClick="select_product()">Connect<Br>
-            <input type="radio" id="AXA" name="prod" value="AXA" onClick="select_product()">AXA<Br>
         </div>
         
         <div class="panel content"><span class="remark"></span>
-            <input type="text" id="Unit_name" placeholder="Unit Name"/>
-            <br>
             <input type="text" id="nm" placeholder="Unit ID"/>
             <br>
             <input type="text" id="phone" placeholder="Phone No" value="+380676168786"/>
             <input type="button" value="Сreate" id="create_unit" />
             <br>
             <br>
-            <input type="button" value="Update" id="init_" />
-            <br>
-            Select unit: <select id="units"></select>
+            <input type="button" value="Get selected unit" id="init_" />
+            <select id="units"></select>
             <br>
             <br>
             <input type="button" value="Update unit" id="update_unit" />
 	</div>
         
         <div class="panel right"><span class="remark"></span><br />
-            <input id="login" type="button" value="Click to login" onclick="getToken()"/>
-            <input id="logout" type="button" value="Click to logout" onclick="logout()"/>
-            <iframe name="simple_form" src="" id="loginform" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
+            <input id="login" type="button" value="Click to login" onclick="getToken()" style="display: none;"/>
+            <input id="logout" type="button" value="Click to logout" onclick="logout()" style="display: none;"/>
+            <iframe name="simple_form" src="//navi.venbest.com.ua/login_simple.html?redirect_uri=http://navi.venbest.com.ua/post_token.html&access_type=-1&activation_time=0&duration=1200&flags=0x1" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
             <button onclick="window.location.href='/wl/index.html'">Create notification</button>
 	</div>
                         

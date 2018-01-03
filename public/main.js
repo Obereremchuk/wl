@@ -9,7 +9,7 @@ function msg(text){
 var prod_value;// переменная для выбора уведомлений по продукту
 var dns = "http://navi.venbest.com.ua";// Wialon site dns
 var token;
-
+ 
 function init() { // Получаем, фильтруем ресурс1, ресурс2, объект, имя пользователя
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
 //specify what kind of data should be returned (diffrent flags for 'avl_unit' and 'avl_resource')
@@ -2478,7 +2478,7 @@ function getToken() {
     url += "?client_id=" + "App";	// your application name
     url += "&access_type=" + -1;	// access level, 0x100 = "Online tracking only",
     url += "&activation_time=" + 0;	// activation time, 0 = immediately; you can pass any UNIX time value
-    url += "&duration=" + 43200;	// duration, 604800 = one week in seconds, 1 chas
+    url += "&duration=" + 1200;	// duration, 604800 = one week in seconds, 1 chas
     url += "&flags=" + 0x1;			// options, 0x1 = add username in response
     
     url += "&redirect_uri=" + dns + "/post_token.html"; // if login succeed - redirect to this page
@@ -2493,7 +2493,7 @@ function getToken() {
 function tokenRecieved(e) {
     // get message from login window
     var msg1 = e.data;
-    if (typeof msg1 == "string" && msg1.indexOf("access_token=") >= 0) {
+    if (typeof msg1 == "string" && msg1.search(/access_token=\S/) >= 0) {
         // get token
        	var token = msg1.replace("access_token=", "");
         // now we can use token, e.g show it on page
@@ -2503,14 +2503,14 @@ function tokenRecieved(e) {
         // or login to wialon using our token
         wialon.core.Session.getInstance().initSession("http://navi.venbest.com.ua", null, 0x800);
         console.log("Token:" + token);
-        msg("Успешный вход в систему");
-        
         wialon.core.Session.getInstance().loginToken(token, "", function(code) {
             if (code)
                 return;
-//            var user = wialon.core.Session.getInstance().getCurrUser().getName();
-//            alert("Authorized as " + user);
-        });   
+            var user = wialon.core.Session.getInstance().getCurrUser().getName();
+            msg("Авторизированы как: " + user);
+        });  
+        // remove "message" event listener
+        window.removeEventListener("message", tokenRecieved);
     }
 }// Help function
 
@@ -2694,6 +2694,8 @@ function no_email_check(){
     }
 } //Если отмечено без email содаем другие уведомления без email 
 
+//CREATE UNIT
+
 function init_(){
     var nm = $("#nm").val();
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
@@ -2725,14 +2727,56 @@ function init_(){
 //                        var users = sess.getItems("user");
 //                        for (var i = 0; i< users.length; i++);
 //                        console.log(users[i].getId() +":"+ users[i].getName());
+//                          getHWid();
         }
     );
-}
+   getHWid()// вывести в консоль перечень свего доступного хардворе
+}//Иницилизируем поля
 
 function create_unit(){
+    if(!prod_value){
+        msg("Выбери продукт!");
+        return; 
+    };//Проверка: Продукт выбран?
+    //в переменную hwid Выставляем id выбранного продукта 
+    if (prod_value=="CP"){
+        var hwid = "38";
+        var prefix = "C+:";
+    }//Ели выбран СР,
+    else if (prod_value=="CMM"){
+        var hwid = "862";
+        var prefix = "CMM:";
+    }//Ели выбран СММ, 
+    else if (prod_value=="CMA"){
+        var hwid = "862";
+        var prefix = "CMA:";
+    }//Ели выбран СМА, 
+    else if (prod_value=="TK"){
+        var hwid = "456";
+        var prefix = "M:";
+    }//Ели выбран TK, 
+    else if (prod_value=="WATCH"){
+        var hwid = "456";
+        var prefix = "W:";
+    }//Ели выбран WATCH,
+    else if (prod_value=="PHONE"){
+        var hwid = "8";
+        var prefix = "S:";
+    }//Ели выбран Uber, 
+    else if (prod_value=="C"){
+        var hwid = "9";
+        var prefix = "C:";
+    }//Ели выбран C, 
+    else if (prod_value=="CNTK"){
+        var hwid = "9";
+        var prefix = "CNTK:";
+    }//Ели выбран CNTK, 
+    else if (prod_value=="CRAB"){
+        var hwid = "9";
+        var prefix = "CRAB:";
+    }//Ели выбран CRAB, 
     var user=wialon.core.Session.getInstance().getCurrUser();
-    var name=$("#nm").val();
-    var hwid= "9";
+    var name=prefix + $("#nm").val();
     var dataflag = "1";
     
     wialon.core.Session.getInstance().createUnit(user,name, hwid,dataflag,function (code,obj) {
@@ -2740,20 +2784,97 @@ function create_unit(){
             msg(wialon.core.Errors.getErrorText(code));
             return; 
         }
-        msg("ok")
-        console.log(obj)
+        msg("Создан объект: " + name)
     });  
 } //Создаем объект
 
 function update_unit()  {
-    // construct Sensor object with defaults and entered data
-    var obj = { n:"Sensor_name", d:"", f:0, c:"", vt:1, vs:0, tbl:[], m:"Metrics", p:"speed", t:"mileage"};//Пременная с данными для создания датчиков
+    //Создаем датчики
+    var obj = { n:"Статус охраны", d:"", f:0, c:"", vt:1, vs:0, tbl:[], m:"Metrics", p:"speed", t:"mileage"};//Пременная с данными для создания датчиков
     create_sensor(obj);
-        
-    var cf= {id: "2", n: "name", v: "value"};//Пременная с данными для создания произвольных полей
+    
+    //Создаем произвольные поля
+    var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "2", n: "01 УВАГА СК (алгоритм реагування)", v: "В разі виклику ГМР, потрібно буде відправляти інформацію та телефонувати до страх. компанії, у відділ спец. розслідувань щодо підтвердженої тривоги від клієнта та виїзді ГМР"};//Произвольное поле №2
+    create_costomfaild(cf);
+    var cf= {id: "3", n: "02 Назва страхової компанії", v: "АТ СК“ АХА СТРАХУВАННЯ”"};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "4", n: "2.1 І Відповідальна особа (основна)", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "5", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "6", n: "2.3 ІІІ Відповідальна особа", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "7", n: "3.10.2 Версія ПЗ Keyless", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "8", n: "", v: "3.1 Установник: назва, адреса"};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "9", n: "3.11 Комфортний доступ до авто: так/ні", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "10", n: "3.15 Додатково встановлені датчики", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "11", n: "3.2 Установник-монтажник: ПІБ, №тел.", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "12", n: "3.3 Дата установки", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "13", n: "3.4 Місце установки пристрою ВЕНБЕСТ", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "14", n: "3.5 Місце установки сигналізації", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "15", n: "3.5 Назва та місце установки сигналізації", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "16", n: "3.6.1 Реле блокування: елемент блокування", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "17", n: "3.6.2  Реле блокування: місце встановлення", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "18", n: "3.7 Місце встановлення сервісної кнопки", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "19", n: "3.8.1 Тривожна кнопка: провідна/безпровідна", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "20", n: "3.8.2 Місце установки тривожної кнопки", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "21", n: "3.9.1 Кнопки введення PIN-коду: штатні/додатково встановленні", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "22", n: "3.9.2 Штатні кнопки введення PIN-коду", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "24", n: "4.1 Дата активації", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "25", n: "4.2 Дата встановлення PIN-коду", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "26", n: "4.3 PIN-код встановлено особою(клієнт/установлник)", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "27", n: "4.4 Обліковий запис WL", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "28", n: "5.1 Менеджер", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "29", n: "5.1 Менеджер", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "30", n: "5.2 Договір обслуговування", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "31", n: "5.3 Гарантія до", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "32", n: "8.1 Паркінг 1", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "33", n: "8.2 Паркінг 2", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "34", n: "9.0 Примітки", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "35", n: "9.1 Техпаспорт", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "36", n: "10 Кодове слово", v: ""};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "39", n: "22.2.1 Нач. отд. спецрасследований СК", v: "Жовтило Сергій, 067-214-5620,  Sergey.zhovtilo@axa-ukraine.com"};//Произвольное поле №1
+    create_costomfaild(cf);
+    var cf= {id: "40", n: "22.2.2 Спец. отд. спецрасследований СК", v: "Косован Олександр,  067-235-4761,  alexandr.kosovan@axa-ukraine.com"};//Произвольное поле №1
     create_costomfaild(cf);
     
-    var acf= {id: "2", n: "adminname", v: "value"};//Пременная с данными для создания admin полей
+    //Создаем административные поля
+    var acf= {id: "23", n: "3.9.3 PUK-код", v: ""};//Административное поле №23
+    create_adminfaild(acf);
+    var acf= {id: "37", n: "11 Серійний номер CNTK (Keyless)", v: ""};//Произвольное поле №37
+    create_adminfaild(acf);
+    var acf= {id: "38", n: "12 Версия ПО Prizrak", v: "6.4."};//Произвольное поле №38
     create_adminfaild(acf);
     
     var phn= $("#phone").val();//Пременная с данными для обновления телефона
@@ -2789,7 +2910,7 @@ function update_unit()  {
     var acl_flag=550594678661;//Пременная с правами Service
     var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
     set_access_unit(acl_flag,user);
-}
+}//Обновляем данные объекта CP
 
 function set_access_unit(acl_flag,user){
     var sess = wialon.core.Session.getInstance();    
@@ -2851,7 +2972,7 @@ function create_adminfaild(acf){
 function create_sensor(obj){
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
 // get Unit by id and create sensor from obj
-    sess.getItem( $("#units").val()).createSensor(obj,
+        sess.getItem( $("#units").val()).createSensor(obj,
     function(code, data){ // create sensor callback
                 if (code) msg(wialon.core.Errors.getErrorText(code)); // print error if error code
             else { // print message about creation succeed and refresh sensor list
@@ -2876,6 +2997,7 @@ wialon.core.Session.getInstance().getHwTypes(
 }//Получаем диапазон доступных HWid
 
 $(document).ready(function () {
+        window.addEventListener("message", tokenRecieved);
        // bind actions to button clicks
 	$("#create_btn").click( button_work); // bind action to button click
         $("#Set_access").click( set_access );
