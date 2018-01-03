@@ -2790,8 +2790,36 @@ function create_unit(){
 
 function update_unit()  {
     //Создаем датчики
-    var obj = { n:"Статус охраны", d:"", f:0, c:"", vt:1, vs:0, tbl:[], m:"Metrics", p:"speed", t:"mileage"};//Пременная с данными для создания датчиков
+    
+    var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par6", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par141", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);    
+    var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Качество связи GSM", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":20,"b":0},{"x":1,"a":20,"b":0},{"x":2,"a":20,"b":0},{"x":3,"a":20,"b":0},{"x":4,"a":20,"b":0},{"x":5,"a":20,"b":0}], m:"%", p:"par21", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":12,"a":0,"b":0},{"x":12.9,"a":0,"b":1},{"x":13,"a":0,"b":1},{"x":14,"a":0,"b":1}], m:"Вкл/Выкл", p:"VPWR", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Сработка/-", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Блокировка иммобилайзера", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"Вкл/Выкл", p:"AIN1", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Напряжение внутреннего АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":false}", vt:1, vs:0, tbl:[], m:"В", p:"VBAT", t:"voltage"};//Пременная с данными для создания датчиков
     create_sensor(obj);
+    var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Да/-", p:"par154", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Да/-", p:"par154+par1", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj,);
+    var obj = { n:"Напряжение АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В", p:"VPWR", t:"voltage"};//Пременная с данными для создания датчиков
+    create_sensor(obj);
+    var obj = { n:"Статус дверей", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Открыты/Закрыты", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj);
+    var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
+    create_sensor(obj);
+    
+    
+    
     
     //Создаем произвольные поля
     var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
@@ -2969,14 +2997,15 @@ function create_adminfaild(acf){
     msg("acf created successfully" ); 
 }// Создаем Административное поле для объекта
 
-function create_sensor(obj){
+function create_sensor(obj,data){
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
 // get Unit by id and create sensor from obj
         sess.getItem( $("#units").val()).createSensor(obj,
     function(code, data){ // create sensor callback
                 if (code) msg(wialon.core.Errors.getErrorText(code)); // print error if error code
             else { // print message about creation succeed and refresh sensor list
-                msg("sensor created successfully" ); 
+                msg("sensor created successfully" );
+//                console.log(data.id);
         }
     });
 }// Создаем объект
