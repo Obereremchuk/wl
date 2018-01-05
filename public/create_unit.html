@@ -40,14 +40,14 @@ and open the template in the editor.
             <input type="text" id="nm" placeholder="Unit ID"/>
             <br>
             <input type="text" id="phone"  />
-            <input type="button" value="Сreate" id="create_unit" />
+            <input type="button" value="Создать объект" id="create_unit" />
             <br>
             <br>
-            <input type="button" value="Get selected unit" id="init_" />
+            <input type="button" value="Выбрать созданый объект" id="init_" />
             <select id="units"></select>
             <br>
             <br>
-            <input type="button" value="Update unit" id="update_unit" />
+            <input type="button" value="Созать параметы объекта" id="update_unit" />
             <br>
             <input type="button" value="test func" id="test"/>           
 	</div>
@@ -64,10 +64,10 @@ and open the template in the editor.
         </div>
         
 <script type="text/javascript">
+    //Маска ввода
     $(function(){
-        $("#phone").mask("+380999999999");
-        $("#nm").mask("****************");
-        
+        $("#phone").mask("+380999999999");//Маска ввода ввода телефонного номера
+        $("#nm").mask("****************");//Маска ввода ввода ID объекта
 });
 </script>
 
