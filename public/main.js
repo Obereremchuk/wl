@@ -2602,18 +2602,14 @@ function select_product (){
             prod_value = prod_select[i].value;
         }
     }
-//    if (prod_value=="CP"){
-//        document.getElementById('div_but').id='create_btn_CP'   ;
-//        document.getElementById('first_email').disabled=true;
-//        document.getElementById('sec_email').disabled=false;
-//        document.getElementById('tri_email').disabled=false;
-//    }
-//    else if (prod_value=="CMA"){
-//        document.getElementById("div_but").id="create_btn_CMA";
-//        document.getElementById('first_email').disabled=false;
-//        document.getElementById('sec_email').disabled=true;
-//        document.getElementById('tri_email').disabled=false;        
-//    }
+    if (prod_value=="CNTK"){
+        document.getElementById('hw_trakcer').value = "3.9.7";
+        document.getElementById('hw_tec').value = "6.4.25";
+    }
+    else if (prod_value=="CP"){
+        document.getElementById('hw_trakcer').value = "3.15";
+        document.getElementById('hw_tec').value = "6.4.25";        
+    }
 //    else if (prod_value=="CMM"){
 //        document.getElementById("div_but").id="create_btn_CMM";
 //        document.getElementById('first_email').disabled=false;
@@ -2740,12 +2736,13 @@ function init_(){
                     // get loaded 'avl_unit's items with edit sensors access 
                 var units = wialon.util.Helper.filterItems( sess.getItems("avl_unit"), 
                     wialon.item.Unit.accessFlag.editSensors & wialon.item.Unit.accessFlag.editReportSettings);
+                    console.log(units);
 
                 if (!units || !units.length){ msg("No units found"); return; } // check if units found
                 for (var i=0; i<units.length; i++) // construct Select list using found units
-                        $("#units").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
-                        $("#units :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
-                        $("#units :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
+                        $("#units_").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
+                        $("#units_ :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
+                        $("#units_ :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
                         
 //                        Get all users to console
 //                        var users = sess.getItems("user");
@@ -2832,6 +2829,10 @@ function update_unit()  {
         msg("Выбери продукт!");
         return; 
     };//Проверка: Продукт выбран?
+    if(!$("#units_").val()){
+        msg("Выбери объект!");
+        return; 
+    };//Проверка: Объект выбран?
     
     if (prod_value=="CP"){
         
@@ -2867,6 +2868,7 @@ function update_unit()  {
             msg("Заполни номер СИМ карты!");
             return; 
         };//Проверка: номер СИМ карты объекта введен?
+        
         
         //Обновляем тип оборудования объекта 
         var idHW = "9";//Пременная с типом оборудования
@@ -3219,7 +3221,7 @@ function update_unit()  {
 function update_ReportSettings(repsetting){
     var sess=wialon.core.Session.getInstance();
     
-    sess.getItem( $("#units").val() ).updateReportSettings(repsetting, function(code, data){ // create command callback
+    sess.getItem( $("#units_").val() ).updateReportSettings(repsetting, function(code, data){ // create command callback
 	    	if (code) msg(wialon.core.Errors.getErrorText(msg("error"+ code))); // print error if error code
 	    	else { // print message about creation succeed and refresh command list
 	    	    msg("Report setting updated");
@@ -3229,7 +3231,7 @@ function update_ReportSettings(repsetting){
 
 function set_access_unit(acl_flag,user){
     var sess = wialon.core.Session.getInstance();    
-    var unit=$("#units").val();    
+    var unit=$("#units_").val();    
 
     user.updateItemAccess(sess.getItem( unit ), acl_flag, function(code){
         if (code != 0){
@@ -3243,7 +3245,7 @@ function set_access_unit(acl_flag,user){
 function create_comand(obj){
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
     // get Unit by id and create Command from obj
-    sess.getItem( $("#units").val() ).createCommandDefinition(obj, 
+    sess.getItem( $("#units_").val() ).createCommandDefinition(obj, 
         function(code, data){ // create command callback
 	    	if (code) msg(wialon.core.Errors.getErrorText(msg("error"+ code))); // print error if error code
 	    	else { // print message about creation succeed and refresh command list
@@ -3254,40 +3256,40 @@ function create_comand(obj){
 
 function update_apass(apass){
     var sess=wialon.core.Session.getInstance();
-    sess.getItem( parseInt( $("#units").val() ) ).updateAccessPassword(apass); 
+    sess.getItem( parseInt( $("#units_").val() ) ).updateAccessPassword(apass); 
     msg("Accsess Pass updated");
 }// Обновляем Пароль объекта
 
 function update_uniqueid(idHW, uniqueid){
     var sess=wialon.core.Session.getInstance();
-    sess.getItem( parseInt( $("#units").val() ) ).updateDeviceSettings(idHW, uniqueid); 
+    sess.getItem( parseInt( $("#units_").val() ) ).updateDeviceSettings(idHW, uniqueid); 
     msg("uniqueid updated");
 }// Обновляем ID объекта
 
 function update_phonenum(phn){
     var sess=wialon.core.Session.getInstance();
-    sess.getItem( parseInt( $("#units").val() ) ).updatePhoneNumber( phn );
+    sess.getItem( parseInt( $("#units_").val() ) ).updatePhoneNumber( phn );
     msg("phn updated" );
 }// Обновляем Телефон объекта
 
 function create_costomfaild(cf){
     var sess=wialon.core.Session.getInstance();
     sess.loadLibrary("itemCustomFields");
-    sess.getItem( parseInt( $("#units").val() ) ).createCustomField( cf );
+    sess.getItem( parseInt( $("#units_").val() ) ).createCustomField( cf );
     msg("cf created successfully" ); 
 }// Создаем произвольное поле для объекта
 
 function create_adminfaild(acf){
     var sess=wialon.core.Session.getInstance();
     sess.loadLibrary("itemAdminFields");
-    sess.getItem( parseInt( $("#units").val() ) ).createAdminField( acf );
+    sess.getItem( parseInt( $("#units_").val() ) ).createAdminField( acf );
     msg("acf created successfully" ); 
 }// Создаем Административное поле для объекта
 
 function create_sensor(obj,data){
     var sess = wialon.core.Session.getInstance(); // get instance of current Session
 // get Unit by id and create sensor from obj
-        sess.getItem( $("#units").val()).createSensor(obj,
+        sess.getItem( $("#units_").val()).createSensor(obj,
     function(code, data){ // create sensor callback
                 if (code) msg(wialon.core.Errors.getErrorText(code)); // print error if error code
             else { // print message about creation succeed and refresh sensor list

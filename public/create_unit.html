@@ -15,14 +15,12 @@ and open the template in the editor.
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" src="http://navi.venbest.com.ua/wsdk/script/wialon.js"></script>
         
-        <script src="jquery.js"></script>
         <script src="jquery.maskedinput.min.js"></script>
         
         <script src="main.js" type="text/javascript"></script>
         <link href="newcss.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div class="panel header"><span class="remark"></span> Создание пользователей Wialon Local</div>
         
         <div id="product" class="panel left"><span class="remark"></span>
             <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
@@ -37,17 +35,12 @@ and open the template in the editor.
         </div>
         
         <div class="panel content"><span class="remark"></span>
-            <input type="text" id="nm" placeholder="Unit ID"/>
-            <br>
-            <input type="text" id="phone"  />
-            <input type="button" value="Создать объект" id="create_unit" />
-            <br>
-            <br>
-            <input type="button" value="Выбрать созданый объект" id="init_" />
-            <select id="units"></select>
-            <br>
-            <br>
-            <input type="button" value="Созать параметы объекта" id="update_unit" />
+            <p>ID: &nbsp<input type="text" id="nm" placeholder="_______________"/></p>
+            <p>Tel: <input type="text" id="phone" placeholder="+380_________" />
+            <input type="button" value="Создать объект" id="create_unit" /></p>
+            <p><input type="button" value="Выбрать созданый объект" id="init_" />
+            <select id="units"></select></p>
+            <p><input type="button" value="Созать параметы объекта" id="update_unit" /></p>
             <br>
             <input type="button" value="test func" id="test"/>           
 	</div>
@@ -63,13 +56,13 @@ and open the template in the editor.
             <textarea style="overflow-x:hidden; width:100%;" name="log" id="log" rows="4"></textarea>
         </div>
         
-<script type="text/javascript">
-    //Маска ввода
-    $(function(){
-        $("#phone").mask("+380999999999");//Маска ввода ввода телефонного номера
-        $("#nm").mask("****************");//Маска ввода ввода ID объекта
-});
-</script>
+        <script type="text/javascript">
+            //Маска ввода
+            $(function(){
+                $("#phone").mask("+380999999999");//Маска ввода ввода телефонного номера
+                $("#nm").mask("****?************");//Маска ввода ввода ID объекта
+        });
+        </script>
 
     </body>
  

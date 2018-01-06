@@ -1,41 +1,37 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>Wialon Helper</title>
+        <link rel="icon" type="image/x-icon" href="./favicon.png">
+        <title>M-Centre_04.09.17</title>
+  
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="index.css" rel="stylesheet" type="text/css"/>
-        <script src="tab.js" type="text/javascript"></script>
-        <link href="newcss.css" rel="stylesheet" type="text/css"/>
+        
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script type="text/javascript" src="http://navi.venbest.com.ua/wsdk/script/wialon.js"></script>
         <script src="main.js" type="text/javascript"></script>
-        <script src="jquery.maskedinput.min.js"></script>
+        <link href="newcss.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <!-- Tab links -->
-        <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'London')">Уведомления</button>
-          <button class="tablinks" onclick="openCity(event, 'Paris')">Объекты</button>
-        </div>
-
-        <!-- Tab Уведомления -->
-        <div id="London" class="tabcontent">
-            
-            <div id="product" class="panel left"><span class="remark"></span>
-            <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
-            <input type="radio" id="CNTK" name="prod" value="CNTK" onClick="select_product()">Connect Keyless<Br>
-            <input type="radio" id="CRAB" name="prod" value="CRAB" onClick="select_product()">CRAB<Br>
-            <input type="radio" id="CMA" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
-            <input type="radio" id="CMM" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
-            <input type="radio" id="WATCH" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
-            <input type="radio" id="TK" name="prod" value="TK" onClick="select_product()">TK<Br>
-            <input type="radio" id="PHONE" name="prod" value="PHONE" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
-            <input type="radio" id="C" name="prod" value="C" onClick="select_product()">Connect<Br>
+        <div id="product" class="panel left"><span class="remark"></span>
+            <input type="radio" id="38" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
+            <input type="radio" id="9" name="prod" value="CNTK" onClick="select_product()">Connect Keyless<Br>
+            <input type="radio" id="9" name="prod" value="CRAB" onClick="select_product()">CRAB<Br>
+            <input type="radio" id="862" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
+            <input type="radio" id="862" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
+            <input type="radio" id="456" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
+            <input type="radio" id="456" name="prod" value="TK" onClick="select_product()">TK<Br>
+            <input type="radio" id="8" name="prod" value="PHONE" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
+            <input type="radio" id="9" name="prod" value="C" onClick="select_product()">Connect<Br>
             <input type="radio" id="AXA" name="prod" value="AXA" onClick="select_product()">AXA<Br>
         </div>
         
-            <div class="panel content"><span class="remark"></span>
+        <div class="panel content"><span class="remark"></span>
             <p><input type="text" id="username" placeholder="User name" /></p>
             <p><input type="text" id="passw" placeholder="pass" oninput="update_out()"/><input type="button" value="Generate" id="Generate"/></p>
             <p><input type="button" value="Создать" id="create_user" />  <input type="button" value="Locale" id="Locale" style="display: none;"/> <input type="checkbox" name="Locale" id="Locale1" checked> Set Locale </p>
@@ -76,58 +72,28 @@
             <br/><br/><textarea name="Out" id="Out" cols="40" rows="5"></textarea>
 	</div>
         
-            <div class="panel right"><span class="remark"></span><br />
+        <div class="panel right"><span class="remark"></span><br />
             <input id="login" type="button" value="Click to login" onclick="getToken()" style="display: none;"/>
             <input id="logout" type="button" value="Click to logout" onclick="logout()" style="display: none;"/>
             <iframe name="simple_form" src="//navi.venbest.com.ua/login_simple.html?redirect_uri=http://navi.venbest.com.ua/post_token.html&access_type=-1&activation_time=0&duration=1200&flags=0x1" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
+            <button onclick="window.location.href='/wl/create_unit.html'">Create unit</button>
 	</div>
                         
-            <div class="panel footer"><span class="remark"></span>
+	<div class="panel footer"><span class="remark"></span>
             <textarea style="overflow-x:hidden; width:100%;" name="log" id="log" rows="4"></textarea>
         </div>
-        </div>
         
-        <!-- Tab Объекты -->
-        <div id="Paris" class="tabcontent2">
-            
-            <div class="panel content"><span class="remark"></span>
-                <table>
-                    <tr>
-                        <td>ID:</td>
-                        <td><input type="text" id="nm" placeholder="_______________"/></td>
-                    </tr>
-                    <tr>
-                        <td>Tel:</td>
-                        <td><input type="text" id="phone" placeholder="+380_________" /></td>
-                    </tr>
-                    <tr>
-                        <td>HW Tracker:</td>
-                        <td><input type="text" id="hw_trakcer" value=""/></td>
-                    </tr>
-                    <tr>
-                        <td>HW TEC:</td>
-                        <td><input type="text" id="hw_tec" value=""/></td>
-                        <td><input type="button" value="Создать объект" id="create_unit"/></td>
-                </table>
-            
-            <p><input type="button" value="Выбрать созданый объект" id="init_" />
-            <select id="units_"></select></p>
-            <p><input type="button" value="Созать параметы объекта" id="update_unit" /></p>
-            <br>
-            <input type="button" value="test func" id="test"/>           
-	</div>
-        
-        <script type="text/javascript">
-            
-            //Маска ввода
-            $(function(){
-                $("#phone").mask("+380999999999");//Маска ввода ввода телефонного номера
-                $("#nm").mask("****?************");//Маска ввода ввода ID объекта
-        });
-        openCity(event, "London");
+        <script>
+        function update_search(){
+           Update_1.click();
+        }    
+        function update_out() {
+            var password = document.getElementById('passw').value;
+            var out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
+            document.getElementById('Out').value = out;
+        }
         </script>
-          
-            
-        </div>
+
     </body>
+ 
 </html>

@@ -8,47 +8,47 @@ and open the template in the editor.
     Author     : A
 */
       #map{ width:705px; height:300px; }
-        #log{ border: 1px solid #c6c6c6; }
+        #log{ border: 1px solid #000000; }
         .panel {
             position: absolute;
-            border: 1px solid #76BBFF;
+            border: 1px solid 	#000000;
             padding: 5px ; 
             box-sizing: border-box;
                 }
-        .header {
+/*        .header {
             left: 0;
             top: 0;
             height: 40px;
             right: 0;
             background: #CAECF7;
-                }
+                }*/
         .footer {
             left: 0;
             bottom: 0;
             height: auto;
             right: 0;
-            background: #CAECF7;
+            background: #ddd;
                 }
         .left  {
             left: 0;
-            top: 41px;
+            top: 45px;
             bottom: 100px;
             width: 200px;
-            background: #A7E2FF;
+            background: #ddd;
                }
         .right {
             right: 0;
-            top: 41px;
+            top: 45px;
             bottom: 100px;
             width: 280px;
-            background: #A7E2FF;
+            background: #ddd;
                 }
         .content {
-                left: 201px;
-                top: 41px;
-                bottom: 100px;
-                right: 281px;
-                background: #D6F1FF;
+                left: 200px;
+                top: 45px;
+                bottom: 105px;
+                right: 280px;
+                background: #ddd;
                 overflow: hidden;
                 text-align: justify;
                 text-overflow: ellipsis;
