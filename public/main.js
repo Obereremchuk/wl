@@ -226,7 +226,7 @@ function set_access(){
         loc = " ,настройки локализации";
         
     }
-    msg("Установлены права для пользователя, объекта и двум ресурам"+ loc)
+    msg("Установлены права для пользователя, объекта и двум ресурам"+ loc);
 }//Устанавливаем права.
 
 function Locale(){
@@ -2595,7 +2595,6 @@ function button_work(){
 }//Выбор продукта и создание уведомлений для него
 
 function select_product (){
-    
     var prod_select = document.getElementsByName('prod');
     for(var i = 0; i < prod_select.length; i++){
         if(prod_select[i].checked){
@@ -2603,20 +2602,14 @@ function select_product (){
         }
     }
     if (prod_value=="CNTK"){
-        document.getElementById('hw_trakcer').value = "3.9.7";
+        document.getElementById('hw_tracker').value = "3.9.7";
         document.getElementById('hw_tec').value = "6.4.25";
-    }
+    }//Изменяем версию прошивки для этого продукта
     else if (prod_value=="CP"){
-        document.getElementById('hw_trakcer').value = "3.15";
-        document.getElementById('hw_tec').value = "6.4.25";        
-    }
-//    else if (prod_value=="CMM"){
-//        document.getElementById("div_but").id="create_btn_CMM";
-//        document.getElementById('first_email').disabled=false;
-//        document.getElementById('sec_email').disabled=false;
-//        document.getElementById('tri_email').disabled=true;        
-//    }    
-} //Не помню для чего, не используется нужно удалить!!!!
+        document.getElementById('hw_tracker').value = "3.15";
+        document.getElementById('hw_tec').value = "6.4.25";
+} //Изменяем версию прошивки для этого продукта
+}
 
 function getToken() {
     // construct login page URL
@@ -2736,7 +2729,6 @@ function init_(){
                     // get loaded 'avl_unit's items with edit sensors access 
                 var units = wialon.util.Helper.filterItems( sess.getItems("avl_unit"), 
                     wialon.item.Unit.accessFlag.editSensors & wialon.item.Unit.accessFlag.editReportSettings);
-                    console.log(units);
 
                 if (!units || !units.length){ msg("No units found"); return; } // check if units found
                 for (var i=0; i<units.length; i++) // construct Select list using found units
@@ -2751,7 +2743,7 @@ function init_(){
 //                          getHWid();
         }
     );
-//   getHWid()// вывести в консоль перечень свего доступного хардворе
+   getHWid()// вывести в консоль перечень свего доступного хардворе
 }//Иницилизируем поля
 
 function create_unit(){
@@ -2836,24 +2828,443 @@ function update_unit()  {
     
     if (prod_value=="CP"){
         
+        var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
+        if(!uniqueid){
+            msg("Заполни ID объекта!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
+        
+        var phn= $("#phone").val();//Пременная с данными для обновления телефона
+        if(!phn){
+            msg("Заполни номер СИМ карты!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
+        
+        
+        //Обновляем тип оборудования объекта 
+        var idHW = "38";//Пременная с типом оборудования
+        update_uniqueid(idHW, uniqueid);
+
+        //Обновляем номер СИМ карты объекта
+        update_phonenum(phn);
+
+        //Создаем датчики
+        
+        var obj = { n:"ГЛУШЕНИЕ GSM (ПАРКИНГ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"ГЛУШЕНИЕ GSM (ОХРАНА)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":1,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0},{"x":12,"a":0,"b":0}], m:"Вкл/Выкл", p:"adc2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);    
+        var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Вкл/Выкл", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Качество связи GSM", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":20,"b":0},{"x":1,"a":20,"b":0},{"x":2,"a":20,"b":0},{"x":3,"a":20,"b":0},{"x":4,"a":20,"b":0},{"x":5,"a":20,"b":0}], m:"%", p:"gsm", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Сработка сигнализации: зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Сработка/-", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"param6", t:"engine operation"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:12, tbl:[], m:"Сработка/-", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Блокировка иммобилайзера", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"in3", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Напряжение внутреннего АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":false}", vt:1, vs:0, tbl:[], m:"В", p:"pwr_int", t:"voltage"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+        var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Да/-", p:"can10", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[{"x":0,"a":0,"b":0},{"x":1,"a":0,"b":1},{"x":2,"a":0,"b":0},{"x":3,"a":0,"b":0},{"x":4,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0}], m:"Да/-", p:"can10+param6+in1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"in4", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Статус дверей", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Открыты/Закрыты", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+        var obj = { n:"Напряжение АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В", p:"pwr_ext+const1.3", t:"voltage"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+        var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В охране/Не в охране", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+
+        //Создаем произвольные поля
+        var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
+        create_costomfaild(cf);
+        var cf= {id: "2", n: "2.1 І Відповідальна особа (основна)", v: ""};//Произвольное поле №2
+        create_costomfaild(cf);
+        var cf= {id: "3", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №3
+        create_costomfaild(cf);
+        var cf= {id: "4", n: "2.3 ІІІ Відповідальна особа)", v: ""};//Произвольное поле №4
+        create_costomfaild(cf);
+        var cf= {id: "6", n: "3.1 Установник, назва, адреса", v: ""};//Произвольное поле №6
+        create_costomfaild(cf);
+        var cf= {id: "7", n: "3.11 Комфортний доступ до авто (так/ні)", v: ""};//Произвольное поле №7
+        create_costomfaild(cf);
+        var cf= {id: "8", n: "3.15 Додатково встановлені датчики", v: ""};//Произвольное поле №8
+        create_costomfaild(cf);
+        var cf= {id: "9", n: "3.2 Установник_монтажник, ПІБ, №тел.", v: ""};//Произвольное поле №9
+        create_costomfaild(cf);
+        var cf= {id: "10", n: "3.3 Дата установки", v: ""};//Произвольное поле №10
+        create_costomfaild(cf);
+        var cf= {id: "11", n: "3.4 Місце установки пристрою ВЕНБЕСТ", v: ""};//Произвольное поле №11
+        create_costomfaild(cf);
+        var cf= {id: "12", n: "3.5 Місце установки сигналізації", v: ""};//Произвольное поле №12
+        create_costomfaild(cf);
+        var cf= {id: "13", n: "3.6.1 Реле блокування: місце установки", v: ""};//Произвольное поле №13
+        create_costomfaild(cf);
+        var cf= {id: "14", n: "3.6.2 Реле блокування, елемент блокування", v: ""};//Произвольное поле №14
+        create_costomfaild(cf);
+        var cf= {id: "15", n: "3.7 Місце установки сервісної кнопки", v: ""};//Произвольное поле №15
+        create_costomfaild(cf);
+        var cf= {id: "16", n: "3.8.1 Трвожна кнопка (провідна/безпровідна)", v: ""};//Произвольное поле №16
+        create_costomfaild(cf);
+        var cf= {id: "17", n: "3.8.2 МІсе встановлення тривожной кнопки", v: ""};//Произвольное поле №17
+        create_costomfaild(cf);
+        var cf= {id: "18", n: "3.9.1 Кнопки для введення PIN-коду", v: ""};//Произвольное поле №18
+        create_costomfaild(cf);
+        var cf= {id: "19", n: "3.9.2 Штатні кнопки для введення PIN-коду", v: ""};//Произвольное поле №19
+        create_costomfaild(cf);
+        var cf= {id: "20", n: "4.1 Дата активації", v: ""};//Произвольное поле №20
+        create_costomfaild(cf);
+        var cf= {id: "22", n: "4.2 Дата встановлення PIN-коду", v: ""};//Произвольное поле №21
+        create_costomfaild(cf);
+        var cf= {id: "23", n: "4.3 PIN-код встановлено особою (клієнт/установник)", v: ""};//Произвольное поле №22
+        create_costomfaild(cf);
+        var cf= {id: "24", n: "4.4 Обліковий запис WL", v: ""};//Произвольное поле №23
+        create_costomfaild(cf);
+        var cf= {id: "25", n: "5.1 Менеджер", v: ""};//Произвольное поле №24
+        create_costomfaild(cf);
+        var cf= {id: "26", n: "5.2 Договір обслуговування", v: ""};//Произвольное поле №25
+        create_costomfaild(cf);
+        var cf= {id: "27", n: "5.3 Гарантія до", v: ""};//Произвольное поле №26
+        create_costomfaild(cf);
+        var cf= {id: "28", n: "8.1 Паркінг 1", v: ""};//Произвольное поле №27
+        create_costomfaild(cf);
+        var cf= {id: "29", n: "8.2 Паркінг 2", v: ""};//Произвольное поле №28
+        create_costomfaild(cf);
+        var cf= {id: "30", n: "9.0 Примітки", v: ""};//Произвольное поле №29
+        create_costomfaild(cf);
+        var cf= {id: "31", n: "9.1 Техпаспорт", v: ""};//Произвольное поле №30
+        create_costomfaild(cf);
+        var cf= {id: "32", n: "10 Кодове слово", v: ""};//Произвольное поле №40
+        create_costomfaild(cf);
+
+
+        //Создаем административные поля
+        var acf= {id: "21", n: "3.9.3 PUK-код", v: ""};//Административное поле №21
+        create_adminfaild(acf);
+        var hw_tracker = $("#hw_tracker").val();
+        var acf= {id: "33", n: "11 CONNECT PLUS", v: hw_tracker};//Произвольное поле №33
+        create_adminfaild(acf);
+        var hw_tec = $("#hw_tec").val();
+        var cf= {id: "5", n: "3.10.2 Версія ПЗ ТЕС", v: hw_tec};//Произвольное поле №5
+        create_costomfaild(cf);
+        
+        //Обновляем пароль досткпа к объекту
+        var apass = 11111; //Пременная с паролем оборудования
+        update_apass(apass);
+        
+        //Создаем команды для объекта
+        var obj = { n:"1. Отключить сервисную кнопку", c:"custom_msg", l:"tcp", p:"40,10", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"2. Включить сервисную кнопку", c:"custom_msg", l:"tcp", p:"40,9", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"3. СТАРТ Двигатель", c:"custom_msg", l:"tcp", p:"40,8", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"4. СТОП Двигатель", c:"custom_msg", l:"tcp", p:"40,7", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"5. Отключить датчик глушения", c:"custom_msg", l:"tcp", p:"36,0310,int,1,0", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"6. Активировать датчик глушения", c:"custom_msg", l:"tcp", p:"36,0310,int,1,1", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"7. Ver.FW", c:"custom_msg", l:"tcp", p:"40,2", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"8. FWUpdate", c:"custom_msg", l:"tcp", p:"43,213.160.136.54,80,pr/bi920_v_3_15_vb.bin", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"9. Service", c:"custom_msg", l:"tcp", p:"36,5030,int,1,1+36,5031,int,1,1+36,5032,int,1,0+36,5033,int,1,0+36,5034,int,1,6+36,5035,int,1,10+36,4017,int,2,30+40,2", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"10. Система GPS", c:"custom_msg", l:"tcp", p:"36,4016,int,1,1+40,1", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"11. Get GPS", c:"custom_msg", l:"tcp", p:"32,4016", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"12. Система GPS+Глонасс", c:"custom_msg", l:"tcp", p:"36,4016,int,1,3+40,1", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+
+        //Устанавливаем права на объект для пользователей
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("27");// Устанавливаеми права Позователю Пустовит
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("58");// Устанавливаеми права Позователю v.chihman
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("206");// Устанавливаеми права Позователю y.vyshnevska
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю l.kolomiyets
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        msg("Объект обновлен");
     }//Ели выбран СР,
     else if (prod_value=="CMM"){
-        
+        return;
     }//Ели выбран СММ, 
     else if (prod_value=="CMA"){
-        
+        return;
     }//Ели выбран СМА, 
     else if (prod_value=="TK"){
+        var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
+        if(!uniqueid){
+            msg("Заполни ID объекта!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
         
+        var phn= $("#phone").val();//Пременная с данными для обновления телефона
+        if(!phn){
+            msg("Заполни номер СИМ карты!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
+        
+        
+        //Обновляем тип оборудования объекта 
+        var idHW = "456";//Пременная с типом оборудования
+        update_uniqueid(idHW, uniqueid);
+
+        //Обновляем номер СИМ карты объекта
+        update_phonenum(phn);
+
+        //Создаем датчики
+        
+        var obj = { n:"Датчик снятия с руки", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":7,"a":0,"b":0},{"x":8,"a":0,"b":1},{"x":8.5,"a":0,"b":0},{"x":9,"a":0,"b":0}], m:"", p:"status", t:"custom"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Заряд АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"%", p:"battery", t:"custom"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":65000,"a":0,"b":1},{"x":65556,"a":0,"b":1},{"x":65557,"a":0,"b":0},], m:"", p:"status", t:"alarm trigger"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+
+        //Создаем произвольные поля
+        var cf= {id: "1", n: "1 GPS-годинник", v: ""};//Произвольное поле №1
+        create_costomfaild(cf);
+        var cf= {id: "2", n: "2.1 І Відповідальна особа", v: ""};//Произвольное поле №2
+        create_costomfaild(cf);
+        var cf= {id: "3", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №3
+        create_costomfaild(cf);
+        var cf= {id: "4", n: "2.3 ІІІ Відповідальна особа", v: ""};//Произвольное поле №4
+        create_costomfaild(cf);
+        var cf= {id: "6", n: "5.1 Дата активації", v: ""};//Произвольное поле №6
+        create_costomfaild(cf);
+        var cf= {id: "7", n: "9.9 Колір", v: ""};//Произвольное поле №7
+        create_costomfaild(cf);
+        var cf= {id: "8", n: "10 Кодове слово", v: ""};//Произвольное поле №8
+        create_costomfaild(cf);
+        var cf= {id: "9", n: "11 УВАГА", v: ""};//Произвольное поле №9
+        create_costomfaild(cf);
+        var cf= {id: "10", n: "Адреса 1", v: ""};//Произвольное поле №10
+        create_costomfaild(cf);
+        var cf= {id: "11", n: "Адреса 2", v: ""};//Произвольное поле №11
+        create_costomfaild(cf);
+        var cf= {id: "12", n: "Адреса 3", v: ""};//Произвольное поле №12
+        create_costomfaild(cf);
+        var cf= {id: "13", n: "Адреса 4", v: ""};//Произвольное поле №13
+        create_costomfaild(cf);
+        var cf= {id: "14", n: "Адреса 5", v: ""};//Произвольное поле №14
+        create_costomfaild(cf);
+        var cf= {id: "15", n: "Адреса 6", v: ""};//Произвольное поле №15
+        create_costomfaild(cf);
+        var cf= {id: "16", n: "Документ", v: ""};//Произвольное поле №16
+        create_costomfaild(cf);
+        var cf= {id: "17", n: "Ел.пошта", v: ""};//Произвольное поле №17
+        create_costomfaild(cf);
+        var cf= {id: "18", n: "Особливі прикмети", v: ""};//Произвольное поле №18
+        create_costomfaild(cf);
+        
+        //Обновляем пароль досткпа к объекту
+        var apass = 123456; //Пременная с паролем оборудования
+        update_apass(apass);
+        
+        //Создаем команды для объекта
+        var obj = { n:"1. Настройка номера SOS1", c:"custom_msg", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"2. Настройка тайного номера", c:"custom_msg", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"3. Настройка телефонной книги", c:"contacts_set", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"4. Тайный звонок на номер клиента", c:"custom_msg", l:"tcp", p:"MONITOR", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"5. Установка зимнего времени", c:"custom_msg", l:"tcp", p:"LZ,9,2", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"6. Установка летнего времени", c:"custom_msg", l:"tcp", p:"LZ,9,3", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"7. Частота передачи 1 раз в минуту", c:"custom_msg", l:"tcp", p:"UPLOAD,60", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"8. Частота передачи 1 раз в 2,5 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,150", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"9. Частота передачи 1 раз в 5 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,300", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"10. Частота передачи 1 раз в 15 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,900", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+
+        //Устанавливаем права на объект для пользователей
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("27");// Устанавливаеми права Позователю Пустовит
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("58");// Устанавливаеми права Позователю v.chihman
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("206");// Устанавливаеми права Позователю y.vyshnevska
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю l.kolomiyets
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        msg("Объект обновлен");
     }//Ели выбран TK, 
     else if (prod_value=="WATCH"){
         
+        var uniqueid= $("#nm").val();//Пременная с данными для обновления IMEI
+        if(!uniqueid){
+            msg("Заполни ID объекта!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
+        
+        var phn= $("#phone").val();//Пременная с данными для обновления телефона
+        if(!phn){
+            msg("Заполни номер СИМ карты!");
+            return; 
+        };//Проверка: номер СИМ карты объекта введен?
+        
+        
+        //Обновляем тип оборудования объекта 
+        var idHW = "456";//Пременная с типом оборудования
+        update_uniqueid(idHW, uniqueid);
+
+        //Обновляем номер СИМ карты объекта
+        update_phonenum(phn);
+
+        //Создаем датчики
+        
+        var obj = { n:"Датчик снятия с руки", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":7,"a":0,"b":0},{"x":8,"a":0,"b":1},{"x":8.5,"a":0,"b":0},{"x":9,"a":0,"b":0}], m:"", p:"status", t:"custom"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Заряд АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"%", p:"battery", t:"custom"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":65000,"a":0,"b":1},{"x":65556,"a":0,"b":1},{"x":65557,"a":0,"b":0},], m:"", p:"status", t:"alarm trigger"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+
+        //Создаем произвольные поля
+        var cf= {id: "1", n: "1 GPS-годинник", v: ""};//Произвольное поле №1
+        create_costomfaild(cf);
+        var cf= {id: "2", n: "2.1 І Відповідальна особа", v: ""};//Произвольное поле №2
+        create_costomfaild(cf);
+        var cf= {id: "3", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №3
+        create_costomfaild(cf);
+        var cf= {id: "4", n: "2.3 ІІІ Відповідальна особа", v: ""};//Произвольное поле №4
+        create_costomfaild(cf);
+        var cf= {id: "6", n: "5.1 Дата активації", v: ""};//Произвольное поле №6
+        create_costomfaild(cf);
+        var cf= {id: "7", n: "9.9 Колір", v: ""};//Произвольное поле №7
+        create_costomfaild(cf);
+        var cf= {id: "8", n: "10 Кодове слово", v: ""};//Произвольное поле №8
+        create_costomfaild(cf);
+        var cf= {id: "9", n: "11 УВАГА", v: ""};//Произвольное поле №9
+        create_costomfaild(cf);
+        var cf= {id: "10", n: "Адреса 1", v: ""};//Произвольное поле №10
+        create_costomfaild(cf);
+        var cf= {id: "11", n: "Адреса 2", v: ""};//Произвольное поле №11
+        create_costomfaild(cf);
+        var cf= {id: "12", n: "Адреса 3", v: ""};//Произвольное поле №12
+        create_costomfaild(cf);
+        var cf= {id: "13", n: "Адреса 4", v: ""};//Произвольное поле №13
+        create_costomfaild(cf);
+        var cf= {id: "14", n: "Адреса 5", v: ""};//Произвольное поле №14
+        create_costomfaild(cf);
+        var cf= {id: "15", n: "Адреса 6", v: ""};//Произвольное поле №15
+        create_costomfaild(cf);
+        var cf= {id: "16", n: "Документ", v: ""};//Произвольное поле №16
+        create_costomfaild(cf);
+        var cf= {id: "17", n: "Ел.пошта", v: ""};//Произвольное поле №17
+        create_costomfaild(cf);
+        var cf= {id: "18", n: "Особливі прикмети", v: ""};//Произвольное поле №18
+        create_costomfaild(cf);
+        
+        //Обновляем пароль досткпа к объекту
+        var apass = 123456; //Пременная с паролем оборудования
+        update_apass(apass);
+        
+        //Создаем команды для объекта
+        var obj = { n:"1. Настройка номера SOS1", c:"custom_msg", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"2. Настройка тайного номера", c:"custom_msg", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"3. Настройка телефонной книги", c:"contacts_set", l:"tcp", p:"", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"4. Тайный звонок на номер клиента", c:"custom_msg", l:"tcp", p:"MONITOR", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"5. Установка зимнего времени", c:"custom_msg", l:"tcp", p:"LZ,9,2", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"6. Установка летнего времени", c:"custom_msg", l:"tcp", p:"LZ,9,3", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"7. Частота передачи 1 раз в минуту", c:"custom_msg", l:"tcp", p:"UPLOAD,60", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"8. Частота передачи 1 раз в 2,5 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,150", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"9. Частота передачи 1 раз в 5 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,300", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+        var obj = { n:"10. Частота передачи 1 раз в 15 минут", c:"custom_msg", l:"tcp", p:"UPLOAD,900", a:1 }; //Пременная с данными для создания команд
+        create_comand(obj);
+
+        //Устанавливаем права на объект для пользователей
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("27");// Устанавливаеми права Позователю Пустовит
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("58");// Устанавливаеми права Позователю v.chihman
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("206");// Устанавливаеми права Позователю y.vyshnevska
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю l.kolomiyets
+        set_access_unit(acl_flag,user);
+
+        var acl_flag=-1;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        msg("Объект обновлен");
     }//Ели выбран WATCH,
     else if (prod_value=="PHONE"){
-        
+        return;
     }//Ели выбран Phone, 
     else if (prod_value=="C"){
-        
+        return;
     }//Ели выбран C, 
     else if (prod_value=="CNTK"){
     
@@ -2886,7 +3297,7 @@ function update_unit()  {
         create_sensor(obj,);
         var obj = { n:"Качество связи GSM", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":20,"b":0},{"x":1,"a":20,"b":0},{"x":2,"a":20,"b":0},{"x":3,"a":20,"b":0},{"x":4,"a":20,"b":0},{"x":5,"a":20,"b":0}], m:"%", p:"par21", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
-        var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":12,"a":0,"b":0},{"x":12.9,"a":0,"b":1},{"x":13,"a":0,"b":1},{"x":14,"a":0,"b":1}], m:"Вкл/Выкл", p:"VPWR", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":12,"a":0,"b":0},{"x":12.9,"a":0,"b":1},{"x":13,"a":0,"b":1},{"x":14,"a":0,"b":1}], m:"Вкл/Выкл", p:"VPWR", t:"engine operation"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:9, tbl:[], m:"Сработка/-", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
@@ -2910,83 +3321,85 @@ function update_unit()  {
         create_costomfaild(cf);
         var cf= {id: "2", n: "01 УВАГА СК (алгоритм реагування)", v: "В разі виклику ГМР, потрібно буде відправляти інформацію та телефонувати до страх. компанії, у відділ спец. розслідувань щодо підтвердженої тривоги від клієнта та виїзді ГМР"};//Произвольное поле №2
         create_costomfaild(cf);
-        var cf= {id: "3", n: "02 Назва страхової компанії", v: "АТ СК“ АХА СТРАХУВАННЯ”"};//Произвольное поле №1
+        var cf= {id: "3", n: "02 Назва страхової компанії", v: "АТ СК“ АХА СТРАХУВАННЯ”"};//Произвольное поле №3
         create_costomfaild(cf);
-        var cf= {id: "4", n: "2.1 І Відповідальна особа (основна)", v: ""};//Произвольное поле №1
+        var cf= {id: "4", n: "2.1 І Відповідальна особа (основна)", v: ""};//Произвольное поле №4
         create_costomfaild(cf);
-        var cf= {id: "5", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №1
+        var cf= {id: "5", n: "2.2 ІІ Відповідальна особа", v: ""};//Произвольное поле №5
         create_costomfaild(cf);
-        var cf= {id: "6", n: "2.3 ІІІ Відповідальна особа", v: ""};//Произвольное поле №1
+        var cf= {id: "6", n: "2.3 ІІІ Відповідальна особа", v: ""};//Произвольное поле №6
         create_costomfaild(cf);
-        var cf= {id: "7", n: "3.10.2 Версія ПЗ Keyless", v: ""};//Произвольное поле №1
+        var cf= {id: "7", n: "3.10.2 Версія ПЗ Keyless", v: ""};//Произвольное поле №7
         create_costomfaild(cf);
-        var cf= {id: "8", n: "", v: "3.1 Установник: назва, адреса"};//Произвольное поле №1
+        var cf= {id: "8", n: "", v: "3.1 Установник: назва, адреса"};//Произвольное поле №8
         create_costomfaild(cf);
-        var cf= {id: "9", n: "3.11 Комфортний доступ до авто: так/ні", v: ""};//Произвольное поле №1
+        var cf= {id: "9", n: "3.11 Комфортний доступ до авто: так/ні", v: ""};//Произвольное поле №9
         create_costomfaild(cf);
-        var cf= {id: "10", n: "3.15 Додатково встановлені датчики", v: ""};//Произвольное поле №1
+        var cf= {id: "10", n: "3.15 Додатково встановлені датчики", v: ""};//Произвольное поле №10
         create_costomfaild(cf);
-        var cf= {id: "11", n: "3.2 Установник-монтажник: ПІБ, №тел.", v: ""};//Произвольное поле №1
+        var cf= {id: "11", n: "3.2 Установник-монтажник: ПІБ, №тел.", v: ""};//Произвольное поле №11
         create_costomfaild(cf);
-        var cf= {id: "12", n: "3.3 Дата установки", v: ""};//Произвольное поле №1
+        var cf= {id: "12", n: "3.3 Дата установки", v: ""};//Произвольное поле №12
         create_costomfaild(cf);
-        var cf= {id: "13", n: "3.4 Місце установки пристрою ВЕНБЕСТ", v: ""};//Произвольное поле №1
+        var cf= {id: "13", n: "3.4 Місце установки пристрою ВЕНБЕСТ", v: ""};//Произвольное поле №13
         create_costomfaild(cf);
-        var cf= {id: "14", n: "3.5 Місце установки сигналізації", v: ""};//Произвольное поле №1
+        var cf= {id: "14", n: "3.5 Місце установки сигналізації", v: ""};//Произвольное поле №14
         create_costomfaild(cf);
-        var cf= {id: "15", n: "3.5 Назва та місце установки сигналізації", v: ""};//Произвольное поле №1
+        var cf= {id: "15", n: "3.5 Назва та місце установки сигналізації", v: ""};//Произвольное поле №15
         create_costomfaild(cf);
-        var cf= {id: "16", n: "3.6.1 Реле блокування: елемент блокування", v: ""};//Произвольное поле №1
+        var cf= {id: "16", n: "3.6.1 Реле блокування: елемент блокування", v: ""};//Произвольное поле №16
         create_costomfaild(cf);
-        var cf= {id: "17", n: "3.6.2  Реле блокування: місце встановлення", v: ""};//Произвольное поле №1
+        var cf= {id: "17", n: "3.6.2  Реле блокування: місце встановлення", v: ""};//Произвольное поле №17
         create_costomfaild(cf);
-        var cf= {id: "18", n: "3.7 Місце встановлення сервісної кнопки", v: ""};//Произвольное поле №1
+        var cf= {id: "18", n: "3.7 Місце встановлення сервісної кнопки", v: ""};//Произвольное поле №18
         create_costomfaild(cf);
-        var cf= {id: "19", n: "3.8.1 Тривожна кнопка: провідна/безпровідна", v: ""};//Произвольное поле №1
+        var cf= {id: "19", n: "3.8.1 Тривожна кнопка: провідна/безпровідна", v: ""};//Произвольное поле №19
         create_costomfaild(cf);
-        var cf= {id: "20", n: "3.8.2 Місце установки тривожної кнопки", v: ""};//Произвольное поле №1
+        var cf= {id: "20", n: "3.8.2 Місце установки тривожної кнопки", v: ""};//Произвольное поле №20
         create_costomfaild(cf);
-        var cf= {id: "21", n: "3.9.1 Кнопки введення PIN-коду: штатні/додатково встановленні", v: ""};//Произвольное поле №1
+        var cf= {id: "21", n: "3.9.1 Кнопки введення PIN-коду: штатні/додатково встановленні", v: ""};//Произвольное поле №21
         create_costomfaild(cf);
-        var cf= {id: "22", n: "3.9.2 Штатні кнопки введення PIN-коду", v: ""};//Произвольное поле №1
+        var cf= {id: "22", n: "3.9.2 Штатні кнопки введення PIN-коду", v: ""};//Произвольное поле №22
         create_costomfaild(cf);
-        var cf= {id: "24", n: "4.1 Дата активації", v: ""};//Произвольное поле №1
+        var cf= {id: "24", n: "4.1 Дата активації", v: ""};//Произвольное поле №23
         create_costomfaild(cf);
-        var cf= {id: "25", n: "4.2 Дата встановлення PIN-коду", v: ""};//Произвольное поле №1
+        var cf= {id: "25", n: "4.2 Дата встановлення PIN-коду", v: ""};//Произвольное поле №24
         create_costomfaild(cf);
-        var cf= {id: "26", n: "4.3 PIN-код встановлено особою(клієнт/установлник)", v: ""};//Произвольное поле №1
+        var cf= {id: "26", n: "4.3 PIN-код встановлено особою(клієнт/установлник)", v: ""};//Произвольное поле №25
         create_costomfaild(cf);
-        var cf= {id: "27", n: "4.4 Обліковий запис WL", v: ""};//Произвольное поле №1
+        var cf= {id: "27", n: "4.4 Обліковий запис WL", v: ""};//Произвольное поле №26
         create_costomfaild(cf);
-        var cf= {id: "28", n: "5.1 Менеджер", v: ""};//Произвольное поле №1
+        var cf= {id: "28", n: "5.1 Менеджер", v: ""};//Произвольное поле №27
         create_costomfaild(cf);
-        var cf= {id: "29", n: "5.1 Менеджер", v: ""};//Произвольное поле №1
+        var cf= {id: "29", n: "5.1 Менеджер", v: ""};//Произвольное поле №28
         create_costomfaild(cf);
-        var cf= {id: "30", n: "5.2 Договір обслуговування", v: ""};//Произвольное поле №1
+        var cf= {id: "30", n: "5.2 Договір обслуговування", v: ""};//Произвольное поле №29
         create_costomfaild(cf);
-        var cf= {id: "31", n: "5.3 Гарантія до", v: ""};//Произвольное поле №1
+        var cf= {id: "31", n: "5.3 Гарантія до", v: ""};//Произвольное поле №30
         create_costomfaild(cf);
-        var cf= {id: "32", n: "8.1 Паркінг 1", v: ""};//Произвольное поле №1
+        var cf= {id: "32", n: "8.1 Паркінг 1", v: ""};//Произвольное поле №40
         create_costomfaild(cf);
-        var cf= {id: "33", n: "8.2 Паркінг 2", v: ""};//Произвольное поле №1
+        var cf= {id: "33", n: "8.2 Паркінг 2", v: ""};//Произвольное поле №41
         create_costomfaild(cf);
-        var cf= {id: "34", n: "9.0 Примітки", v: ""};//Произвольное поле №1
+        var cf= {id: "34", n: "9.0 Примітки", v: ""};//Произвольное поле №42
         create_costomfaild(cf);
-        var cf= {id: "35", n: "9.1 Техпаспорт", v: ""};//Произвольное поле №1
+        var cf= {id: "35", n: "9.1 Техпаспорт", v: ""};//Произвольное поле №43
         create_costomfaild(cf);
-        var cf= {id: "36", n: "10 Кодове слово", v: ""};//Произвольное поле №1
+        var cf= {id: "36", n: "10 Кодове слово", v: ""};//Произвольное поле №44
         create_costomfaild(cf);
-        var cf= {id: "39", n: "22.2.1 Нач. отд. спецрасследований СК", v: "Жовтило Сергій, 067-214-5620,  Sergey.zhovtilo@axa-ukraine.com"};//Произвольное поле №1
+        var cf= {id: "39", n: "22.2.1 Нач. отд. спецрасследований СК", v: "Жовтило Сергій, 067-214-5620,  Sergey.zhovtilo@axa-ukraine.com"};//Произвольное поле №45
         create_costomfaild(cf);
-        var cf= {id: "40", n: "22.2.2 Спец. отд. спецрасследований СК", v: "Косован Олександр,  067-235-4761,  alexandr.kosovan@axa-ukraine.com"};//Произвольное поле №1
+        var cf= {id: "40", n: "22.2.2 Спец. отд. спецрасследований СК", v: "Косован Олександр,  067-235-4761,  alexandr.kosovan@axa-ukraine.com"};//Произвольное поле №46
         create_costomfaild(cf);
 
         //Создаем административные поля
         var acf= {id: "23", n: "3.9.3 PUK-код", v: ""};//Административное поле №23
         create_adminfaild(acf);
-        var acf= {id: "37", n: "11 Серійний номер CNTK (Keyless)", v: ""};//Произвольное поле №37
+        var hw_tracker = $("#hw_tracker").val();
+        var acf= {id: "37", n: "11 Серійний номер CNTK (Keyless)", v: hw_tracker};//Произвольное поле №37
         create_adminfaild(acf);
-        var acf= {id: "38", n: "12 Версия ПО Prizrak", v: "6.4."};//Произвольное поле №38
+        var hw_tec = $("#hw_tec").val();
+        var acf= {id: "38", n: "12 Версия ПО Prizrak", v: hw_tec};//Произвольное поле №38
         create_adminfaild(acf);
         
         //Обновляем пароль досткпа к объекту
@@ -2995,11 +3408,11 @@ function update_unit()  {
         
         //Создаем команды для объекта
         var obj = { n:"1. СТАРТ Двигатель", c:"driver_msg", l:"tcp", p:"TPASS: 081983; setdigout 00;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
         var obj = { n:"2. СТОП Двигатель", c:"driver_msg", l:"tcp", p:"TPASS: 081983; setdigout 01;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
         var obj = { n:"3. Service", c:"driver_msg", l:"tcp", p:"TPASS: 081983;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
 
         //Устанавливаем права на объект для пользователей
         var acl_flag=-1;//Пременная с правами Service
@@ -3025,6 +3438,8 @@ function update_unit()  {
         var acl_flag=-1;//Пременная с правами Service
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
+        
+        msg("Объект обновлен");
         
 //        // Обновляем настройки отчетов для объекта
 //        var repsetting = {speedLimit:"60",maxMessagesInterval:"40"}
@@ -3077,6 +3492,8 @@ function update_unit()  {
         create_sensor(obj);
         var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj);
+        var obj = { n:"Сработка сигнализации: зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:13, tbl:[], m:"Сработка/-", p:"par6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
 
         //Создаем произвольные поля
         var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
@@ -3168,11 +3585,11 @@ function update_unit()  {
         
         //Создаем команды для объекта
         var obj = { n:"1. СТАРТ Двигатель", c:"driver_msg", l:"tcp", p:"TPASS: 081983; setdigout 00;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
         var obj = { n:"2. СТОП Двигатель", c:"driver_msg", l:"tcp", p:"TPASS: 081983; setdigout 01;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
         var obj = { n:"3. Service", c:"driver_msg", l:"tcp", p:"TPASS: 081983;", a:1 }; //Пременная с данными для создания команд
-        create_comand(obj)
+        create_comand(obj);
 
         //Устанавливаем права на объект для пользователей
         var acl_flag=-1;//Пременная с правами Service
@@ -3224,7 +3641,7 @@ function update_ReportSettings(repsetting){
     sess.getItem( $("#units_").val() ).updateReportSettings(repsetting, function(code, data){ // create command callback
 	    	if (code) msg(wialon.core.Errors.getErrorText(msg("error"+ code))); // print error if error code
 	    	else { // print message about creation succeed and refresh command list
-	    	    msg("Report setting updated");
+	    	    console.log("Report setting updated");
 	    	}
 	}); 
 }// Обновляем настройки отчетов для объекта
@@ -3249,7 +3666,7 @@ function create_comand(obj){
         function(code, data){ // create command callback
 	    	if (code) msg(wialon.core.Errors.getErrorText(msg("error"+ code))); // print error if error code
 	    	else { // print message about creation succeed and refresh command list
-	    	    msg("command created successfully");
+	    	    console.log("command created successfully");
 	    	}
 	});
 }// Создаем команду для объекта
@@ -3257,33 +3674,33 @@ function create_comand(obj){
 function update_apass(apass){
     var sess=wialon.core.Session.getInstance();
     sess.getItem( parseInt( $("#units_").val() ) ).updateAccessPassword(apass); 
-    msg("Accsess Pass updated");
+    console.log("Accsess Pass updated");
 }// Обновляем Пароль объекта
 
 function update_uniqueid(idHW, uniqueid){
     var sess=wialon.core.Session.getInstance();
     sess.getItem( parseInt( $("#units_").val() ) ).updateDeviceSettings(idHW, uniqueid); 
-    msg("uniqueid updated");
+    console.log("uniqueid updated");
 }// Обновляем ID объекта
 
 function update_phonenum(phn){
     var sess=wialon.core.Session.getInstance();
     sess.getItem( parseInt( $("#units_").val() ) ).updatePhoneNumber( phn );
-    msg("phn updated" );
+    console.log("phn updated" );
 }// Обновляем Телефон объекта
 
 function create_costomfaild(cf){
     var sess=wialon.core.Session.getInstance();
     sess.loadLibrary("itemCustomFields");
     sess.getItem( parseInt( $("#units_").val() ) ).createCustomField( cf );
-    msg("cf created successfully" ); 
+    console.log("cf created successfully" ); 
 }// Создаем произвольное поле для объекта
 
 function create_adminfaild(acf){
     var sess=wialon.core.Session.getInstance();
     sess.loadLibrary("itemAdminFields");
     sess.getItem( parseInt( $("#units_").val() ) ).createAdminField( acf );
-    msg("acf created successfully" ); 
+    console.log("acf created successfully" ); 
 }// Создаем Административное поле для объекта
 
 function create_sensor(obj,data){
@@ -3293,7 +3710,7 @@ function create_sensor(obj,data){
     function(code, data){ // create sensor callback
                 if (code) msg(wialon.core.Errors.getErrorText(code)); // print error if error code
             else { // print message about creation succeed and refresh sensor list
-                msg("sensor created successfully" );
+                console.log("sensor created successfully" );
 //                console.log(data.id);
         }
     });
@@ -3327,7 +3744,8 @@ function test(){
     document.getElementById('CRAB').checked =false;
     document.getElementById('TK').checked =false;
     var tttt=$("#phone").val();
-        console.log(tttt);
+    console.log(tttt);
+    getHWid();
 }
 
 $(document).ready(function () {
@@ -3352,4 +3770,4 @@ $(document).ready(function () {
 //       break loop1; // Только 4 попытки
 //   }}
 //         msg("2");
-}); //Запускаем функции после загрузки станицы
+});

@@ -15,13 +15,11 @@
     <body>
         <!-- Tab links -->
         <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'London')">Уведомления</button>
-          <button class="tablinks" onclick="openCity(event, 'Paris')">Объекты</button>
+          <button class="tablinks" onclick="openCity(event, 'notification')">Уведомления</button>
+          <button class="tablinks" onclick="openCity(event, 'object')">Объекты</button>
         </div>
-
         <!-- Tab Уведомления -->
-        <div id="London" class="tabcontent">
-            
+        <div id="notification" class="tabcontent">
             <div id="product" class="panel left"><span class="remark"></span>
             <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
             <input type="radio" id="CNTK" name="prod" value="CNTK" onClick="select_product()">Connect Keyless<Br>
@@ -34,7 +32,6 @@
             <input type="radio" id="C" name="prod" value="C" onClick="select_product()">Connect<Br>
             <input type="radio" id="AXA" name="prod" value="AXA" onClick="select_product()">AXA<Br>
         </div>
-        
             <div class="panel content"><span class="remark"></span>
             <p><input type="text" id="username" placeholder="User name" /></p>
             <p><input type="text" id="passw" placeholder="pass" oninput="update_out()"/><input type="button" value="Generate" id="Generate"/></p>
@@ -75,21 +72,17 @@
             <br/><input type="button" id="create_btn" name="crtent" value="Создать уведомления"/>
             <br/><br/><textarea name="Out" id="Out" cols="40" rows="5"></textarea>
 	</div>
-        
             <div class="panel right"><span class="remark"></span><br />
             <input id="login" type="button" value="Click to login" onclick="getToken()" style="display: none;"/>
             <input id="logout" type="button" value="Click to logout" onclick="logout()" style="display: none;"/>
             <iframe name="simple_form" src="//navi.venbest.com.ua/login_simple.html?redirect_uri=http://navi.venbest.com.ua/post_token.html&access_type=-1&activation_time=0&duration=1200&flags=0x1" scrolling="no" style="width: 230px; height: 290px; border: 0; margin: 10px;"></iframe>
 	</div>
-                        
             <div class="panel footer"><span class="remark"></span>
             <textarea style="overflow-x:hidden; width:100%;" name="log" id="log" rows="4"></textarea>
         </div>
         </div>
-        
         <!-- Tab Объекты -->
-        <div id="Paris" class="tabcontent2">
-            
+        <div id="object" class="tabcontent2">
             <div class="panel content"><span class="remark"></span>
                 <table>
                     <tr>
@@ -102,21 +95,19 @@
                     </tr>
                     <tr>
                         <td>HW Tracker:</td>
-                        <td><input type="text" id="hw_trakcer" value=""/></td>
+                        <td><input type="text" id="hw_tracker" value=""/></td>
                     </tr>
                     <tr>
                         <td>HW TEC:</td>
                         <td><input type="text" id="hw_tec" value=""/></td>
                         <td><input type="button" value="Создать объект" id="create_unit"/></td>
+                    </tr>
                 </table>
-            
-            <p><input type="button" value="Выбрать созданый объект" id="init_" />
-            <select id="units_"></select></p>
-            <p><input type="button" value="Созать параметы объекта" id="update_unit" /></p>
-            <br>
-            <input type="button" value="test func" id="test"/>           
-	</div>
-        
+                <p><input type="button" value="Выбрать созданый объект" id="init_" />
+                <select id="units_"></select></p>
+                <p><input type="button" value="Созать параметы объекта" id="update_unit" /></p>          
+            </div>
+        </div>
         <script type="text/javascript">
             
             //Маска ввода
@@ -124,10 +115,7 @@
                 $("#phone").mask("+380999999999");//Маска ввода ввода телефонного номера
                 $("#nm").mask("****?************");//Маска ввода ввода ID объекта
         });
-        openCity(event, "London");
+        openCity(event, "notification");
         </script>
-          
-            
-        </div>
     </body>
 </html>
