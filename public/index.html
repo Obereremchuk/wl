@@ -15,7 +15,7 @@
     <body>
         <!-- Tab links -->
         <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'notification')">Уведомления</button>
+          <button class="tablinks" onclick="openCity(event, 'notification')">Учетные записи</button>
           <button class="tablinks" onclick="openCity(event, 'object')">Объекты</button>
         </div>
         <!-- Tab Уведомления -->
@@ -23,12 +23,14 @@
             <div id="product" class="panel left"><span class="remark"></span>
             <input type="radio" id="CP" name="prod" value="CP" onClick="select_product()">Connect Plus<Br>
             <input type="radio" id="CNTK" name="prod" value="CNTK" onClick="select_product()">Connect Keyless<Br>
+            <input type="radio" id="WATCH" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
+            <input type="radio" id="TK" name="prod" value="TK" onClick="select_product()">TK<Br>
+            <input type="radio" id="N" name="prod" value="N" onClick="select_product()">Sled<Br>
+            <input type="radio" id="K" name="prod" value="K" onClick="select_product()">Kondor+<Br>
+            <input type="radio" id="PHONE" name="prod" value="PHONE" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
             <input type="radio" id="CRAB" name="prod" value="CRAB" onClick="select_product()">CRAB<Br>
             <input type="radio" id="CMA" name="prod" value="CMA" onClick="select_product()">Connect Magnum<Br>
             <input type="radio" id="CMM" name="prod" value="CMM" onClick="select_product()">Connect Moto<Br>
-            <input type="radio" id="WATCH" name="prod" value="WATCH" onClick="select_product()">Watch<Br>
-            <input type="radio" id="TK" name="prod" value="TK" onClick="select_product()">TK<Br>
-            <input type="radio" id="PHONE" name="prod" value="PHONE" onClick="select_product()">SmartF: <input type="checkbox" id="no_batt" name="no_batt">Без АКБ<Br>
             <input type="radio" id="C" name="prod" value="C" onClick="select_product()">Connect<Br>
             <input type="radio" id="AXA" name="prod" value="AXA" onClick="select_product()">AXA<Br>
         </div>
@@ -95,11 +97,11 @@
                     </tr>
                     <tr>
                         <td>HW Tracker:</td>
-                        <td><input type="text" id="hw_tracker" value=""/></td>
+                        <td><input type="text" id="hw_tracker" value="" disabled/></td>
                     </tr>
                     <tr>
                         <td>HW TEC:</td>
-                        <td><input type="text" id="hw_tec" value=""/></td>
+                        <td><input type="text" id="hw_tec" value="" disabled/></td>
                         <td><input type="button" value="Создать объект" id="create_unit"/></td>
                     </tr>
                 </table>
