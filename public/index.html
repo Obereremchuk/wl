@@ -144,6 +144,15 @@
                 $("#nm").mask("****?************");//Маска ввода ввода ID объекта
         });
         openCity(event, "notification");
+        
+        function update_search(){
+           Update_1.click();
+        }    
+        function update_out() {
+            var password = document.getElementById('passw').value;
+            var out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
+            document.getElementById('Out').value = out;
+        }
         </script>
     </body>
 </html>
