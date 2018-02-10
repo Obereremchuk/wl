@@ -280,11 +280,11 @@ function createNotification_CP(){
             return; };//Проверка: поле Email Заполнено?
         var sec_email = $("#sec_email").val();
         if(!sec_email){
-            sec_email = first_email;
+            sec_email = "";//sec_email = first_email;
         };
         var tri_email = $("#sec_email").val();
         if(!tri_email){ 
-            tri_email = first_email;
+            tri_email = "";//tri_email = first_email;
         }; 
     } //отключение поле Email 
     wialon.core.Session.getInstance().loadLibrary("mobileApps");
@@ -666,11 +666,11 @@ function createNotification_CNTK(){
             return; };//Проверка: поле Email Заполнено?
         var sec_email = $("#sec_email").val();
         if(!sec_email){
-            sec_email = first_email;
+            sec_email = ""; //sec_email = first_email;
         };
         var tri_email = $("#sec_email").val();
         if(!tri_email){ 
-            tri_email = first_email;
+            tri_email = ""; //tri_email = first_email;
         }; 
     } //отключение поле Email 
     wialon.core.Session.getInstance().loadLibrary("mobileApps");
@@ -2603,12 +2603,12 @@ function select_product (){
     }
     if (prod_value=="CNTK"){
         document.getElementById('hw_tracker').value = "3.9.7";
-        document.getElementById('hw_tec').value = "6.4.250";
+        document.getElementById('hw_tec').value = "6.4.252";
         document.getElementById("hw_tracker").disabled = false;
         document.getElementById("hw_tec").disabled = false;
     }//Изменяем версию прошивки для этого продукта
     else if (prod_value=="CP"){
-        document.getElementById('hw_tracker').value = "3.15";
+        document.getElementById('hw_tracker').value = "3.15_vb";
         document.getElementById('hw_tec').value = "6.4.250";
         document.getElementById("hw_tracker").disabled = false;
         document.getElementById("hw_tec").disabled = false;
@@ -2641,7 +2641,7 @@ function select_product (){
     else if (prod_value=="N"){
         document.getElementById("hw_tracker").disabled = false;
         document.getElementById("hw_tec").disabled = true;
-        document.getElementById('hw_tracker').value = "3.2";
+        document.getElementById('hw_tracker').value = "3.3.3";
         document.getElementById('hw_tec').value = "";     
 } //Изменяем версию прошивки для этого продукта
     else if (prod_value=="CRAB"){
@@ -2899,39 +2899,39 @@ function update_unit()  {
 
         //Создаем датчики
         
-        var obj = { n:"ГЛУШЕНИЕ GSM (ПАРКИНГ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);
-        var obj = { n:"ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);
-        var obj = { n:"ГЛУШЕНИЕ GSM (ОХРАНА)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Вкл/Выкл", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В охране/Не в охране", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+        var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:1, tbl:[], m:"Да/-", p:"can10", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":1,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0},{"x":12,"a":0,"b":0}], m:"Вкл/Выкл", p:"adc2", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);    
-        var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Вкл/Выкл", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);   
+        var obj = { n:"ГЛУШЕНИЕ GSM (ПАРКИНГ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"ГЛУШЕНИЕ GSM (ДВИЖЕНИЕ)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Вкл/Выкл", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"ГЛУШЕНИЕ GSM (ОХРАНА)", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Вкл/Выкл", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,); 
+        var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:1, tbl:[], m:"Вкл/Выкл", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Качество связи GSM", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":20,"b":0},{"x":1,"a":20,"b":0},{"x":2,"a":20,"b":0},{"x":3,"a":20,"b":0},{"x":4,"a":20,"b":0},{"x":5,"a":20,"b":0}], m:"%", p:"gsm", t:"custom"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
-        var obj = { n:"Сработка сигнализации: зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Сработка/-", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Сработка сигнализации: зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:1, tbl:[], m:"Сработка/-", p:"param6", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"param6", t:"engine operation"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
-        var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:12, tbl:[], m:"Сработка/-", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:2, tbl:[], m:"Сработка/-", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Блокировка иммобилайзера", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"in3", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Напряжение внутреннего АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":false}", vt:1, vs:0, tbl:[], m:"В", p:"pwr_int", t:"voltage"};//Пременная с данными для создания датчиков
         create_sensor(obj);
-        var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:17, tbl:[], m:"Да/-", p:"can10", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);
-        var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:12, tbl:[{"x":0,"a":0,"b":0},{"x":1,"a":0,"b":1},{"x":2,"a":0,"b":0},{"x":3,"a":0,"b":0},{"x":4,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0}], m:"Да/-", p:"can10+param6+in1", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:2, tbl:[{"x":0,"a":0,"b":0},{"x":1,"a":0,"b":1},{"x":2,"a":0,"b":0},{"x":3,"a":0,"b":0},{"x":4,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0}], m:"Да/-", p:"can10+param6+in1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"in4", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Статус дверей", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Открыты/Закрыты", p:"in1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj);
         var obj = { n:"Напряжение АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В", p:"pwr_ext+const1.3", t:"voltage"};//Пременная с данными для создания датчиков
-        create_sensor(obj);
-        var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В охране/Не в охране", p:"in2", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj);
 
         //Создаем произвольные поля
@@ -3454,29 +3454,30 @@ function update_unit()  {
         var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par6", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par141", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);    
-        var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:13, tbl:[], m:"Вкл/Выкл", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,); 
+        var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj);
+        var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Да/-", p:"par154", t:"digital"};//Пременная с данными для создания датчиков
+        create_sensor(obj,);
+        var obj = { n:"Не закрыты двери в охране", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Вкл/Выкл", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Качество связи GSM", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":20,"b":0},{"x":1,"a":20,"b":0},{"x":2,"a":20,"b":0},{"x":3,"a":20,"b":0},{"x":4,"a":20,"b":0},{"x":5,"a":20,"b":0}], m:"%", p:"par21", t:"custom"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Зажигание", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":0},{"x":12,"a":0,"b":0},{"x":12.9,"a":0,"b":0},{"x":13,"a":0,"b":1},{"x":14,"a":0,"b":1}], m:"Вкл/Выкл", p:"VPWR", t:"engine operation"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
-        var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:9, tbl:[], m:"Сработка/-", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Сработка сигнализации: двери", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[], m:"Сработка/-", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Блокировка иммобилайзера", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"Вкл/Выкл", p:"AIN1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Напряжение внутреннего АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":false}", vt:1, vs:0, tbl:[], m:"В", p:"VBAT", t:"voltage"};//Пременная с данными для создания датчиков
         create_sensor(obj);
-        var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:13, tbl:[], m:"Да/-", p:"par154", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,);
-        var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:9, tbl:[{"x":0,"a":0,"b":0},{"x":1,"a":0,"b":1},{"x":2,"a":0,"b":0},{"x":3,"a":0,"b":0},{"x":4,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0}], m:"Да/-", p:"par154+par1", t:"digital"};//Пременная с данными для создания датчиков
+        var obj = { n:"Датчик удара", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:4, tbl:[{"x":0,"a":0,"b":0},{"x":1,"a":0,"b":1},{"x":2,"a":0,"b":0},{"x":3,"a":0,"b":0},{"x":4,"a":0,"b":0},{"x":5,"a":0,"b":0},{"x":6,"a":0,"b":0}], m:"Да/-", p:"par154+par1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Напряжение АКБ", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"В", p:"VPWR", t:"voltage"};//Пременная с данными для создания датчиков
         create_sensor(obj);
         var obj = { n:"Статус дверей", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Открыты/Закрыты", p:"par1", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj);
-        var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj);
+        
 
         //Создаем произвольные поля
         var cf= {id: "1", n: "0 УВАГА", v: ""};//Произвольное поле №1
