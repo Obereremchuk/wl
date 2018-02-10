@@ -2650,7 +2650,7 @@ function select_product (){
         document.getElementById("hw_tracker").disabled = false;
         document.getElementById("hw_tec").disabled = true;   
 } //Изменяем версию прошивки для этого продукта
-}
+} 
 
 function getToken() {
     // construct login page URL
