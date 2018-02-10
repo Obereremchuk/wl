@@ -2860,7 +2860,7 @@ function create_unit(){
             msg(wialon.core.Errors.getErrorText(code));
             return; 
         }
-        msg("Создан объект: " + name)
+        msg("Создан объект: " + name); init_();
     });  
 } //Создаем объект
 

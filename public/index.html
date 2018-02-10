@@ -69,17 +69,17 @@
             <table>
                 <tr>
                     <td>
-                        Resource "name":<br/><select id="res" multiple="multiple" style="width: 200px;"></select>
+                        Resource "name":<br/><select id="res" multiple="multiple" style="width: 150px;"></select>
                     </td>
                     <td>
-                        Resource "name_user":<br/><select id="res2" multiple="multiple" style="width: 200px;"></select>
+                        Resource "name_user":<br/><select id="res2" multiple="multiple" style="width: 150px;"></select>
                     </td>
                     <td>
-                        Select user:<br/><select  id="users" multiple="multiple" style="width: 200px;"></select>
+                        Select user:<br/><select  id="users" multiple="multiple" style="width: 150px;"></select>
                     </td>
                     <td>
                         Select units:<input type="radio" id="select_unit" name="select" checked="checked"> Select groups:<input type="radio" id="select_group" name="select"> <br/>
-                        <select id="units" multiple="multiple" style="width: 250px;"></select> <input type="search" id="searchBox" oninput="update_search()"> <input type="button" value="Поиск" id="Update_1" style="display: none;"/>
+                        <select id="units" multiple="multiple" style="width: 400px;"></select> <input type="search" id="searchBox" oninput="update_search()"> <input type="button" value="Поиск" id="Update_1" style="display: none;"/>
                     </td>
 
                     <!--<td>Select mapps<br/><select id="mapps" multiple="multiple"></select></td>-->
@@ -131,9 +131,9 @@
                         <td><input type="button" value="Создать объект" id="create_unit"/></td>
                     </tr>
                 </table>
-                <p><input type="button" value="Выбрать созданый объект" id="init_" />
-                <select id="units_"></select></p>
-                <p><input type="button" value="Созать параметы объекта" id="update_unit" /></p>          
+                <p><input type="button" value="Выбрать созданый объект" id="init_" style="display: none;" />
+                    Создан объект: <select id="units_" ></select></p>
+                <p><input type="button" value="Обновить параметы объекта" id="update_unit" /></p>          
             </div>
         </div>
         <script type="text/javascript">
