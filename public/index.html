@@ -91,14 +91,14 @@
             <table>
                     <tr>
                     <td>
-                        <br/>
-                        <input type="text" id="first_email" placeholder="email 1" />   <input type="checkbox" id="no_email" name="Не отправлять Email">Не отправлять Email<br/>                       
-                        <input type="text" id="sec_email" placeholder="email 2" /><br/>                        
-                        <input type="text" id="tri_email" placeholder="email 3" />
+                        <input type="text" id="first_email" placeholder="Enter email" />   <input type="checkbox" id="no_email" name="Не отправлять Email">Не отправлять Email<br/>                       
+                        <input type="text" id="sec_email" placeholder="email 2" style="display: none;" /><br/>                        
+                        <input type="text" id="tri_email" placeholder="email 3" style="display: none;" />
                     </td>
+                    </tr>
             </table>        
-            <br/><input type="button" id="create_btn" name="crtent" value="Создать уведомления"/>
-            <br/><br/><textarea name="Out" id="Out" cols="40" rows="5"></textarea>
+            <input type="button" id="create_btn" name="crtent" value="Создать уведомления"/>
+            <br/><br/><br/> <textarea name="Out" id="Out" cols="40" rows="5"></textarea>
 	</div>
             <div class="panel right"><span class="remark"></span><br />
             <input id="login" type="button" value="Click to login" onclick="getToken()" style="display: none;"/>

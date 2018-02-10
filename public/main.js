@@ -296,8 +296,8 @@ function createNotification_CP(){
             ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -335,8 +335,8 @@ function createNotification_CP(){
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -374,8 +374,8 @@ function createNotification_CP(){
         var obj3 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -413,8 +413,8 @@ function createNotification_CP(){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -452,8 +452,8 @@ function createNotification_CP(){
         var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -491,8 +491,8 @@ function createNotification_CP(){
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -530,8 +530,8 @@ function createNotification_CP(){
     var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -569,8 +569,8 @@ function createNotification_CP(){
         var obj8 = { ma:0, fl:0, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -608,8 +608,8 @@ function createNotification_CP(){
         var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: "2"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -682,8 +682,8 @@ function createNotification_CNTK(){
             ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -721,8 +721,8 @@ function createNotification_CNTK(){
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -760,8 +760,8 @@ function createNotification_CNTK(){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -799,8 +799,8 @@ function createNotification_CNTK(){
         var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -838,8 +838,8 @@ function createNotification_CNTK(){
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -877,8 +877,8 @@ function createNotification_CNTK(){
     var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -951,8 +951,8 @@ function createNotification_CRAB(){
             ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: "#ff0000"}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -990,8 +990,8 @@ function createNotification_CRAB(){
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1029,8 +1029,8 @@ function createNotification_CRAB(){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1068,8 +1068,8 @@ function createNotification_CRAB(){
         var obj5 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1107,8 +1107,8 @@ function createNotification_CRAB(){
         var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1146,8 +1146,8 @@ function createNotification_CRAB(){
     var obj7 = { ma:0, fl:0, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1219,8 +1219,8 @@ function createNotification_CMM(){ //create notification
         var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: "#ff0000"}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1258,8 +1258,8 @@ function createNotification_CMM(){ //create notification
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1297,8 +1297,8 @@ function createNotification_CMM(){ //create notification
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1336,8 +1336,8 @@ function createNotification_CMM(){ //create notification
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1375,8 +1375,8 @@ function createNotification_CMM(){ //create notification
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1414,8 +1414,8 @@ function createNotification_CMM(){ //create notification
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1453,8 +1453,8 @@ function createNotification_CMM(){ //create notification
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1492,8 +1492,8 @@ function createNotification_CMM(){ //create notification
         var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1532,8 +1532,8 @@ function createNotification_CMM(){ //create notification
         var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
                 act: [  {t:"message", p:{color: ""}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1605,8 +1605,8 @@ function createNotification_CMA(){ //create notification
         var obj1 = { ma:0, fl:0, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: "#ff0000"}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -1644,8 +1644,8 @@ function createNotification_CMA(){ //create notification
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1683,8 +1683,8 @@ function createNotification_CMA(){ //create notification
         var obj3 =  { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1722,8 +1722,8 @@ function createNotification_CMA(){ //create notification
         var obj4 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1761,8 +1761,8 @@ function createNotification_CMA(){ //create notification
         var obj5 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1800,8 +1800,8 @@ function createNotification_CMA(){ //create notification
     var obj6 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1839,8 +1839,8 @@ function createNotification_CMA(){ //create notification
         var obj7 = { ma:0, fl:1, tz:7200, la:"ru", mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1878,8 +1878,8 @@ function createNotification_CMA(){ //create notification
     var obj8 = { ma:0, fl:1, tz:7200, la:"ru",  mpst:60,
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1917,8 +1917,8 @@ function createNotification_CMA(){ //create notification
     var obj9 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -1956,8 +1956,8 @@ function createNotification_CMA(){ //create notification
         var obj10 = { ma:0, fl:0, tz:7200, la:"ru",
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -2029,8 +2029,8 @@ function createNotification_WATCH(){ //create notification
         var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: "#ff0000"}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -2068,8 +2068,8 @@ function createNotification_WATCH(){ //create notification
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -2140,8 +2140,8 @@ function createNotification_UBER(){ //create notification
         var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: "#ff0000"}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -2179,8 +2179,8 @@ function createNotification_UBER(){ //create notification
         var obj2 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -2252,8 +2252,8 @@ function createNotification_C(){
         var obj1 = { ma:0, fl:1, tz:7200, la:"ru", 
                 act: [  {t:"message", p:{color: "#ff0000"}}, 
                         {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                        {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                        
+                        
                         {t:"event", p:{flags: 0}},
                         {"t":"mobile_apps","p":{"apps":app}}
                     ], // default values
@@ -2291,8 +2291,8 @@ function createNotification_C(){
         var obj3 = { ma:0, fl:1, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -2330,8 +2330,8 @@ function createNotification_C(){
         var obj4 = { ma:0, fl:0, tz:7200, la:"ru", 
             act: [  {t:"message", p:{color: ""}}, 
                     {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-                    {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+                    
+                    
                     {t:"event", p:{flags: 0}},
                     {"t":"mobile_apps","p":{"apps":app}}
                 ], // default values
@@ -2403,8 +2403,8 @@ function createNotification_AXA(){
         ma:0, fl:0, tz:7200, la:"ru", 
         act: [  {t:"message", p:{color: "#ff0000"}}, 
                 {t:"email", p:{email_to: first_email, html: 0, img_attach: 0, subj:""}},
-//                {t:"email", p:{email_to: sec_email, html: 0, img_attach: 0, subj:""}},
-//                {t:"email", p:{email_to: tri_email, html: 0, img_attach: 0, subj:""}},
+//                
+//                
                 {t:"event", p:{flags: 0}},
                 {"t":"mobile_apps","p":{"apps":app}}
             ], // default values
