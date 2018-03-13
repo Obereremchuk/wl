@@ -62,13 +62,14 @@ function init() { // Получаем, фильтруем ресурс1, рес�
                         $("#units :not(:contains("+$searchBox+"))option").remove();//Убираем все что не содержит строку для поиска $searchBox
                         
                     // get loaded 'users's items                       
-                    var users = sess.getItems("user");                        
+                    var users = sess.getItems("user");  
+                    
                     // construct Select list using found users                        
                     for (var i = 0; i< users.length; i++) 
-                        $("#users").append("<option value='"+ users[i].getId() +"'>"+ users[i].getName() +"</option>");
+                        $("#users").append("<option value='"+ users[i].getId() +"'>"+ users[i].getName()+" ("+ users[i].getId()+ ")" +"</option>");
                         $("#users :not(:contains("+$username+"))option").hide();//Убираем все что не содержит username
                         $("#users :contains("+$username+")").attr("selected", "selected");//выбираем из списка содержащий $username
-                
+              
     });// получаем, фильтруем ресурс1, ресурс2, пользователь, объект
 
 }
@@ -2603,7 +2604,7 @@ function select_product (){
     }
     if (prod_value=="CNTK"){
         document.getElementById('hw_tracker').value = "3.9.7";
-        document.getElementById('hw_tec').value = "6.4.252";
+        document.getElementById('hw_tec').value = "6.4.259";
         document.getElementById("hw_tracker").disabled = false;
         document.getElementById("hw_tec").disabled = false;
     }//Изменяем версию прошивки для этого продукта
@@ -2710,8 +2711,8 @@ function password_generator(  ) {
         return; 
     }
     var length = (5)?(5):(10);
-    var string = "abcdefghijklmnopqrstuvwxyz"; //to upper 
-    var numeric = '0123456789';
+    var string = "abcdefghjkmnpqrstuvwxyz"; //to upper 
+    var numeric = '123456789';
     var punctuation = '';
     var password = "";
     var character = "";
@@ -2730,8 +2731,12 @@ function password_generator(  ) {
     } 
     console.log (password);
     document.getElementById('passw').value = password;
-    out = "Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
+    out = password; //"Login: "+ $("#username").val() + "\r\n" + "Pass: " + password + "\r\n";
     document.getElementById('Out').value = out;
+    document.querySelector('#Out').select();//выделяем поле пароль
+    document.execCommand('copy');//копируем поле пароль
+    var username = $("#username").val(); // имя нового юзера из формы
+    document.getElementById('first_email').value = username;//копируем логин в имеил
 }//Генератор паролей
 
 function no_email_check(){
@@ -2776,12 +2781,6 @@ function init_(){
                         $("#units_").append("<option value='" + units[i].getId() + "'>" + units[i].getName() + "</option>")
                         $("#units_ :not(:contains("+nm+"))option").remove();//Убираем все что не содержит username
                         $("#units_ :contains("+nm+")").attr("selected", "selected");//выбираем из списка содержащий _user
-                        
-//                        Get all users to console
-//                        var users = sess.getItems("user");
-//                        for (var i = 0; i< users.length; i++);
-//                        console.log(users[i].getId() +":"+ users[i].getName());
-//                          getHWid();
         }
     );
    getHWid()// вывести в консоль перечень свего доступного хардворе
@@ -3064,12 +3063,38 @@ function update_unit()  {
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
         
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
         msg("Объект обновлен");
     }//Ели выбран СР,
     else if (prod_value=="CMM"){
+        msg("Функция не реализована");
         return;
     }//Ели выбран СММ, 
     else if (prod_value=="CMA"){
+        msg("Функция не реализована");
         return;
     }//Ели выбран СМА, 
     else if (prod_value=="TK"){
@@ -3192,6 +3217,30 @@ function update_unit()  {
 
         var acl_flag=-1;//Пременная с правами Service
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
         set_access_unit(acl_flag,user);
         
         msg("Объект TK обновлен");
@@ -3319,6 +3368,30 @@ function update_unit()  {
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
         
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
         msg("Объект обновлен");
     }//Ели выбран WATCH,
     else if (prod_value=="PHONE"){
@@ -3423,9 +3496,34 @@ function update_unit()  {
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
         
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
         msg("Объект PHONE обновлен");
     }//Ели выбран Phone, 
     else if (prod_value=="C"){
+        msg("Функция не реализована");
         return;
     }//Ели выбран C, 
     else if (prod_value=="CNTK"){
@@ -3600,6 +3698,32 @@ function update_unit()  {
 
         var acl_flag=-1;//Пременная с правами Service
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
         set_access_unit(acl_flag,user);
         
         msg("Объект обновлен");
@@ -3779,6 +3903,30 @@ function update_unit()  {
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
         
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
 //        // Обновляем настройки отчетов для объекта
 //        var repsetting = {speedLimit:"60",maxMessagesInterval:"40"}
 //        update_ReportSettings(repsetting)
@@ -3897,6 +4045,30 @@ function update_unit()  {
 
         var acl_flag=-1;//Пременная с правами Service
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
         set_access_unit(acl_flag,user);
         
         msg("Объект Sled обновлен");
@@ -4022,6 +4194,30 @@ function update_unit()  {
         var user=wialon.core.Session.getInstance().getItem("494");// Устанавливаеми права Позователю d.yacenko
         set_access_unit(acl_flag,user);
         
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("1384");// Устанавливаеми права Позователю a.andreasyan
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2535");// Устанавливаеми права Позователю a.shavlovskiy
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2212");// Устанавливаеми права Позователю l.ivchenko
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("207");// Устанавливаеми права Позователю Locator_link
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("2534");// Устанавливаеми права Позователю s.shershun
+        set_access_unit(acl_flag,user);
+        
+        var acl_flag=16799347;//Пременная с правами Service
+        var user=wialon.core.Session.getInstance().getItem("356");// Устанавливаеми права Позователю v.chihman2
+        set_access_unit(acl_flag,user);
+        
         msg("Объект Kondor обновлен");
     }//Ели выбран Kondor+,
     
@@ -4062,7 +4258,7 @@ function set_access_unit(acl_flag,user){
             alert(wialon.core.Errors.getErrorText(code));
             return;
         }
-        console.log("access to unit Done");
+        console.log("access to unit Done" + user);
     });//Устанавливаем права на объект для нового пользователя.
 }//Устанавливаем права.
 
