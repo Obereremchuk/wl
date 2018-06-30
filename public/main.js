@@ -1,4 +1,6 @@
 
+/* global wialon */
+
 function msg(text){
     var d = new Date();
     var curr_date = d.getDate();
@@ -90,9 +92,11 @@ function createuser(){
     var skipCreatorCheck = 1; //флаг
     wialon.core.Session.getInstance().createUser(user, username, passw, flag, function(code, obj) {//create username
         if (code != 0){ 
+            document.getElementById("log").style.background="red"; 
             msg(wialon.core.Errors.getErrorText(code)); 
             return ; 
         }
+        document.getElementById("log").style.background="white";
         var newuser = obj;
         console.log("User created: '" + username + "'"); //выводим в лог созданного пользователя
         wialon.core.Session.getInstance().createResource(newuser, username, flag, skipCreatorCheck, function(code, obj1) { //create resurce 1
@@ -2449,8 +2453,10 @@ function button_work(){
     
     if(!prod_value){
         msg("Выбери продукт!");
+        document.getElementById("log").style.background="red";
         return; 
     };//Проверка: Продукт выбран?
+    document.getElementById("log").style.background="white";
     
     if (prod_value=="CP"){
         createNotification_CP();
@@ -4368,6 +4374,7 @@ $(document).ready(function () {
         $("#update_unit").click(update_unit);
         $("#init_").click(init_);
         $("#test").click(test);
+
 //loop1: for (var a = 0; a < 10000000; a++) {
 //   if (a == 100000000) {
 //       break loop1; // Только 4 попытки
