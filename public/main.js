@@ -64,14 +64,15 @@ function init() { // Получаем, фильтруем ресурс1, рес�
                         $("#units :not(:contains("+$searchBox+"))option").remove();//Убираем все что не содержит строку для поиска $searchBox
                         
                     // get loaded 'users's items                       
-                    var users = sess.getItems("user");  
+                    var users = sess.getItems("user");
+                    
                     
                     // construct Select list using found users                        
                     for (var i = 0; i< users.length; i++) 
                         $("#users").append("<option value='"+ users[i].getId() +"'>"+ users[i].getName()+" ("+ users[i].getId()+ ")" +"</option>");
                         $("#users :not(:contains("+$username+"))option").hide();//Убираем все что не содержит username
                         $("#users :contains("+$username+")").attr("selected", "selected");//выбираем из списка содержащий $username
-              
+             
     });// получаем, фильтруем ресурс1, ресурс2, пользователь, объект
 
 }
@@ -170,7 +171,7 @@ function set_access(){
     });//Устанавливаем Full права на учетку нового пользователя: o.pustovit
     
     var flag_dlenik=52810916888575;//Права на ресурсы нового пользователя для d.lenik
-    var usr_dlenik = sess.getItem("1066");//Загружаем данные пользователя: d.lenik id:1066
+    var usr_dlenik = sess.getItem("4391");//Загружаем данные пользователя: d.lenik id:4391
     usr_dlenik.updateItemAccess(sess.getItem( res ), flag_dlenik, function(code){
         if (code != 0){
             alert(wialon.core.Errors.getErrorText(code));
@@ -3050,7 +3051,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -3206,7 +3207,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -3355,7 +3356,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -3483,7 +3484,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -3558,7 +3559,7 @@ function update_unit()  {
         var obj = { n:"Тревожная кнопка", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par6", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj,);
         var obj = { n:"Датчик глушения", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[], m:"Вкл/Выкл", p:"par141", t:"digital"};//Пременная с данными для создания датчиков
-        create_sensor(obj,); 
+        create_sensor(obj,);
         var obj = { n:"Статус охраны", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:0, tbl:[{"x":0,"a":0,"b":1},{"x":5.9,"a":0,"b":1},{"x":6,"a":0,"b":0},{"x":13,"a":0,"b":0}], m:"В охране/Не в охране", p:"AIN2", t:"digital"};//Пременная с данными для создания датчиков
         create_sensor(obj);
         var obj = { n:"Сработка сигнализации", d:"", f:0, c:"{\"act\":true,\"appear_in_popup\":true}", vt:1, vs:3, tbl:[], m:"Да/-", p:"par154", t:"digital"};//Пременная с данными для создания датчиков
@@ -3687,7 +3688,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -3890,7 +3891,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -4034,7 +4035,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -4181,7 +4182,7 @@ function update_unit()  {
         set_access_unit(acl_flag,user);
         
         var acl_flag=-1;//Пременная с правами Service
-        var user=wialon.core.Session.getInstance().getItem("1066");// Устанавливаеми права Позователю Леника
+        var user=wialon.core.Session.getInstance().getItem("4391");// Устанавливаеми права Позователю Леника
         set_access_unit(acl_flag,user);
 
         var acl_flag=16799347;//Пременная с правами Service
@@ -4342,18 +4343,18 @@ wialon.core.Session.getInstance().getHwTypes(
 
 function test(){
         // Очищаем выбранный продукт
-    prod_value="";
-    document.getElementById('CP').checked =false;
-    document.getElementById('CMM').checked =false;
-    document.getElementById('CMA').checked =false;
-    document.getElementById('WATCH').checked =false;
-    document.getElementById('PHONE').checked =false;
-    document.getElementById('C').checked =false;
-    document.getElementById('CNTK').checked =false;
-    document.getElementById('CRAB').checked =false;
-    document.getElementById('TK').checked =false;
-    var tttt=$("#phone").val();
-    console.log(tttt);
+//    prod_value="";
+//    document.getElementById('CP').checked =false;
+//    document.getElementById('CMM').checked =false;
+//    document.getElementById('CMA').checked =false;
+//    document.getElementById('WATCH').checked =false;
+//    document.getElementById('PHONE').checked =false;
+//    document.getElementById('C').checked =false;
+//    document.getElementById('CNTK').checked =false;
+//    document.getElementById('CRAB').checked =false;
+//    document.getElementById('TK').checked =false;
+//    var tttt=$("#phone").val();
+//    console.log(tttt);
     getHWid();
 }
 
