@@ -38,7 +38,7 @@ function init() { // Получаем, фильтруем ресурс1, рес�
                 wialon.item.Resource.accessFlag.editNotifications);
 // construct Select list using found resources "name"
                 for (var i = 0; i< res.length; i++) 
-                    $("#res").append("<option value='"+ res[i].getId() +"'>"+ res[i].getName() +"</option>");
+                    $("#res").append("<option value='"+ res[i].getId() +"'>"+ res[i].getName() + "("+ res[i].getId() + ")" + "</option>");
                     $("#res :contains('_user')option").remove();//Убираем все что не содержит _user
                     $("#res :not(:contains("+$username+"))option").remove();//Убираем все что не содержит username
                     $("#res :contains("+$username+")").attr("selected", "selected");//выбираем из списка содержащий $username
