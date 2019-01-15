@@ -44,7 +44,7 @@ function init() { // Получаем, фильтруем ресурс1, рес�
                     $("#res :contains("+$username+")").attr("selected", "selected");//выбираем из списка содержащий $username
 // construct Select list using found resources "name_user"
                 for (var i = 0; i< res.length; i++)
-                    $("#res2").append("<option value='"+ res[i].getId() +"'>"+ res[i].getName() +"</option>");
+                    $("#res2").append("<option value='"+ res[i].getId() +"'>"+ res[i].getName()+" ("+ res[i].getId()+ ")" +"</option>");
                     $("#res2 :not(:contains('_user'))option").remove();//Убираем все что не содержит _user
                     $("#res2 :not(:contains("+$username+"))option").remove();//Убираем все что не содержит username
                     $("#res2 :contains('_user')").attr("selected", "selected");//выбираем из списка содержащий _user
